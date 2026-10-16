@@ -1,0 +1,3227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Entertainment News, Celebrity Updates & Movies | ZONGO</title>
+
+  <meta name="description" content="Discover entertainment news, celebrity updates, music, movies, Nollywood, events and trending stories on ZONGO.">
+
+  <meta name="keywords" content="entertainment news, celebrity news, Nigerian entertainment, Nollywood, music news, movies, trending celebrities">
+
+  <meta name="author" content="ZONGO">
+  <meta name="theme-color" content="#171717">
+
+  <meta property="og:title" content="Entertainment News & Celebrity Updates | ZONGO">
+  <meta property="og:description" content="Explore celebrity stories, music, movies, Nollywood and trending entertainment news on ZONGO.">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  
+  
+  <style>
+      
+      /* =========================================
+   ZONGO ENTERTAINMENT
+   File: entertainment.css
+========================================= */
+
+/* =========================================
+   1. GLOBAL RESET
+========================================= */
+
+:root {
+  --primary: #e63946;
+  --primary-dark: #c92835;
+  --secondary: #171717;
+  --text: #252525;
+  --muted: #707070;
+  --background: #ffffff;
+  --soft-background: #f7f7f9;
+  --border: #e8e8ec;
+  --card-background: #ffffff;
+  --radius: 16px;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  --container: 1180px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: var(--background);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+input {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font-size: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button,
+input,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(230, 57, 70, 0.35);
+  outline-offset: 3px;
+}
+
+ul {
+  list-style: none;
+}
+
+section {
+  width: 100%;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.section-container,
+.header-container,
+.hero-container {
+  width: min(var(--container), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* =========================================
+   2. HEADER
+========================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.header-container {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: var(--secondary);
+}
+
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: var(--primary);
+  border-radius: 12px;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.main-nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  color: #555;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--primary);
+}
+
+.header-search {
+  width: 43px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--secondary);
+  background: var(--soft-background);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.header-search:hover {
+  color: white;
+  background: var(--primary);
+}
+
+.menu-toggle {
+  display: none;
+  width: 43px;
+  height: 43px;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+
+/* =========================================
+   3. HERO SECTION
+========================================= */
+
+.entertainment-hero {
+  padding: 75px 0 80px;
+  background:
+    radial-gradient(
+      circle at 5% 10%,
+      rgba(230, 57, 70, 0.07),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #ffffff 0%, #faf9fb 100%);
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 0.92fr;
+  align-items: center;
+  gap: 65px;
+}
+
+.hero-content {
+  min-width: 0;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 13px;
+  color: var(--primary);
+  background: rgba(230, 57, 70, 0.08);
+  border: 1px solid rgba(230, 57, 70, 0.12);
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+}
+
+.section-label i {
+  font-size: 12px;
+}
+
+.hero-content h1 {
+  max-width: 620px;
+  margin: 23px 0 20px;
+  font-size: clamp(38px, 5vw, 65px);
+  line-height: 1.08;
+  font-weight: 900;
+  letter-spacing: -2.8px;
+}
+
+.hero-content h1 span {
+  display: block;
+  color: var(--primary);
+}
+
+.hero-content > p {
+  max-width: 540px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 30px;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 49px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primary-button {
+  color: white;
+  background: var(--primary);
+  box-shadow: 0 7px 18px rgba(230, 57, 70, 0.2);
+}
+
+.primary-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(230, 57, 70, 0.24);
+}
+
+.secondary-button {
+  color: var(--secondary);
+  background: white;
+  border: 1px solid var(--border);
+}
+
+.secondary-button:hover {
+  background: var(--soft-background);
+  transform: translateY(-2px);
+}
+
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 42px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-stats strong {
+  color: var(--secondary);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.hero-stats span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.hero-visual {
+  position: relative;
+  min-width: 0;
+}
+
+.hero-image-card {
+  position: relative;
+  height: 440px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #242424;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.14);
+}
+
+.hero-image-card > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  color: white;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88),
+    rgba(0, 0, 0, 0.12) 75%
+  );
+}
+
+.image-tag {
+  align-self: flex-start;
+  padding: 6px 10px;
+  margin-bottom: 12px;
+  color: white;
+  background: var(--primary);
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.hero-image-overlay h2 {
+  font-size: clamp(25px, 3vw, 35px);
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.hero-image-overlay p {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.83);
+  font-size: 13px;
+}
+
+.floating-badge {
+  position: absolute;
+  right: -20px;
+  bottom: 35px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(100% - 20px);
+  padding: 14px 18px;
+  color: var(--secondary);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.floating-badge i {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: white;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+
+/* =========================================
+   4. SECTION HEADINGS
+========================================= */
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--primary);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+}
+
+.section-heading h2 {
+  color: var(--secondary);
+  font-size: clamp(27px, 3vw, 37px);
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.section-heading > p {
+  max-width: 360px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================================
+   5. TOPIC NAVIGATION
+========================================= */
+
+.entertainment-topics {
+  padding: 75px 0;
+  background: white;
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.topic-card {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.topic-card:hover,
+.topic-card.active {
+  transform: translateY(-3px);
+  border-color: rgba(230, 57, 70, 0.45);
+  box-shadow: var(--shadow);
+}
+
+.topic-card.active {
+  background: #fffafa;
+}
+
+.topic-icon {
+  width: 49px;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary);
+  background: rgba(230, 57, 70, 0.09);
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.topic-text {
+  min-width: 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.topic-text strong {
+  color: var(--secondary);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.topic-text small {
+  color: var(--muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.topic-arrow {
+  flex-shrink: 0;
+  color: #a5a5a5;
+  font-size: 12px;
+  transition: color 0.2s ease;
+}
+
+.topic-card:hover .topic-arrow,
+.topic-card.active .topic-arrow {
+  color: var(--primary);
+}
+
+
+/* =========================================
+   6. SEARCH SECTION
+========================================= */
+
+.entertainment-search-section {
+  padding: 10px 0 75px;
+}
+
+.search-box {
+  padding: 30px;
+  background: var(--soft-background);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.search-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.search-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--primary);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+.search-heading h2 {
+  color: var(--secondary);
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.search-heading p {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.search-form {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.search-form input {
+  min-width: 0;
+  min-height: 53px;
+  flex: 1;
+  padding: 12px 16px;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+
+.search-form input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.08);
+}
+
+.search-form input::placeholder {
+  color: #999;
+}
+
+.search-form button {
+  min-width: 125px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 18px;
+  color: white;
+  background: var(--primary);
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  transition: background 0.2s ease;
+}
+
+.search-form button:hover {
+  background: var(--primary-dark);
+}
+
+.search-status {
+  min-height: 0;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* =========================================
+   7. LATEST ARTICLES
+========================================= */
+
+.latest-entertainment {
+  padding: 75px 0;
+  background: #fcfcfd;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 25px;
+}
+
+.article-card {
+  min-width: 0;
+  overflow: hidden;
+  background: var(--card-background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  border-color: #dedee4;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+}
+
+.article-image {
+  position: relative;
+  display: block;
+  height: 225px;
+  overflow: hidden;
+  background: #e9e9ed;
+}
+
+.article-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.article-card:hover .article-image img {
+  transform: scale(1.05);
+}
+
+.article-category {
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  max-width: calc(100% - 30px);
+  padding: 7px 11px;
+  color: white;
+  background: var(--primary);
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  overflow-wrap: anywhere;
+}
+
+.article-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 23px;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.article-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.article-meta i {
+  color: var(--primary);
+}
+
+.article-content h3 {
+  margin-bottom: 12px;
+  color: var(--secondary);
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  overflow-wrap: anywhere;
+}
+
+.article-content h3 a {
+  transition: color 0.2s ease;
+}
+
+.article-content h3 a:hover {
+  color: var(--primary);
+}
+
+.article-content > p {
+  margin-bottom: 20px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.read-more i {
+  transition: transform 0.2s ease;
+}
+
+.read-more:hover i {
+  transform: translateX(4px);
+}
+
+
+/* =========================================
+   8. NO SEARCH RESULTS
+========================================= */
+
+.no-results {
+  padding: 60px 20px;
+  text-align: center;
+  background: white;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.no-results > span {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: var(--primary);
+  background: rgba(230, 57, 70, 0.08);
+  border-radius: 50%;
+  font-size: 23px;
+}
+
+.no-results h3 {
+  margin-bottom: 8px;
+  color: var(--secondary);
+  font-size: 22px;
+}
+
+.no-results p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+
+/* =========================================
+   9. LOAD MORE
+========================================= */
+
+.load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.load-more-button {
+  min-height: 49px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 25px;
+  color: var(--secondary);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.load-more-button:hover {
+  color: white;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+
+/* =========================================
+   10. EDITORIAL FEATURE
+========================================= */
+
+.entertainment-feature {
+  padding: 80px 0;
+  background: white;
+}
+
+.feature-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  overflow: hidden;
+  background: #191919;
+  border-radius: 22px;
+}
+
+.feature-image {
+  min-width: 0;
+  min-height: 360px;
+  overflow: hidden;
+  background: #333;
+}
+
+.feature-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+}
+
+.feature-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 45px;
+  color: white;
+}
+
+.feature-content .eyebrow {
+  color: #ff858d;
+}
+
+.feature-content h2 {
+  margin-bottom: 18px;
+  font-size: clamp(28px, 3.5vw, 40px);
+  line-height: 1.2;
+  font-weight: 900;
+  letter-spacing: -1.3px;
+}
+
+.feature-content h2 span {
+  display: block;
+  color: #ff858d;
+}
+
+.feature-content p {
+  margin-bottom: 25px;
+  color: #c5c5c5;
+  font-size: 13px;
+  line-height: 2;
+}
+
+.feature-content .primary-button {
+  margin-top: 2px;
+}
+
+
+/* =========================================
+   11. NEWSLETTER
+========================================= */
+
+.entertainment-newsletter {
+  padding: 20px 0 80px;
+  background: white;
+}
+
+.newsletter-card {
+  display: grid;
+  grid-template-columns: auto 1fr 0.95fr;
+  align-items: center;
+  gap: 25px;
+  padding: 35px;
+  background: #fff8f8;
+  border: 1px solid #f5dfe1;
+  border-radius: 18px;
+}
+
+.newsletter-icon {
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: white;
+  background: var(--primary);
+  border-radius: 16px;
+  font-size: 25px;
+}
+
+.newsletter-content h2 {
+  margin-bottom: 8px;
+  color: var(--secondary);
+  font-size: 23px;
+  line-height: 1.3;
+  font-weight: 900;
+}
+
+.newsletter-content p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.newsletter-form {
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.newsletter-form input {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  outline: none;
+}
+
+.newsletter-form input:focus {
+  border-color: var(--primary);
+}
+
+.newsletter-form button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  color: white;
+  background: var(--primary);
+  border: none;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: background 0.2s ease;
+}
+
+.newsletter-form button:hover {
+  background: var(--primary-dark);
+}
+
+#newsletterMessage {
+  width: 100%;
+  color: var(--muted);
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   12. FOOTER
+========================================= */
+
+.site-footer {
+  padding: 65px 0 0;
+  color: #e4e4e4;
+  background: #171717;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 45px;
+  padding-bottom: 45px;
+}
+
+.footer-logo {
+  margin-bottom: 20px;
+  color: white;
+}
+
+.footer-brand > p {
+  max-width: 300px;
+  color: #a7a7a7;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.social-links a {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: #292929;
+  border: 1px solid #383838;
+  border-radius: 9px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.social-links a:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.footer-column h3 {
+  margin-bottom: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.footer-column a {
+  color: #a7a7a7;
+  font-size: 12px;
+  transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+  color: #ff858d;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 0;
+  border-top: 1px solid #303030;
+}
+
+.footer-bottom p {
+  color: #999;
+  font-size: 11px;
+}
+
+.footer-bottom > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #d6d6d6;
+  font-size: 11px;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom > a:hover {
+  color: #ff858d;
+}
+
+
+/* =========================================
+   13. TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 1050px) {
+
+  .main-nav {
+    gap: 15px;
+  }
+
+  .main-nav a {
+    font-size: 12px;
+  }
+
+  .hero-container {
+    gap: 35px;
+  }
+
+  .hero-image-card {
+    height: 390px;
+  }
+/* =========================================
+   13. TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 1050px) {
+
+  .main-nav {
+    gap: 15px;
+  }
+
+  .main-nav a {
+    font-size: 12px;
+  }
+
+  .hero-container {
+    gap: 35px;
+  }
+
+  .hero-image-card {
+    height: 390px;
+  }
+
+  .topic-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .newsletter-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .newsletter-form {
+    grid-column: 1 / -1;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 35px;
+  }
+
+}
+
+
+/* =========================================
+   14. MOBILE NAVIGATION
+========================================= */
+
+@media (max-width: 780px) {
+
+  .header-container {
+    min-height: 68px;
+    gap: 12px;
+  }
+
+  .site-logo {
+    font-size: 22px;
+  }
+
+  .logo-mark {
+    width: 37px;
+    height: 37px;
+    font-size: 23px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .header-search {
+    width: 42px;
+    height: 42px;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 20px 20px;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.07);
+  }
+
+  .main-nav.active {
+    display: flex;
+  }
+
+  .main-nav a {
+    min-height: 47px;
+    padding: 12px 5px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 13px;
+  }
+
+  .main-nav a:last-child {
+    border-bottom: none;
+  }
+
+  .entertainment-hero {
+    padding: 55px 0 65px;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-content h1 {
+    max-width: 650px;
+    font-size: clamp(38px, 8vw, 56px);
+    letter-spacing: -1.8px;
+  }
+
+  .hero-content > p {
+    font-size: 14px;
+  }
+
+  .hero-image-card {
+    height: 390px;
+  }
+
+  .floating-badge {
+    right: 12px;
+    bottom: 18px;
+  }
+
+  .entertainment-topics,
+  .latest-entertainment,
+  .entertainment-feature {
+    padding: 60px 0;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+
+  .section-heading > p {
+    max-width: 100%;
+  }
+
+  .entertainment-search-section {
+    padding-bottom: 55px;
+  }
+
+  .feature-card {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-image,
+  .feature-image img {
+    min-height: 280px;
+    height: 280px;
+  }
+
+  .feature-content {
+    padding: 32px;
+  }
+
+  .entertainment-newsletter {
+    padding-bottom: 60px;
+  }
+
+  .newsletter-card {
+    padding: 28px;
+  }
+
+}
+
+
+/* =========================================
+   15. SMALL MOBILE SCREENS
+========================================= */
+
+@media (max-width: 520px) {
+
+  .section-container,
+  .header-container,
+  .hero-container {
+    width: calc(100% - 30px);
+  }
+
+  .header-container {
+    min-height: 64px;
+  }
+
+  .site-logo {
+    gap: 8px;
+    font-size: 20px;
+  }
+
+  .logo-mark {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+  }
+
+  .menu-toggle,
+  .header-search {
+    width: 39px;
+    height: 39px;
+  }
+
+  .entertainment-hero {
+    padding: 42px 0 50px;
+  }
+
+  .hero-content h1 {
+    margin-top: 20px;
+    font-size: 39px;
+    letter-spacing: -1.6px;
+  }
+
+  .hero-content > p {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  .hero-buttons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-buttons a {
+    width: 100%;
+  }
+
+  .hero-stats {
+    gap: 17px;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+
+  .hero-stats > div {
+    min-width: 0;
+  }
+
+  .hero-stats strong {
+    font-size: 12px;
+  }
+
+  .hero-stats span {
+    font-size: 10px;
+  }
+
+  .hero-image-card {
+    height: 310px;
+    border-radius: 17px;
+  }
+
+  .hero-image-overlay {
+    padding: 20px;
+  }
+
+  .hero-image-overlay h2 {
+    font-size: 25px;
+  }
+
+  .hero-image-overlay p {
+    font-size: 12px;
+  }
+
+  .floating-badge {
+    right: 8px;
+    bottom: 12px;
+    gap: 8px;
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+
+  .floating-badge i {
+    width: 29px;
+    height: 29px;
+  }
+
+  .entertainment-topics,
+  .latest-entertainment,
+  .entertainment-feature {
+    padding: 48px 0;
+  }
+
+  .section-heading h2 {
+    font-size: 28px;
+  }
+
+  .section-heading > p {
+    font-size: 12px;
+  }
+
+  .topic-grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .topic-card {
+    padding: 15px;
+  }
+
+  .topic-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .search-box {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+
+  .search-heading {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .search-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 15px;
+  }
+
+  .search-heading h2 {
+    font-size: 17px;
+  }
+
+  .search-heading p {
+    font-size: 11px;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-form input {
+    width: 100%;
+    min-height: 49px;
+  }
+
+  .search-form button {
+    width: 100%;
+    min-height: 47px;
+  }
+
+  .article-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .article-image {
+    height: 230px;
+  }
+
+  .article-content {
+    padding: 20px;
+  }
+
+  .article-content h3 {
+    font-size: 18px;
+  }
+
+  .article-content > p {
+    font-size: 12px;
+  }
+
+  .load-more-button {
+    width: 100%;
+  }
+
+  .feature-image,
+  .feature-image img {
+    min-height: 220px;
+    height: 220px;
+  }
+
+  .feature-content {
+    padding: 25px 20px;
+  }
+
+  .feature-content h2 {
+    font-size: 29px;
+  }
+
+  .feature-content p {
+    font-size: 12px;
+  }
+
+  .newsletter-card {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 23px 18px;
+  }
+
+  .newsletter-icon {
+    width: 53px;
+    height: 53px;
+    border-radius: 13px;
+    font-size: 21px;
+  }
+
+  .newsletter-content h2 {
+    font-size: 22px;
+  }
+
+  .newsletter-content p {
+    font-size: 12px;
+  }
+
+  .newsletter-form {
+    grid-column: auto;
+    flex-direction: column;
+  }
+
+  .newsletter-form input,
+  .newsletter-form button {
+    width: 100%;
+  }
+
+  .site-footer {
+    padding-top: 45px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px 20px;
+    padding-bottom: 35px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand > p {
+    max-width: 100%;
+  }
+
+  .footer-column h3 {
+    font-size: 13px;
+  }
+
+  .footer-column a {
+    font-size: 11px;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+}
+
+
+/* =========================================
+   16. EXTRA SMALL SCREENS
+========================================= */
+
+@media (max-width: 350px) {
+
+  .section-container,
+  .header-container,
+  .hero-container {
+    width: calc(100% - 24px);
+  }
+
+  .site-logo {
+    font-size: 18px;
+  }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .header-container {
+    gap: 7px;
+  }
+
+  .menu-toggle,
+  .header-search {
+    width: 35px;
+    height: 35px;
+  }
+
+  .hero-content h1 {
+    font-size: 33px;
+  }
+
+  .hero-stats {
+    gap: 10px;
+  }
+
+  .hero-stats strong {
+    font-size: 11px;
+  }
+
+  .hero-stats span {
+    font-size: 9px;
+  }
+
+  .hero-image-card {
+    height: 270px;
+  }
+
+  .floating-badge {
+    max-width: calc(100% - 12px);
+    font-size: 9px;
+  }
+
+  .article-image {
+    height: 195px;
+  }
+
+  .footer-grid {
+    gap: 28px 14px;
+  }
+
+}
+
+
+/* =========================================
+   17. REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+}
+  
+  
+  </style>
+
+</head>
+
+<body>
+
+<!-- ==============================
+     HEADER
+================================ -->
+
+<header class="site-header">
+
+  <div class="header-container">
+
+    <a href="index.html" class="site-logo">
+      <span class="logo-mark">Z</span>
+      <span>ZONGO</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mainNav"
+      type="button"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <nav class="main-nav" id="mainNav">
+
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="business.html">Business</a>
+      <a href="technology.html">Technology</a>
+      <a href="entertainment.html" class="active">Entertainment</a>
+      <a href="lifestyle.html">Lifestyle</a>
+
+    </nav>
+
+    <a href="#entertainmentSearchSection" class="header-search" aria-label="Search entertainment">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </a>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<!-- ==============================
+     HERO SECTION
+================================ -->
+
+<section class="entertainment-hero">
+
+  <div class="hero-container">
+
+    <div class="hero-content">
+
+      <span class="section-label">
+        <i class="fa-solid fa-star"></i>
+        ENTERTAINMENT
+      </span>
+
+      <h1>
+        Your Front Row Seat to
+        <span>Entertainment.</span>
+      </h1>
+
+      <p>
+        Discover celebrity stories, music releases, Nollywood movies,
+        exciting events and the entertainment conversations everyone
+        is talking about.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="#latestEntertainment" class="primary-button">
+          Explore Stories
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+        <a href="#entertainmentTopics" class="secondary-button">
+          Browse Categories
+        </a>
+
+      </div>
+
+      <div class="hero-stats">
+
+        <div>
+          <strong>Music</strong>
+          <span>Latest releases</span>
+        </div>
+
+        <div>
+          <strong>Movies</strong>
+          <span>Film & TV updates</span>
+        </div>
+
+        <div>
+          <strong>Celebrities</strong>
+          <span>People & stories</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+      <div class="hero-image-card">
+
+        <img
+          src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1000&q=85"
+          alt="Concert stage illuminated by colorful lights"
+          fetchpriority="high"
+        >
+
+        <div class="hero-image-overlay">
+
+          <span class="image-tag">ON THE SCENE</span>
+
+          <h2>Music, Movies & Culture</h2>
+
+          <p>Stories that keep the world talking.</p>
+
+        </div>
+
+      </div>
+
+      <div class="floating-badge">
+        <i class="fa-solid fa-play"></i>
+        <span>Discover What's Trending</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==============================
+     TOPIC NAVIGATION
+================================ -->
+
+<section class="entertainment-topics" id="entertainmentTopics">
+
+  <div class="section-container">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="eyebrow">EXPLORE ENTERTAINMENT</span>
+        <h2>Find Your Spotlight</h2>
+      </div>
+
+      <p>
+        Explore the entertainment topics you love.
+      </p>
+
+    </div>
+
+    <div class="topic-grid">
+
+      <a href="#latestEntertainment" class="topic-card" data-topic-filter="all">
+
+        <span class="topic-icon">
+          <i class="fa-solid fa-border-all"></i>
+        </span>
+
+        <span class="topic-text">
+          <strong>All Stories</strong>
+          <small>Everything new</small>
+        </span>
+
+        <i class="fa-solid fa-arrow-up-right-from-square topic-arrow"></i>
+
+      </a>
+
+
+      <a href="#latestEntertainment" class="topic-card" data-topic-filter="celebrity">
+
+        <span class="topic-icon">
+          <i class="fa-solid fa-user-group"></i>
+        </span>
+
+        <span class="topic-text">
+          <strong>Celebrities</strong>
+          <small>Stars & personalities</small>
+        </span>
+
+        <i class="fa-solid fa-arrow-up-right-from-square topic-arrow"></i>
+
+      </a>
+
+
+      <a href="#latestEntertainment" class="topic-card" data-topic-filter="music">
+
+        <span class="topic-icon">
+          <i class="fa-solid fa-music"></i>
+        </span>
+
+        <span class="topic-text">
+          <strong>Music</strong>
+          <small>Songs & artists</small>
+        </span>
+
+        <i class="fa-solid fa-arrow-up-right-from-square topic-arrow"></i>
+
+      </a>
+
+
+      <a href="#latestEntertainment" class="topic-card" data-topic-filter="movies">
+
+        <span class="topic-icon">
+          <i class="fa-solid fa-film"></i>
+        </span>
+
+        <span class="topic-text">
+          <strong>Movies & TV</strong>
+          <small>Film & television</small>
+        </span>
+
+        <i class="fa-solid fa-arrow-up-right-from-square topic-arrow"></i>
+
+      </a>
+
+
+      <a href="#latestEntertainment" class="topic-card" data-topic-filter="nollywood">
+
+        <span class="topic-icon">
+          <i class="fa-solid fa-video"></i>
+        </span>
+
+        <span class="topic-text">
+          <strong>Nollywood</strong>
+          <small>African cinema</small>
+        </span>
+
+        <i class="fa-solid fa-arrow-up-right-from-square topic-arrow"></i>
+
+      </a>
+
+
+      <a href="#latestEntertainment" class="topic-card" data-topic-filter="events">
+
+        <span class="topic-icon">
+          <i class="fa-solid fa-ticket"></i>
+        </span>
+
+        <span class="topic-text">
+          <strong>Events</strong>
+          <small>Shows & happenings</small>
+        </span>
+
+        <i class="fa-solid fa-arrow-up-right-from-square topic-arrow"></i>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==============================
+     SEARCH
+================================ -->
+
+<section class="entertainment-search-section" id="entertainmentSearchSection">
+
+  <div class="section-container">
+
+    <div class="search-box">
+
+      <div class="search-heading">
+        <span class="search-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+
+        <div>
+          <h2>Looking for a story?</h2>
+          <p>Search entertainment news, artists, movies and more.</p>
+        </div>
+      </div>
+
+      <form id="entertainmentSearchForm" class="search-form">
+
+        <label for="entertainmentSearch" class="visually-hidden">
+          Search entertainment articles
+        </label>
+
+        <input
+          type="search"
+          id="entertainmentSearch"
+          name="q"
+          placeholder="Search celebrities, music, movies..."
+          autocomplete="off"
+        >
+
+        <button type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          Search
+        </button>
+
+      </form>
+
+      <p id="searchStatus" class="search-status" aria-live="polite"></p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==============================
+     LATEST ENTERTAINMENT
+================================ -->
+
+<section class="latest-entertainment" id="latestEntertainment">
+
+  <div class="section-container">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="eyebrow">FRESH FROM THE SPOTLIGHT</span>
+        <h2>Latest Entertainment</h2>
+      </div>
+
+      <p>
+        Catch up on stories from the world of entertainment.
+      </p>
+
+    </div>
+
+
+    <div class="article-grid" id="articleGrid">
+
+
+      <!-- ARTICLE 1 -->
+
+      <article class="article-card searchable-article" data-category="music">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=800&q=80"
+            alt="Singer performing on stage"
+            loading="lazy"
+          >
+
+          <span class="article-category">Music</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-regular fa-clock"></i> Music & Culture</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              The Sounds and Stories Shaping Today's Music Scene
+            </a>
+          </h3>
+
+          <p>
+            Explore how artists, fresh sounds and changing audience
+            tastes continue to influence the music industry.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 2 -->
+
+      <article class="article-card searchable-article" data-category="movies nollywood">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80"
+            alt="Movie theatre with a large cinema screen"
+            loading="lazy"
+          >
+
+          <span class="article-category">Nollywood</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-solid fa-film"></i> Movies & TV</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              How African Cinema Continues to Reach New Audiences
+            </a>
+          </h3>
+
+          <p>
+            Discover the filmmaking ideas, performances and stories
+            attracting attention to African cinema.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 3 -->
+
+      <article class="article-card searchable-article" data-category="celebrity">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+            alt="Portrait of a woman"
+            loading="lazy"
+          >
+
+          <span class="article-category">Celebrity</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-solid fa-star"></i> Celebrity Spotlight</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              Fame, Personal Branding and the Modern Celebrity
+            </a>
+          </h3>
+
+          <p>
+            A look at how public figures build their image and connect
+            with fans across today's media platforms.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 4 -->
+
+      <article class="article-card searchable-article" data-category="music">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=800&q=80"
+            alt="Live music performance with a crowd"
+            loading="lazy"
+          >
+
+          <span class="article-category">Live Music</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-solid fa-headphones"></i> Music Industry</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              What Makes a Live Music Performance Unforgettable?
+            </a>
+          </h3>
+
+          <p>
+            From audience energy to stage production, explore the
+            ingredients behind memorable live performances.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 5 -->
+
+      <article class="article-card searchable-article" data-category="movies">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=800&q=80"
+            alt="Cinema and filmmaking equipment"
+            loading="lazy"
+          >
+
+          <span class="article-category">Movies</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-solid fa-clapperboard"></i> Film Production</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              Behind the Scenes: The Creative Work Behind Great Films
+            </a>
+          </h3>
+
+          <p>
+            Meet the creative elements that help bring compelling
+            stories from the script to the screen.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 6 -->
+
+      <article class="article-card searchable-article" data-category="events">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80"
+            alt="People attending an outdoor music festival"
+            loading="lazy"
+          >
+
+          <span class="article-category">Events</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-solid fa-ticket"></i> Entertainment Events</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              Festivals and Live Shows Bringing People Together
+            </a>
+          </h3>
+
+          <p>
+            Discover how concerts, festivals and cultural events
+            create shared experiences for audiences.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 7 -->
+
+      <article class="article-card searchable-article" data-category="nollywood movies">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80"
+            alt="Film camera used during a production"
+            loading="lazy"
+          >
+
+          <span class="article-category">Nollywood</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-solid fa-video"></i> African Film</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              The Art of Telling Authentic African Stories on Screen
+            </a>
+          </h3>
+
+          <p>
+            Explore the role of culture, language and storytelling
+            in films made for audiences at home and abroad.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 8 -->
+
+      <article class="article-card searchable-article" data-category="celebrity">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80"
+            alt="Portrait photography"
+            loading="lazy"
+          >
+
+          <span class="article-category">Celebrity Culture</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-solid fa-users"></i> Popular Culture</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              Why Fans Feel Connected to Their Favourite Stars
+            </a>
+          </h3>
+
+          <p>
+            Learn how interviews, public appearances and online
+            communities influence relationships between stars and fans.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- ARTICLE 9 -->
+
+      <article class="article-card searchable-article" data-category="music events">
+
+        <a href="entertainment-story.html" class="article-image">
+
+          <img
+            src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80"
+            alt="Concert crowd enjoying a live performance"
+            loading="lazy"
+          >
+
+          <span class="article-category">Music Events</span>
+
+        </a>
+
+        <div class="article-content">
+
+          <div class="article-meta">
+            <span><i class="fa-solid fa-microphone"></i> Live Entertainment</span>
+          </div>
+
+          <h3>
+            <a href="entertainment-story.html">
+              The Growing Appeal of Concerts and Music Festivals
+            </a>
+          </h3>
+
+          <p>
+            Take a closer look at live entertainment and the experiences
+            that bring performers and audiences together.
+          </p>
+
+          <a href="entertainment-story.html" class="read-more">
+            Read Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+      </article>
+
+    </div>
+
+
+    <!-- NO RESULTS -->
+
+    <div id="noResults" class="no-results" hidden>
+
+      <span>
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </span>
+
+      <h3>No stories found</h3>
+
+      <p>
+        Try another search term or choose a different entertainment category.
+      </p>
+
+    </div>
+
+
+    <!-- LOAD MORE -->
+
+    <div class="load-more-wrapper">
+
+      <button id="loadMoreButton" class="load-more-button" type="button" hidden>
+        Load More Stories
+        <i class="fa-solid fa-arrow-down"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==============================
+     EDITORIAL FEATURE
+================================ -->
+
+<section class="entertainment-feature">
+
+  <div class="section-container">
+
+    <div class="feature-card">
+
+      <div class="feature-image">
+
+        <img
+          src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=85"
+          alt="Live entertainment show with stage lighting"
+          loading="lazy"
+        >
+
+      </div>
+
+      <div class="feature-content">
+
+        <span class="eyebrow">THE ENTERTAINMENT EXPERIENCE</span>
+       
+               <h2>
+          More Than Headlines.
+          <span>Stories Worth Discovering.</span>
+        </h2>
+
+        <p>
+          Entertainment reflects our culture, creativity and shared
+          experiences. Explore the people, performances and ideas
+          shaping what we watch, hear and celebrate.
+        </p>
+
+        <a href="#latestEntertainment" class="primary-button">
+          Discover More
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==============================
+     NEWSLETTER
+================================ -->
+
+<section class="entertainment-newsletter">
+
+  <div class="section-container">
+
+    <div class="newsletter-card">
+
+      <div class="newsletter-icon">
+        <i class="fa-regular fa-envelope"></i>
+      </div>
+
+      <div class="newsletter-content">
+
+        <span class="eyebrow">STAY IN THE LOOP</span>
+
+        <h2>Get the Latest Entertainment Stories</h2>
+
+        <p>
+          Be the first to discover celebrity updates, music stories,
+          movie news and entertainment highlights.
+        </p>
+
+      </div>
+
+      <form id="newsletterForm" class="newsletter-form">
+
+        <label for="newsletterEmail" class="visually-hidden">
+          Your email address
+        </label>
+
+        <input
+          type="email"
+          id="newsletterEmail"
+          name="email"
+          placeholder="Enter your email address"
+          autocomplete="email"
+          required
+        >
+
+        <button type="submit">
+          Subscribe
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+        <p id="newsletterMessage" aria-live="polite"></p>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- ==============================
+     FOOTER
+================================ -->
+
+<footer class="site-footer">
+
+  <div class="section-container">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+
+        <a href="index.html" class="site-logo footer-logo">
+          <span class="logo-mark">Z</span>
+          <span>ZONGO</span>
+        </a>
+
+        <p>
+          Your destination for stories, ideas, culture and the
+          latest conversations shaping our world.
+        </p>
+
+        <div class="social-links">
+
+          <a href="#" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+
+          <a href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+
+          <a href="#" aria-label="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+
+          <a href="#" aria-label="YouTube">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Explore</h3>
+
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="business.html">Business</a>
+        <a href="technology.html">Technology</a>
+        <a href="entertainment.html">Entertainment</a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Entertainment</h3>
+
+        <a href="#latestEntertainment">Latest Stories</a>
+        <a href="#entertainmentTopics">Celebrity News</a>
+        <a href="#entertainmentTopics">Music</a>
+        <a href="#entertainmentTopics">Movies & TV</a>
+        <a href="#entertainmentTopics">Events</a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Information</h3>
+
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <p>
+        &copy; <span id="currentYear">2026</span> ZONGO.
+        All rights reserved.
+      </p>
+
+      <a href="#top" id="backToTop">
+        Back to top
+        <i class="fa-solid fa-arrow-up"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- ==============================
+     JAVASCRIPT
+================================ -->
+
+
+<script type="module" src="script.js"></script>
+
+
+
+
+<script>
+    
+    /* =========================================
+   ZONGO ENTERTAINMENT
+   File: entertainment.js
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  "use strict";
+
+  /* =========================================
+     1. MOBILE NAVIGATION
+  ========================================= */
+
+  const menuToggle = document.getElementById("menuToggle");
+  const mainNav = document.getElementById("mainNav");
+
+  if (menuToggle && mainNav) {
+
+    function closeMenu() {
+      mainNav.classList.remove("active");
+
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+      menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }
+
+    menuToggle.addEventListener("click", function () {
+
+      const isOpen = mainNav.classList.toggle("active");
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation menu" : "Open navigation menu"
+      );
+
+      menuToggle.innerHTML = isOpen
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+
+    });
+
+    mainNav.querySelectorAll("a").forEach(function (link) {
+
+      link.addEventListener("click", closeMenu);
+
+    });
+
+    document.addEventListener("click", function (event) {
+
+      if (
+        mainNav.classList.contains("active") &&
+        !mainNav.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeMenu();
+      }
+
+    });
+
+    document.addEventListener("keydown", function (event) {
+
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+
+    });
+
+  }
+
+
+  /* =========================================
+     2. ARTICLE ELEMENTS
+  ========================================= */
+
+  const articleGrid = document.getElementById("articleGrid");
+  const noResults = document.getElementById("noResults");
+  const searchStatus = document.getElementById("searchStatus");
+
+  const searchForm = document.getElementById(
+    "entertainmentSearchForm"
+  );
+
+  const searchInput = document.getElementById(
+    "entertainmentSearch"
+  );
+
+  const loadMoreButton = document.getElementById(
+    "loadMoreButton"
+  );
+
+  const topicButtons = document.querySelectorAll(
+    "[data-topic-filter]"
+  );
+
+  const newsletterForm = document.getElementById(
+    "newsletterForm"
+  );
+
+  const newsletterMessage = document.getElementById(
+    "newsletterMessage"
+  );
+
+  let searchTerm = "";
+  let activeCategory = "all";
+  let visibleLimit = 6;
+
+  const pageSize = 3;
+
+
+  /* =========================================
+     3. FIND ARTICLE CARDS
+  ========================================= */
+
+  function getArticles() {
+
+    if (!articleGrid) {
+      return [];
+    }
+
+    return Array.from(
+      articleGrid.querySelectorAll(".searchable-article")
+    );
+
+  }
+
+
+  /* =========================================
+     4. ARTICLE CATEGORY MATCHING
+  ========================================= */
+
+  function matchesCategory(article) {
+
+    if (activeCategory === "all") {
+      return true;
+    }
+
+    const categoryData = (
+      article.getAttribute("data-category") || ""
+    ).toLowerCase();
+
+    const categories = categoryData
+      .split(/[\s,]+/)
+      .filter(Boolean);
+
+    return categories.includes(activeCategory);
+
+  }
+
+
+  /* =========================================
+     5. ARTICLE SEARCH MATCHING
+  ========================================= */
+
+  function matchesSearch(article) {
+
+    if (!searchTerm) {
+      return true;
+    }
+
+    const articleText = (
+      article.innerText ||
+      article.textContent ||
+      ""
+    ).toLowerCase();
+
+    return articleText.includes(searchTerm);
+
+  }
+
+
+  /* =========================================
+     6. UPDATE ARTICLE DISPLAY
+  ========================================= */
+
+  function updateArticles() {
+
+    const articles = getArticles();
+
+    if (!articles.length) {
+      return;
+    }
+
+    const matchingArticles = articles.filter(function (article) {
+
+      return matchesCategory(article) && matchesSearch(article);
+
+    });
+
+    const filteringIsActive =
+      searchTerm !== "" || activeCategory !== "all";
+
+    const articlesToDisplay = filteringIsActive
+      ? matchingArticles
+      : matchingArticles.slice(0, visibleLimit);
+
+    articles.forEach(function (article) {
+
+      article.hidden = !articlesToDisplay.includes(article);
+
+    });
+
+
+    // Show or hide the no-results message.
+
+    if (noResults) {
+      noResults.hidden = matchingArticles.length > 0;
+    }
+
+
+    // Update search result information.
+
+    if (searchStatus) {
+
+      if (filteringIsActive) {
+
+        const count = matchingArticles.length;
+
+        searchStatus.textContent =
+          count + (count === 1
+            ? " story found."
+            : " stories found.");
+
+      } else {
+
+        searchStatus.textContent = "";
+
+      }
+
+    }
+
+
+    // Control the Load More button.
+
+    if (loadMoreButton) {
+
+      const hasMoreArticles =
+        !filteringIsActive &&
+        matchingArticles.length > visibleLimit;
+
+      loadMoreButton.hidden = !hasMoreArticles;
+
+    }
+
+  }
+
+
+  /* =========================================
+     7. SEARCH FORM
+  ========================================= */
+
+  if (searchForm && searchInput) {
+
+    searchForm.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      searchTerm = searchInput.value
+        .trim()
+        .toLowerCase();
+
+      visibleLimit = 6;
+
+      updateArticles();
+
+      const resultsSection = document.getElementById(
+        "latestEntertainment"
+      );
+
+      if (resultsSection) {
+        resultsSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+    });
+
+
+    // Update results while the user types.
+
+    searchInput.addEventListener("input", function () {
+
+      searchTerm = searchInput.value
+        .trim()
+        .toLowerCase();
+
+      visibleLimit = 6;
+
+      updateArticles();
+
+    });
+
+  }
+
+
+  /* =========================================
+     8. TOPIC FILTERS
+  ========================================= */
+
+  topicButtons.forEach(function (button) {
+
+    button.addEventListener("click", function (event) {
+
+      event.preventDefault();
+
+      activeCategory = (
+        button.getAttribute("data-topic-filter") || "all"
+      ).toLowerCase().trim();
+
+      visibleLimit = 6;
+
+      // Highlight the selected category.
+
+      topicButtons.forEach(function (otherButton) {
+
+        otherButton.classList.remove("active");
+
+        otherButton.setAttribute("aria-pressed", "false");
+
+      });
+
+      button.classList.add("active");
+
+      button.setAttribute("aria-pressed", "true");
+
+      updateArticles();
+
+      // Move the user to the article section.
+
+      const resultsSection = document.getElementById(
+        "latestEntertainment"
+      );
+
+      if (resultsSection) {
+
+        resultsSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    });
+
+  });
+
+
+  /* =========================================
+     9. LOAD MORE STORIES
+  ========================================= */
+
+  if (loadMoreButton) {
+
+    loadMoreButton.addEventListener("click", function () {
+
+      visibleLimit += pageSize;
+
+      updateArticles();
+
+    });
+
+  }
+
+
+  /* =========================================
+     10. NEWSLETTER FORM
+  ========================================= */
+
+  if (newsletterForm) {
+
+    newsletterForm.addEventListener("submit", function (event) {
+
+      event.preventDefault();
+
+      const emailInput = newsletterForm.querySelector(
+        'input[type="email"]'
+      );
+
+      if (!emailInput) {
+        return;
+      }
+
+      const email = emailInput.value.trim();
+
+      if (!email) {
+
+        if (newsletterMessage) {
+          newsletterMessage.textContent =
+            "Please enter your email address.";
+        }
+
+        return;
+
+      }
+
+      if (!emailInput.checkValidity()) {
+
+        if (newsletterMessage) {
+          newsletterMessage.textContent =
+            "Please enter a valid email address.";
+        }
+
+        emailInput.focus();
+
+        return;
+
+      }
+
+      /*
+        IMPORTANT:
+        Connect an email marketing service or backend
+        before collecting newsletter subscriptions.
+
+        This frontend-only version does not save emails.
+      */
+
+      if (newsletterMessage) {
+
+        newsletterMessage.textContent =
+          "Newsletter subscriptions are not connected yet. Please try again later.";
+
+      }
+
+    });
+
+  }
+
+
+  /* =========================================
+     11. AUTOMATIC COPYRIGHT YEAR
+  ========================================= */
+
+  const currentYear = document.getElementById("currentYear");
+
+  if (currentYear) {
+
+    currentYear.textContent = new Date().getFullYear();
+
+  }
+
+
+  /* =========================================
+     12. BACK TO TOP
+  ========================================= */
+
+  const backToTop = document.getElementById("backToTop");
+
+  if (backToTop) {
+
+    backToTop.addEventListener("click", function (event) {
+
+      event.preventDefault();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+  }
+
+
+  /* =========================================
+     13. INITIALIZE
+  ========================================= */
+
+  // Display the first six stories.
+  updateArticles();
+
+});
+
+</script>
+
+</body>
+</html>
+
+    

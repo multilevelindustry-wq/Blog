@@ -1,0 +1,4180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Business & Finance | ZONGO Blog</title>
+
+  <meta name="description" content="Explore business news, entrepreneurship, personal finance, investment education, small business ideas and economic developments on ZONGO Blog.">
+
+  <meta name="keywords" content="business news Nigeria, entrepreneurship, small business ideas, personal finance, investment education, Nigerian economy">
+
+  <meta name="theme-color" content="#172554">
+
+  <meta property="og:title" content="Business & Finance | ZONGO Blog">
+  <meta property="og:description" content="Business insights, money management, entrepreneurship and financial education.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <style>
+      /* =========================================
+   ZONGO BLOG — BUSINESS PAGE CSS
+   File: business.css
+========================================= */
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #172554;
+  --primary-light: #243b75;
+  --accent: #e85d3f;
+  --accent-hover: #cf472b;
+  --text: #202738;
+  --muted: #6b7280;
+  --background: #f5f6f8;
+  --white: #ffffff;
+  --border: #e5e7eb;
+  --soft-blue: #eef2ff;
+  --soft-orange: #fff0eb;
+  --radius: 12px;
+  --shadow: 0 5px 20px rgba(23, 37, 84, 0.06);
+  --transition: 0.25s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: "DM Sans", Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(232, 93, 63, 0.4);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.topbar {
+  background: var(--primary);
+  color: #fff;
+  font-size: 12px;
+}
+
+.topbar-inner {
+  min-height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.topbar-left,
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.topbar-left span,
+.topbar-right a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.topbar-right a {
+  color: #e6eaff;
+  transition: color var(--transition);
+}
+
+.topbar-right a:hover {
+  color: #fff;
+}
+
+/* =========================================
+   SITE HEADER
+========================================= */
+
+.site-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 100;
+}
+
+.header-main {
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.logo-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: white;
+  font-size: 24px;
+  font-weight: 800;
+  border-radius: 11px;
+}
+
+.logo-text {
+  color: var(--primary);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex: 1;
+}
+
+.search-form {
+  width: min(340px, 100%);
+  height: 43px;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+
+.search-form:focus-within {
+  border-color: var(--primary-light);
+}
+
+.search-form input {
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 13px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.search-form button {
+  height: 100%;
+  width: 45px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: var(--primary);
+  font-size: 15px;
+  transition: background var(--transition);
+}
+
+.search-form button:hover {
+  background: #e9edf8;
+}
+
+.subscribe-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 43px;
+  padding: 0 17px;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    background var(--transition),
+    transform var(--transition);
+}
+
+.subscribe-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.menu-toggle {
+  width: 43px;
+  height: 43px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--primary);
+  font-size: 19px;
+}
+
+/* =========================================
+   MAIN NAVIGATION
+========================================= */
+
+.main-nav {
+  background: #fff;
+  border-top: 1px solid #f0f1f3;
+}
+
+.nav-inner {
+  min-height: 49px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-inner a {
+  position: relative;
+  min-height: 49px;
+  display: inline-flex;
+  align-items: center;
+  color: #525b6c;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+
+.nav-inner a:hover,
+.nav-inner a.active {
+  color: var(--accent);
+}
+
+.nav-inner a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 3px 3px 0 0;
+}
+
+/* =========================================
+   BUSINESS HERO
+========================================= */
+
+.business-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 58px 0 52px;
+  background:
+    radial-gradient(
+      circle at 88% 18%,
+      rgba(232, 93, 63, 0.2),
+      transparent 30%
+    ),
+    linear-gradient(120deg, #111d45, #20366d);
+  color: #fff;
+}
+
+.business-hero::after {
+  content: "";
+  position: absolute;
+  width: 310px;
+  height: 310px;
+  right: -100px;
+  bottom: -200px;
+  border: 45px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 20px;
+  color: #c6d0ed;
+  font-size: 12px;
+}
+
+.breadcrumb a {
+  transition: color var(--transition);
+}
+
+.breadcrumb a:hover {
+  color: #fff;
+}
+
+.breadcrumb i {
+  font-size: 9px;
+  opacity: 0.7;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 17px;
+  padding: 6px 12px;
+  color: #ffe1d9;
+  background: rgba(232, 93, 63, 0.15);
+  border: 1px solid rgba(255, 180, 158, 0.3);
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.hero-content h1 {
+  max-width: 750px;
+  margin-bottom: 18px;
+  color: #fff;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(35px, 5vw, 55px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -1.4px;
+}
+
+.hero-content > p {
+  max-width: 660px;
+  color: #d8def0;
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 27px;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 19px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.primary-button {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+
+.primary-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.secondary-button {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.secondary-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.hero-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+  color: #dce3f7;
+  font-size: 12px;
+}
+
+.hero-benefits span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-benefits i {
+  color: #ff9c82;
+}
+
+/* =========================================
+   TOPIC NAVIGATION
+========================================= */
+
+.topic-navigation {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.topic-navigation-inner {
+  min-height: 63px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.topic-navigation-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.topic-navigation-inner a {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 13px;
+  background: #f7f8fa;
+  border: 1px solid #eceef2;
+  border-radius: 30px;
+  color: #50596b;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all var(--transition);
+}
+
+.topic-navigation-inner a:hover {
+  background: var(--soft-orange);
+  color: var(--accent);
+  border-color: #f8d0c5;
+}
+
+.topic-navigation-inner a i {
+  font-size: 12px;
+}
+
+/* =========================================
+   PAGE CONTENT LAYOUT
+========================================= */
+
+.page-content {
+  padding: 42px 0 65px;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  align-items: start;
+  gap: 32px;
+}
+
+.main-column {
+  min-width: 0;
+}
+
+.sidebar {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* =========================================
+   SECTION HEADINGS
+========================================= */
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 23px;
+}
+
+.section-heading h2 {
+  color: var(--primary);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(23px, 3vw, 30px);
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+
+.section-heading p {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.section-kicker {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.editor-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  color: var(--primary);
+  background: var(--soft-blue);
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* =========================================
+   FEATURED ARTICLE
+========================================= */
+
+.featured-section {
+  margin-bottom: 43px;
+}
+
+.featured-article {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition);
+}
+
+.featured-article:hover {
+  box-shadow: 0 12px 30px rgba(23, 37, 84, 0.1);
+}
+
+.featured-image {
+  position: relative;
+  min-height: 320px;
+  overflow: hidden;
+  background: #e8ecf4;
+}
+
+.featured-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.featured-article:hover .featured-image img {
+  transform: scale(1.04);
+}
+
+.image-category {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 11px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.featured-content {
+  align-self: center;
+  padding: 29px;
+}
+
+.article-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 13px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.featured-content h3 {
+  margin-bottom: 14px;
+  color: var(--primary);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(22px, 2.4vw, 29px);
+  line-height: 1.35;
+  letter-spacing: -0.5px;
+}
+
+.featured-content h3 a {
+  transition: color var(--transition);
+}
+
+.featured-content h3 a:hover {
+  color: var(--accent);
+}
+
+.featured-content > p {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px 15px;
+  margin: 14px 0;
+  color: #7b8391;
+  font-size: 11px;
+}
+
+.article-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.article-meta i {
+  color: #9ca3af;
+}
+
+.read-more-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 6px;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 800;
+  transition:
+    gap var(--transition),
+    color var(--transition);
+}
+
+.read-more-button:hover {
+  gap: 14px;
+  color: var(--accent);
+}
+
+/* =========================================
+   LATEST ARTICLES
+========================================= */
+
+.latest-section {
+  margin-bottom: 45px;
+}
+
+.search-status {
+  margin: -8px 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.search-status:empty {
+  display: none;
+}
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.article-card {
+  min-width: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 3px 13px rgba(23, 37, 84, 0.035);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(23, 37, 84, 0.09);
+}
+
+.article-image {
+  position: relative;
+  height: 205px;
+  overflow: hidden;
+  background: #edf0f5;
+}
+
+.article-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.article-card:hover .article-image img {
+  transform: scale(1.05);
+}
+
+.image-label {
+  position: absolute;
+  top: 13px;
+  left: 13px;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.article-body {
+  padding: 20px;
+}
+
+.article-body .article-category {
+  margin-bottom: 9px;
+}
+
+.article-body h3 {
+  margin-bottom: 10px;
+  color: var(--primary);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.article-body h3 a {
+  transition: color var(--transition);
+}
+
+.article-body h3 a:hover {
+  color: var(--accent);
+}
+
+.article-body > p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+.article-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 17px;
+  padding-top: 14px;
+  border-top: 1px solid #f0f1f4;
+}
+
+.article-footer .article-meta {
+  margin: 0;
+  gap: 8px;
+}
+
+.article-footer .read-more-button {
+  margin: 0;
+  font-size: 11px;
+}
+
+/* =========================================
+   AFFILIATE / PARTNER CONTENT UNITS
+========================================= */
+
+.affiliate-unit {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 2px 0;
+  padding: 21px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.affiliate-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.affiliate-heading h3 {
+  color: var(--primary);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.affiliate-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #737b89;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.affiliate-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.affiliate-content > div {
+  min-width: 0;
+}
+
+.affiliate-content h4 {
+  margin-bottom: 6px;
+  color: var(--primary);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.affiliate-content p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.affiliate-button {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  transition: background var(--transition);
+}
+
+.affiliate-button:hover {
+  background: var(--primary-light);
+}
+
+/* =========================================
+   NO RESULTS
+========================================= */
+
+.no-results {
+  padding: 40px 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px dashed #d5d9e2;
+  border-radius: var(--radius);
+}
+
+.no-results i {
+  display: block;
+  margin-bottom: 15px;
+  color: #a2aabd;
+  font-size: 34px;
+}
+
+.no-results h3 {
+  margin-bottom: 7px;
+  color: var(--primary);
+  font-size: 19px;
+}
+
+.no-results p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.no-results[hidden] {
+  display: none !important;
+}
+
+/* =========================================
+   LOAD MORE
+========================================= */
+
+.load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.load-more-button {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid #d9deea;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: all var(--transition);
+}
+
+.load-more-button:hover {
+  color: #fff;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.load-more-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.load-more-button[hidden] {
+  display: none !important;
+}
+
+/* =========================================
+   BUSINESS TOPICS
+========================================= */
+
+.business-topics-section {
+  margin-bottom: 38px;
+}
+
+.business-topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.business-topic-card {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 17px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition:
+    border-color var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.business-topic-card:hover {
+  transform: translateY(-3px);
+  border-color: #f0b2a3;
+  box-shadow: var(--shadow);
+}
+
+.topic-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: var(--soft-orange);
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.business-topic-card h3 {
+  margin-bottom: 3px;
+  color: var(--primary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.business-topic-card p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.topic-arrow {
+  margin-left: auto;
+  color: #a0a6b2;
+  font-size: 12px;
+  transition:
+    transform var(--transition),
+    color var(--transition);
+}
+
+.business-topic-card:hover .topic-arrow {
+  color: var(--accent);
+  transform: translateX(3px);
+}
+
+/* =========================================
+   DISCLAIMER
+========================================= */
+
+.business-disclaimer {
+  margin-top: 27px;
+  padding: 17px 19px;
+  background: #fffaf0;
+  border: 1px solid #f2e6c8;
+  border-left: 4px solid #d9a441;
+  border-radius: 8px;
+  color: #726344;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.business-disclaimer strong {
+  color: #5c4820;
+}
+
+/* =========================================
+   SIDEBAR BOXES
+========================================= */
+
+.sidebar-box {
+  min-width: 0;
+  padding: 21px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 3px 13px rgba(23, 37, 84, 0.035);
+}
+
+.sidebar-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--border);
+  color: var(--primary);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.sidebar-title > i {
+  color: var(--accent);
+  font-size: 16px;
+}
+
+/* Sidebar categories */
+
+.sidebar-category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sidebar-category-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  color: #4d5668;
+  border-bottom: 1px solid #f0f1f4;
+  font-size: 12px;
+  transition: color var(--transition);
+}
+
+.sidebar-category-list a:last-child {
+  border-bottom: none;
+}
+
+.sidebar-category-list a:hover {
+  color: var(--accent);
+}
+
+.sidebar-category-list a span {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.sidebar-category-list a span i {
+  width: 16px;
+  color: #939bad;
+  text-align: center;
+}
+
+/* Mini stories */
+
+.mini-story {
+  display: grid;
+  grid-template-columns: 83px minmax(0, 1fr);
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid #f0f1f4;
+}
+
+.mini-story:first-of-type {
+  padding-top: 0;
+}
+
+.mini-story:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.mini-story img {
+  width: 83px;
+  height: 77px;
+  object-fit: cover;
+  border-radius: 7px;
+  background: #edf0f5;
+}
+
+.mini-story > div {
+  min-width: 0;
+}
+
+.mini-story h4 {
+  margin-bottom: 6px;
+  color: var(--primary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.mini-story h4 a {
+  transition: color var(--transition);
+}
+
+.mini-story h4 a:hover {
+  color: var(--accent);
+}
+
+.mini-story span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #858c99;
+  font-size: 10px;
+}
+
+/* =========================================
+   NEWSLETTER
+========================================= */
+
+.newsletter-box {
+  padding: 24px 21px;
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      rgba(232, 93, 63, 0.16),
+      transparent 40%
+    ),
+    #f0f3fc;
+  border: 1px solid #dfe5f5;
+  border-radius: var(--radius);
+}
+
+.newsletter-icon {
+  width: 47px;
+  height: 47px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  color: #fff;
+  background: var(--primary);
+  border-radius: 12px;
+  font-size: 19px;
+}
+
+.newsletter-box h3 {
+  margin-bottom: 9px;
+  color: var(--primary);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.newsletter-box > p {
+  margin-bottom: 18px;
+  color: #69738a;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.newsletter-form input {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 12px;
+  background: #fff;
+  border: 1px solid #dce1ed;
+  border-radius: 7px;
+  color: var(--text);
+  outline: none;
+  font-size: 12px;
+}
+
+.newsletter-form input:focus {
+  border-color: var(--primary-light);
+}
+
+.newsletter-form button {
+  min-height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: background var(--transition);
+}
+
+.newsletter-form button:hover {
+  background: var(--accent-hover);
+}
+
+.newsletter-message {
+  margin-top: 11px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.newsletter-message:empty {
+  display: none;
+}
+
+/* =========================================
+   SIDEBAR PROMOTION
+========================================= */
+
+.sidebar-promotion {
+  position: relative;
+  overflow: hidden;
+  padding: 23px;
+  background: linear-gradient(145deg, #172554, #293f79);
+  border-radius: var(--radius);
+  color: #fff;
+}
+
+.sidebar-promotion::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  right: -45px;
+  top: -45px;
+  border: 22px solid rgba(255, 255, 255, 0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.promotion-label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 5px 9px;
+  background: rgba(232, 93, 63, 0.2);
+  color: #ffc7b8;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.sidebar-promotion h3 {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 11px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.sidebar-promotion p {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 19px;
+  color: #d5def4;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.promotion-button {
+  position: relative;
+  z-index: 1;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 14px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  transition: background var(--transition);
+}
+
+.promotion-button:hover {
+  background: var(--accent-hover);
+}
+
+/* =========================================
+   SITE FOOTER
+========================================= */
+
+.site-footer {
+  background: #101a39;
+  color: #d2d9ea;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 35px;
+  padding-top: 53px;
+  padding-bottom: 43px;
+}
+
+.footer-brand .logo {
+  margin-bottom: 17px;
+}
+
+.footer-brand .logo-text {
+  color: #fff;
+}
+
+.footer-brand > p {
+  max-width: 290px;
+  color: #b4bfd8;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.footer-column h3,
+.footer-column > b {
+  display: block;
+  margin-bottom: 17px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.footer-column ul {
+  list-style: none;
+}
+
+.footer-column li {
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  color: #b4bfd8;
+  font-size: 12px;
+  transition: color var(--transition);
+}
+
+.footer-column a:hover {
+  color: #ff9f88;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 19px;
+}
+
+.social-links a {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  color: #e6eafa;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all var(--transition);
+}
+
+.social-links a:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.footer-bottom {
+  min-height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+  color: #aab5d0;
+  font-size: 11px;
+}
+
+.footer-bottom-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.footer-bottom-links a {
+  color: #aab5d0;
+  font-size: 11px;
+  transition: color var(--transition);
+}
+
+.footer-bottom-links a:hover {
+  color: #fff;
+}
+
+/* =========================================
+   SEARCH VISIBILITY
+========================================= */
+
+.searchable-article[hidden],
+.featured-article[hidden],
+.article-card[hidden],
+.affiliate-unit[hidden] {
+  display: none !important;
+}
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+  .container {
+    width: min(100% - 32px, 900px);
+  }
+
+  .header-main {
+    gap: 15px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .content-layout {
+    grid-template-columns: minmax(0, 1fr) 270px;
+    gap: 22px;
+  }
+
+  .featured-article {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-image,
+  .featured-image img {
+    min-height: 280px;
+    max-height: 350px;
+  }
+
+  .featured-content {
+    padding: 25px;
+  }
+
+  .article-grid {
+    gap: 17px;
+  }
+
+  .article-image {
+    height: 180px;
+  }
+
+  .article-body {
+    padding: 16px;
+  }
+
+  .article-body h3 {
+    font-size: 18px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 28px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 760px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    width: calc(100% - 28px);
+  }
+
+  .topbar-inner {
+    min-height: 34px;
+  }
+
+  .topbar-left {
+    gap: 8px;
+  }
+
+  .topbar-left span {
+    font-size: 10px;
+  }
+
+  .topbar-right {
+    gap: 10px;
+  }
+
+  .topbar-right a {
+    font-size: 11px;
+  }
+
+  .header-main {
+    min-height: 72px;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+
+  .logo-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    font-size: 21px;
+  }
+
+  .logo-text {
+    font-size: 21px;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .header-actions .search-form {
+    width: auto;
+    flex: 1;
+    height: 40px;
+  }
+
+  .header-actions .subscribe-button {
+    min-height: 40px;
+    padding: 0 11px;
+    font-size: 11px;
+  }
+
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .main-nav.nav-open {
+    display: block;
+  }
+
+  .nav-inner {
+    min-height: auto;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    overflow: visible;
+  }
+
+  .nav-inner a {
+    min-height: 43px;
+    padding: 0 6px;
+    border-bottom: 1px solid #f0f1f4;
+  }
+
+  .nav-inner a.active::after {
+    top: 10px;
+    bottom: 10px;
+    left: -14px;
+    right: auto;
+    width: 3px;
+    height: auto;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .business-hero {
+    padding: 37px 0 38px;
+  }
+
+  .breadcrumb {
+    margin-bottom: 17px;
+    font-size: 11px;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 14px;
+    font-size: 9px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(32px, 8vw, 43px);
+    letter-spacing: -0.8px;
+  }
+
+  .hero-content > p {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  .hero-buttons {
+    gap: 9px;
+    margin-top: 22px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    min-height: 43px;
+    padding: 0 13px;
+    font-size: 11px;
+  }
+
+  .hero-benefits {
+    gap: 11px 16px;
+    margin-top: 22px;
+    font-size: 11px;
+  }
+
+  .topic-navigation-inner {
+    min-height: 57px;
+    gap: 8px;
+  }
+
+  .topic-navigation-inner a {
+    padding: 7px 11px;
+    font-size: 11px;
+  }
+
+  .page-content {
+    padding: 30px 0 45px;
+  }
+
+  .content-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 38px;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 16px;
+  }
+
+  .sidebar-box,
+  .newsletter-box,
+  .sidebar-promotion {
+    min-width: 0;
+    padding: 17px;
+  }
+
+  .sidebar-box:first-child,
+  .newsletter-box,
+  .sidebar-promotion {
+    grid-column: 1 / -1;
+  }
+
+  .section-heading {
+    margin-bottom: 19px;
+  }
+
+  .section-heading h2 {
+    font-size: 25px;
+  }
+
+  .featured-section,
+  .latest-section {
+    margin-bottom: 35px;
+  }
+
+  .featured-image,
+  .featured-image img {
+    min-height: 220px;
+    max-height: 290px;
+  }
+
+  .featured-content {
+    padding: 20px;
+  }
+
+  .featured-content h3 {
+    font-size: 24px;
+  }
+
+  .featured-content > p {
+    font-size: 12px;
+  }
+
+  .article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .article-image {
+    height: 145px;
+  }
+
+  .image-label {
+    top: 9px;
+    left: 9px;
+    padding: 5px 7px;
+    font-size: 8px;
+  }
+
+  .article-body {
+    padding: 13px;
+  }
+
+  .article-body .article-category {
+    margin-bottom: 7px;
+    font-size: 9px;
+  }
+
+  .article-body h3 {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .article-body > p {
+    font-size: 11px;
+    line-height: 1.75;
+  }
+
+  .article-body .article-meta {
+    gap: 7px;
+    font-size: 10px;
+  }
+
+  .article-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .article-footer .read-more-button {
+    font-size: 10px;
+  }
+
+  .affiliate-unit {
+    padding: 16px;
+  }
+
+  .affiliate-content {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .affiliate-content h4 {
+    font-size: 14px;
+  }
+
+  .affiliate-button {
+    min-height: 38px;
+  }
+
+  .business-topic-grid {
+    gap: 10px;
+  }
+
+  .business-topic-card {
+    gap: 9px;
+    padding: 12px 10px;
+  }
+
+  .topic-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .business-topic-card h3 {
+    font-size: 11px;
+  }
+
+  .business-topic-card p {
+    font-size: 9px;
+  }
+
+  .topic-arrow {
+    font-size: 10px;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 27px 20px;
+    padding-top: 38px;
+    padding-bottom: 30px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* =========================================
+   SMALL PHONES
+========================================= */
+
+@media (max-width: 420px) {
+  .container {
+    width: calc(100% - 22px);
+  }
+
+  .topbar-right a:nth-child(n + 2) {
+    display: none;
+  }
+
+  .logo-text {
+    font-size: 19px;
+  }
+
+  .header-main {
+    gap: 10px;
+  }
+
+  .header-actions {
+    width: 100%;
+    flex: 1 1 100%;
+    order: 2;
+  }
+
+  .menu-toggle {
+    order: 1;
+    margin-left: auto;
+  }
+
+  .header-main > .logo {
+    order: 0;
+  }
+
+  .header-actions .search-form {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .header-actions .subscribe-button {
+    flex-shrink: 0;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .hero-buttons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-buttons a {
+    width: 100%;
+  }
+
+  .hero-benefits {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .featured-image,
+  .featured-image img {
+    min-height: 195px;
+  }
+
+  .featured-content {
+    padding: 17px;
+  }
+
+  .featured-content h3 {
+    font-size: 22px;
+  }
+
+  .article-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .article-image {
+    height: 205px;
+  }
+
+  .article-body {
+    padding: 17px;
+  }
+
+  .article-body h3 {
+    font-size: 19px;
+  }
+
+  .article-body > p {
+    font-size: 12px;
+  }
+
+  .article-footer {
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .business-topic-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .business-topic-card {
+    padding: 14px;
+  }
+
+  .business-topic-card h3 {
+    font-size: 12px;
+  }
+
+  .business-topic-card p {
+    font-size: 10px;
+  }
+
+  .sidebar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar-box:first-child,
+  .newsletter-box,
+  .sidebar-promotion {
+    grid-column: auto;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 15px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom-links {
+    gap: 12px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+      
+  </style>
+  
+  <script src="business.js" defer></script>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+
+      <div class="topbar-left">
+        <span>
+          <i class="fa-solid fa-chart-line"></i>
+          Business ideas. Better decisions.
+        </span>
+
+        <a href="index.html">ZONGO Blog</a>
+      </div>
+
+      <div class="topbar-right">
+        <a href="news.html">Latest News</a>
+        <a href="lifestyle.html">Lifestyle</a>
+        <a href="technology.html">Technology</a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- HEADER -->
+
+  <header class="site-header">
+
+    <div class="container header-main">
+
+      <a href="index.html" class="logo" aria-label="ZONGO Blog homepage">
+
+        <span class="logo-mark">Z</span>
+
+        <span class="logo-text">
+          <strong>ZONGO</strong>
+          <small>Business & Finance</small>
+        </span>
+
+      </a>
+
+
+      <div class="header-actions">
+
+        <form class="search-form" id="businessSearchForm" role="search">
+
+          <input
+            type="search"
+            id="businessSearchInput"
+            placeholder="Search business..."
+            aria-label="Search business articles"
+          >
+
+          <button type="submit" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+
+        </form>
+
+
+        <a href="#newsletter" class="subscribe-button">
+          <i class="fa-regular fa-envelope"></i>
+          Subscribe
+        </a>
+
+
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav class="main-nav" id="mainNav">
+
+      <div class="container nav-inner">
+
+        <a href="index.html">Home</a>
+
+        <a href="news.html">News</a>
+
+        <a href="lifestyle.html">Lifestyle</a>
+
+        <a href="business.html" class="active">Business & Finance</a>
+
+        <a href="technology.html">Technology</a>
+
+        <a href="entertainment.html">Entertainment</a>
+
+        <a href="tinubu-election.html">Featured Products</a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- BUSINESS HERO -->
+
+  <section class="business-hero">
+
+    <div class="container">
+
+      <div class="breadcrumb">
+
+        <a href="index.html">Home</a>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+        <span>Business & Finance</span>
+
+      </div>
+
+
+      <div class="hero-content">
+
+        <span class="hero-eyebrow">
+          <i class="fa-solid fa-chart-column"></i>
+          BUSINESS & FINANCE
+        </span>
+
+
+        <h1>
+          Ideas That Build Businesses.
+          <span>Knowledge That Grows Wealth.</span>
+        </h1>
+
+
+        <p>
+          Discover business opportunities, practical money-management
+          ideas, entrepreneurship stories, market developments and
+          financial education to help you make informed decisions.
+        </p>
+
+
+        <div class="hero-buttons">
+
+          <a href="#latestArticles" class="primary-button">
+            Explore Business Stories
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+          <a href="#businessTopics" class="secondary-button">
+            Browse Topics
+          </a>
+
+        </div>
+
+
+        <div class="hero-benefits">
+
+          <span>
+            <i class="fa-solid fa-check-circle"></i>
+            Business Insights
+          </span>
+
+          <span>
+            <i class="fa-solid fa-check-circle"></i>
+            Money Education
+          </span>
+
+          <span>
+            <i class="fa-solid fa-check-circle"></i>
+            Entrepreneur Stories
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- BUSINESS TOPIC NAVIGATION -->
+
+  <section class="topic-navigation" id="businessTopics">
+
+    <div class="container">
+
+      <div class="topic-navigation-inner">
+
+        <a href="#entrepreneurship">
+          <i class="fa-solid fa-briefcase"></i>
+          Entrepreneurship
+        </a>
+
+        <a href="#personalFinance">
+          <i class="fa-solid fa-wallet"></i>
+          Personal Finance
+        </a>
+
+        <a href="#smallBusiness">
+          <i class="fa-solid fa-store"></i>
+          Small Business
+        </a>
+
+        <a href="#investing">
+          <i class="fa-solid fa-chart-pie"></i>
+          Investing
+        </a>
+
+        <a href="#economy">
+          <i class="fa-solid fa-earth-africa"></i>
+          Economy
+        </a>
+
+        <a href="#careers">
+          <i class="fa-solid fa-user-tie"></i>
+          Careers
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN CONTENT -->
+
+  <main class="page-content">
+
+    <div class="container">
+
+      <div class="content-layout">
+
+
+        <!-- MAIN ARTICLE COLUMN -->
+
+        <div class="main-column">
+
+
+          <!-- FEATURED STORY -->
+
+          <section class="featured-section">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="section-kicker">THE BIG STORY</span>
+                <h2>Business Spotlight</h2>
+                <p>Ideas and insights worth exploring.</p>
+              </div>
+
+              <span class="editor-badge">
+                <i class="fa-solid fa-star"></i>
+                Editor's Pick
+              </span>
+
+            </div>
+
+
+            <article class="featured-article searchable-article"
+              data-category="entrepreneurship business startup small business">
+
+              <a href="#entrepreneurship" class="featured-image">
+
+                <img
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85"
+                  alt="Business analytics and planning on a computer"
+                  loading="eager"
+                >
+
+                <span class="image-category">
+                  Entrepreneurship
+                </span>
+
+              </a>
+
+
+              <div class="featured-content">
+
+                <span class="article-category">
+                  BUSINESS STRATEGY
+                </span>
+
+
+                <h3>
+                  <a href="#entrepreneurship">
+                    How to Turn a Small Business Idea into a Sustainable Business
+                  </a>
+                </h3>
+
+
+                <p>
+                  Starting a business is only the beginning. Learn how
+                  understanding customers, controlling expenses, pricing
+                  products and building trust can help a small business
+                  establish a stronger foundation.
+                </p>
+
+
+                <div class="article-meta">
+
+                  <span>
+                    <i class="fa-regular fa-user"></i>
+                    ZONGO Business Desk
+                  </span>
+
+                  <span>
+                    <i class="fa-regular fa-clock"></i>
+                    7 min read
+                  </span>
+
+                </div>
+
+
+                <a href="#entrepreneurship" class="read-more-button">
+                  Read the Story
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+              </div>
+
+            </article>
+
+          </section>
+
+
+          <!-- LATEST ARTICLES -->
+
+          <section class="latest-section" id="latestArticles">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="section-kicker">FRESH PERSPECTIVES</span>
+                <h2>Latest Business Stories</h2>
+                <p>Explore ideas for work, money and business growth.</p>
+              </div>
+
+            </div>
+
+
+            <div class="search-status" id="searchStatus" aria-live="polite"></div>
+
+
+            <div class="article-grid" id="articleGrid">
+
+
+              <!-- ARTICLE 1 -->
+
+              <article class="article-card searchable-article"
+                id="entrepreneurship"
+                data-category="entrepreneurship business startup planning">
+
+                <a href="#entrepreneurship" class="article-image">
+
+                  <img
+                    src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=850&q=80"
+                    alt="Entrepreneurs discussing a business plan"
+                    loading="lazy"
+                  >
+
+                  <span class="image-label">Entrepreneurship</span>
+
+                </a>
+
+
+                <div class="article-body">
+
+                  <span class="article-category">STARTING A BUSINESS</span>
+
+                  <h3>
+                    <a href="#entrepreneurship">
+                      What Every New Entrepreneur Should Understand Before Starting
+                    </a>
+                  </h3>
+
+                  <p>
+                    Explore customer research, startup expenses, pricing,
+                    record keeping and other foundations of a new business.
+                  </p>
+
+                  <div class="article-footer">
+
+                    <span>
+                      <i class="fa-regular fa-clock"></i>
+                      6 min read
+                    </span>
+
+                    <a href="#entrepreneurship">Read more →</a>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+
+              <!-- ARTICLE 2 -->
+
+              <article class="article-card searchable-article"
+                id="personalFinance"
+                data-category="personal finance budgeting saving money">
+
+                <a href="#personalFinance" class="article-image">
+
+                  <img
+                    src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=850&q=80"
+                    alt="Personal financial planning and budgeting"
+                    loading="lazy"
+                  >
+
+                  <span class="image-label">Personal Finance</span>
+
+                </a>
+
+
+                <div class="article-body">
+
+                  <span class="article-category">MONEY MANAGEMENT</span>
+
+                  <h3>
+                    <a href="#personalFinance">
+                      Practical Ways to Manage Your Monthly Income Better
+                    </a>
+                  </h3>
+
+                  <p>
+                    Learn how to plan a budget, track everyday spending,
+                    prepare for emergencies and set realistic savings goals.
+                  </p>
+
+                  <div class="article-footer">
+
+                    <span>
+                      <i class="fa-regular fa-clock"></i>
+                      5 min read
+                    </span>
+
+                    <a href="#personalFinance">Read more →</a>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+
+              <!-- AFFILIATE PRODUCT PLACEMENT 1 -->
+
+              <div class="affiliate-unit" data-affiliate="1">
+
+                <div class="affiliate-heading">
+
+                  <span>
+                    <i class="fa-solid fa-tag"></i>
+                    Featured Recommendation
+                  </span>
+
+                  <span class="affiliate-label">Affiliate</span>
+
+                </div>
+
+
+                <div class="affiliate-content">
+
+                  <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80"
+                    alt="Wristwatch product"
+                    loading="lazy"
+                  >
+
+
+                  <div>
+
+                    <h3>Discover Featured Products</h3>
+
+                    <p>
+                      Explore selected products from the ZONGO featured
+                      products page. Review the available details before buying.
+                    </p>
+
+                    <a href="tinubu-election.html" class="affiliate-button">
+                      Explore Products
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- ARTICLE 3 -->
+
+              <article class="article-card searchable-article"
+                id="smallBusiness"
+                data-category="small business retail shop inventory pricing">
+
+                <a href="#smallBusiness" class="article-image">
+
+                  <img
+                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=850&q=80"
+                    alt="Retail shop displaying products"
+                    loading="lazy"
+                  >
+
+                  <span class="image-label">Small Business</span>
+
+                </a>
+
+
+                <div class="article-body">
+
+                  <span class="article-category">RETAIL & COMMERCE</span>
+
+                  <h3>
+                    <a href="#smallBusiness">
+                      How Small Retailers Can Improve Stock and Cash Management
+                    </a>
+                  </h3>
+
+                  <p>
+                    Understand stock tracking, product selection, cash flow
+                    and the importance of keeping accurate business records.
+                  </p>
+
+                  <div class="article-footer">
+
+                    <span>
+                      <i class="fa-regular fa-clock"></i>
+                      6 min read
+                    </span>
+
+                    <a href="#smallBusiness">Read more →</a>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+
+              <!-- ARTICLE 4 -->
+
+              <article class="article-card searchable-article"
+                id="investing"
+                data-category="investing investment risk financial education">
+
+                <a href="#investing" class="article-image">
+
+                  <img
+                    src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=850&q=80"
+                    alt="Financial market charts displayed on screens"
+                    loading="lazy"
+                  >
+
+                  <span class="image-label">Investing</span>
+
+                </a>
+
+
+                <div class="article-body">
+
+                  <span class="article-category">INVESTMENT EDUCATION</span>
+
+                  <h3>
+                    <a href="#investing">
+                      Important Things to Understand Before Making an Investment
+                    </a>
+                  </h3>
+
+                  <p>
+                    Learn about investment risk, diversification, fees,
+                    time horizons and why guaranteed high returns deserve scrutiny.
+                  </p>
+
+                  <div class="article-footer">
+
+                    <span>
+                      <i class="fa-regular fa-clock"></i>
+                      8 min read
+                    </span>
+
+                    <a href="#investing">Read more →</a>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+
+              <!-- AFFILIATE PRODUCT PLACEMENT 2 -->
+
+              <div class="affiliate-unit" data-affiliate="2">
+
+                <div class="affiliate-heading">
+
+                  <span>
+                    <i class="fa-solid fa-tag"></i>
+                    Shopping Discovery
+                  </span>
+
+                  <span class="affiliate-label">Affiliate</span>
+
+                </div>
+
+
+                <div class="affiliate-content">
+
+                  <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80"
+                    alt="Red sports shoe"
+                    loading="lazy"
+                  >
+
+
+                  <div>
+
+                    <h3>Browse More Product Picks</h3>
+
+                    <p>
+                      Discover more products on ZONGO. Product availability,
+                      prices and details should be checked before ordering.
+                    </p>
+
+                    <a href="tinubu-election.html" class="affiliate-button">
+                      View Products
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- ARTICLE 5 -->
+
+              <article class="article-card searchable-article"
+                id="economy"
+                data-category="economy Nigeria inflation markets economic news">
+
+                <a href="#economy" class="article-image">
+
+                  <img
+                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=850&q=80"
+                    alt="Modern commercial buildings"
+                    loading="lazy"
+                  >
+
+                  <span class="image-label">Economy</span>
+
+                </a>
+
+
+                <div class="article-body">
+
+                  <span class="article-category">ECONOMIC INSIGHTS</span>
+
+                  <h3>
+                    <a href="#economy">
+                      How Economic Changes Can Affect Everyday Businesses
+                    </a>
+                  </h3>
+
+                  <p>
+                    Explore how changing costs, consumer spending, exchange
+                    rates and supply conditions can influence business decisions.
+                  </p>
+
+                  <div class="article-footer">
+
+                    <span>
+                      <i class="fa-regular fa-clock"></i>
+                      7 min read
+                    </span>
+
+                    <a href="#economy">Read more →</a>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+
+              <!-- ARTICLE 6 -->
+
+              <article class="article-card searchable-article"
+                id="careers"
+                data-category="careers employment jobs interview workplace">
+
+                <a href="#careers" class="article-image">
+
+                  <img
+                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=850&q=80"
+                    alt="Professionals working together in an office"
+                    loading="lazy"
+                  >
+
+                  <span class="image-label">Careers</span>
+
+                </a>
+
+
+                <div class="article-body">
+
+                  <span class="article-category">CAREER DEVELOPMENT</span>
+
+                  <h3>
+                    <a href="#careers">
+                      Skills That Can Help You Become More Valuable at Work
+                    </a>
+                  </h3>
+
+                  <p>
+                    Discover why communication, problem-solving,                   decision-making, digital literacy, and teamwork can
+                    improve your career opportunities and professional growth.
+                  </p>
+
+                  <div class="article-footer">
+                    <span><i class="fa-regular fa-clock"></i> 6 min read</span>
+                    <a href="#careers" class="read-more-button">
+                      Read Article <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+
+                </div>
+              </article>
+
+
+              <!-- ARTICLE 7 -->
+
+              <article
+                class="article-card searchable-article"
+                id="digitalBusiness"
+                data-category="technology"
+              >
+
+                <a href="#digital-business" class="article-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80"
+                    alt="Business analytics displayed on a computer screen"
+                    loading="lazy"
+                  >
+
+                  <span class="image-label">Digital Business</span>
+                </a>
+
+                <div class="article-body">
+
+                  <span class="article-category">DIGITAL BUSINESS</span>
+
+                  <h3>
+                    <a href="#digital-business">
+                      How to Grow a Business Online
+                    </a>
+                  </h3>
+
+                  <p>
+                    Learn how websites, social media, customer service,
+                    and online marketing can help businesses reach more
+                    customers and build a stronger digital presence.
+                  </p>
+
+                  <div class="article-footer">
+                    <span><i class="fa-regular fa-clock"></i> 7 min read</span>
+
+                    <a href="#digital-business" class="read-more-button">
+                      Read Article <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+
+                </div>
+              </article>
+
+
+              <!-- ARTICLE 8 -->
+
+              <article
+                class="article-card searchable-article"
+                id="businessMarketing"
+                data-category="marketing"
+              >
+
+                <a href="#business-marketing" class="article-image">
+                  <img
+                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"
+                    alt="Business professionals planning a marketing strategy"
+                    loading="lazy"
+                  >
+
+                  <span class="image-label">Marketing</span>
+                </a>
+
+                <div class="article-body">
+
+                  <span class="article-category">BUSINESS MARKETING</span>
+
+                  <h3>
+                    <a href="#business-marketing">
+                      Simple Marketing Strategies for Small Businesses
+                    </a>
+                  </h3>
+
+                  <p>
+                    Explore practical ways to promote your products,
+                    understand your customers, build trust, and encourage
+                    repeat purchases without overspending.
+                  </p>
+
+                  <div class="article-footer">
+                    <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+
+                    <a href="#business-marketing" class="read-more-button">
+                      Read Article <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+
+                </div>
+              </article>
+
+
+              <!-- AFFILIATE RECOMMENDATION 4 -->
+
+              <div class="affiliate-unit">
+
+                <div class="affiliate-heading">
+                  <span class="affiliate-label">
+                    <i class="fa-solid fa-link"></i> PARTNER RECOMMENDATION
+                  </span>
+                </div>
+
+                <div class="affiliate-content">
+
+                  <div>
+                    <h3>Explore Opportunities and Useful Resources</h3>
+
+                    <p>
+                      Discover resources that may help you learn new skills,
+                      explore opportunities, and make better-informed decisions.
+                    </p>
+                  </div>
+
+                  <a href="tinubu-election.html" class="affiliate-button">
+                    Explore <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+
+                </div>
+
+                <p class="affiliate-disclosure">
+                  Some links may be promotional. Review the destination
+                  and its terms before making a decision.
+                </p>
+
+              </div>
+
+
+              <!-- NO SEARCH RESULTS -->
+
+              <div class="no-results" id="noResults" hidden>
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <h3>No articles found</h3>
+
+                <p>
+                  Try a different search term or select another topic.
+                </p>
+
+                <button
+                  type="button"
+                  class="secondary-button"
+                  id="clearSearchButton"
+                >
+                  Clear Search
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- LOAD MORE -->
+
+            <div class="load-more-wrapper">
+
+              <button
+                type="button"
+                class="load-more-button"
+                id="loadMoreButton"
+              >
+                Load More Articles
+                <i class="fa-solid fa-arrow-down"></i>
+              </button>
+
+            </div>
+
+          </section>
+
+
+          <!-- BUSINESS TOPICS -->
+
+          <section class="business-topics-section" id="businessTopics">
+
+            <div class="section-heading">
+
+              <div>
+                <span class="section-kicker">EXPLORE OUR COVERAGE</span>
+                <h2>Explore Business Topics</h2>
+
+                <p>
+                  Find practical information across different areas
+                  of business and professional development.
+                </p>
+              </div>
+
+            </div>
+
+
+            <div class="business-topic-grid">
+
+              <a href="#entrepreneurship" class="business-topic-card">
+
+                <span class="topic-icon">
+                  <i class="fa-solid fa-lightbulb"></i>
+                </span>
+
+                <span>
+                  <strong>Entrepreneurship</strong>
+                  <small>Ideas, startups and business growth</small>
+                </span>
+
+                <i class="fa-solid fa-arrow-right topic-arrow"></i>
+
+              </a>
+
+
+              <a href="#personalFinance" class="business-topic-card">
+
+                <span class="topic-icon">
+                  <i class="fa-solid fa-wallet"></i>
+                </span>
+
+                <span>
+                  <strong>Personal Finance</strong>
+                  <small>Budgeting, saving and money management</small>
+                </span>
+
+                <i class="fa-solid fa-arrow-right topic-arrow"></i>
+
+              </a>
+
+
+              <a href="#smallBusiness" class="business-topic-card">
+
+                <span class="topic-icon">
+                  <i class="fa-solid fa-store"></i>
+                </span>
+
+                <span>
+                  <strong>Small Business</strong>
+                  <small>Operations, customers and profits</small>
+                </span>
+
+                <i class="fa-solid fa-arrow-right topic-arrow"></i>
+
+              </a>
+
+
+              <a href="#investing" class="business-topic-card">
+
+                <span class="topic-icon">
+                  <i class="fa-solid fa-chart-line"></i>
+                </span>
+
+                <span>
+                  <strong>Investing</strong>
+                  <small>Investment knowledge and risk awareness</small>
+                </span>
+
+                <i class="fa-solid fa-arrow-right topic-arrow"></i>
+
+              </a>
+
+
+              <a href="#careers" class="business-topic-card">
+
+                <span class="topic-icon">
+                  <i class="fa-solid fa-briefcase"></i>
+                </span>
+
+                <span>
+                  <strong>Career Development</strong>
+                  <small>Workplace skills and career opportunities</small>
+                </span>
+
+                <i class="fa-solid fa-arrow-right topic-arrow"></i>
+
+              </a>
+
+
+              <a href="#digital-business" class="business-topic-card">
+
+                <span class="topic-icon">
+                  <i class="fa-solid fa-laptop"></i>
+                </span>
+
+                <span>
+                  <strong>Digital Business</strong>
+                  <small>Technology and online growth</small>
+                </span>
+
+                <i class="fa-solid fa-arrow-right topic-arrow"></i>
+
+              </a>
+
+            </div>
+
+          </section>
+
+
+          <!-- DISCLAIMER -->
+
+          <div class="business-disclaimer">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <p>
+              <strong>Disclaimer:</strong>
+              The information on this page is provided for general
+              educational purposes only. It should not be treated as
+              personalized financial, investment, legal, or professional
+              advice. Research important decisions carefully and consult
+              an appropriately qualified professional when necessary.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================
+             SIDEBAR
+        ====================================== -->
+
+        <aside class="sidebar">
+
+
+          <!-- POPULAR TOPICS -->
+
+          <section class="sidebar-box">
+
+            <div class="sidebar-title">
+              <h2>Popular Topics</h2>
+            </div>
+
+            <ul class="sidebar-category-list">
+
+              <li>
+                <a href="#entrepreneurship">
+                  <span>Entrepreneurship</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+              </li>
+
+              <li>
+                <a href="#personalFinance">
+                  <span>Personal Finance</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+              </li>
+
+              <li>
+                <a href="#smallBusiness">
+                  <span>Small Business</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+              </li>
+
+              <li>
+                <a href="#investing">
+                  <span>Investing</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+              </li>
+
+              <li>
+                <a href="#careers">
+                  <span>Career Development</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+              </li>
+
+              <li>
+                <a href="#business-marketing">
+                  <span>Marketing</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+              </li>
+
+            </ul>
+
+          </section>
+
+
+          <!-- EDITOR'S PICKS -->
+
+          <section class="sidebar-box">
+
+            <div class="sidebar-title">
+              <h2>Editor's Picks</h2>
+            </div>
+
+
+            <article class="mini-story">
+
+              <a href="#entrepreneurship" class="mini-story-image">
+
+                <img
+                  src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=300&q=80"
+                  alt="Entrepreneurs discussing a business idea"
+                  loading="lazy"
+                >
+
+              </a>
+
+              <div>
+
+                <span class="article-category">ENTREPRENEURSHIP</span>
+
+                <h3>
+                  <a href="#entrepreneurship">
+                    Starting a Business With a Clear Plan
+                  </a>
+                </h3>
+
+                <span class="mini-story-meta">Business Guide</span>
+
+              </div>
+
+            </article>
+
+
+            <article class="mini-story">
+
+              <a href="#personalFinance" class="mini-story-image">
+
+                <img
+                  src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=300&q=80"
+                  alt="Money and financial planning"
+                  loading="lazy"
+                >
+
+              </a>
+
+              <div>
+
+                <span class="article-category">PERSONAL FINANCE</span>
+
+                <h3>
+                  <a href="#personalFinance">
+                    Building Better Money Habits
+                  </a>
+                </h3>
+
+                <span class="mini-story-meta">Money Matters</span>
+
+              </div>
+
+            </article>
+
+
+            <article class="mini-story">
+
+              <a href="#digital-business" class="mini-story-image">
+
+                <img
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=300&q=80"
+                  alt="Digital business analytics"
+                  loading="lazy"
+                >
+
+              </a>
+
+              <div>
+
+                <span class="article-category">DIGITAL BUSINESS</span>
+
+                <h3>
+                  <a href="#digital-business">
+                    Growing Your Business Online
+                  </a>
+                </h3>
+
+                <span class="mini-story-meta">Digital Growth</span>
+
+              </div>
+
+            </article>
+
+          </section>
+
+
+          <!-- NEWSLETTER -->
+
+          <section class="newsletter-box">
+
+            <div class="newsletter-icon">
+              <i class="fa-regular fa-envelope"></i>
+            </div>
+
+            <span class="section-kicker">STAY INFORMED</span>
+
+            <h2>Get Business Updates</h2>
+
+            <p>
+              Receive useful business insights, career tips,
+              and new article announcements.
+            </p>
+
+            <form id="newsletterForm" class="newsletter-form">
+
+              <label for="newsletterName">Your name</label>
+
+              <input
+                type="text"
+                id="newsletterName"
+                name="name"
+                placeholder="Enter your name"
+                autocomplete="name"
+                required
+              >
+
+              <label for="newsletterEmail">Email address</label>
+
+              <input
+                type="email"
+                id="newsletterEmail"
+                name="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required
+              >
+
+              <button type="submit" class="primary-button">
+                Subscribe
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+
+              <p
+                class="newsletter-message"
+                id="newsletterMessage"
+                role="status"
+                aria-live="polite"
+              ></p>
+
+            </form>
+
+            <small>
+              Your details should only be submitted once a working
+              subscription service has been connected.
+            </small>
+
+          </section>
+
+
+          <!-- SIDEBAR PROMOTION -->
+
+          <section class="sidebar-promotion">
+
+            <span class="promotion-label">
+              <i class="fa-solid fa-star"></i> DISCOVER MORE
+            </span>
+
+            <h2>Explore More Stories</h2>
+
+            <p>
+              Discover more updates, useful information,
+              and stories from different categories.
+            </p>
+
+            <a href="news.html" class="promotion-button">
+              Read Latest News
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </section>
+
+
+        </aside>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================
+       FOOTER
+  ====================================== -->
+
+  <footer class="site-footer">
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+          <a href="index.html" class="logo footer-logo">
+
+            <span class="logo-mark">Z</span>
+
+            <span class="logo-text">
+              ZONGO <span>Blog</span>
+            </span>
+
+          </a>
+
+          <p>
+            Business ideas, money knowledge, career insights,
+            and practical information to help you make
+            better-informed decisions.
+          </p>
+
+          <div class="social-links">
+
+            <a href="#facebook" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="#instagram" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#youtube" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+
+            <a href="#tiktok" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-column">
+
+          <h3>Explore</h3>
+
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="business.html">Business</a></li>
+            <li><a href="technology.html">Technology</a></li>
+            <li><a href="lifestyle.html">Lifestyle</a></li>
+            <li><a href="entertainment.html">Entertainment</a></li>
+          </ul>
+
+        </div>
+
+
+        <!-- BUSINESS -->
+
+        <div class="footer-column">
+
+          <h3>Business</h3>
+
+          <ul>
+            <li><a href="#entrepreneurship">Entrepreneurship</a></li>
+            <li><a href="#personalFinance">Personal Finance</a></li>
+            <li><a href="#smallBusiness">Small Business</a></li>
+            <li><a href="#investing">Investing</a></li>
+            <li><a href="#careers">Career Development</a></li>
+            <li><a href="#digital-business">Digital Business</a></li>
+          </ul>
+
+        </div>
+
+
+        <!-- INFORMATION -->
+
+        <div class="footer-column">
+
+          <h3>Information</h3>
+
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
+          </ul>
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER BOTTOM -->
+
+      <div class="footer-bottom">
+
+        <p>
+          &copy; <span id="currentYear"></span> ZONGO Blog.
+          All rights reserved.
+        </p>
+
+        <div class="footer-bottom-links">
+
+          <a href="privacy.html">Privacy</a>
+
+          <a href="terms.html">Terms</a>
+
+          <a href="contact.html">Contact</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================
+       JAVASCRIPT
+  ====================================== -->
+
+ <script>
+     
+     /* =========================================
+   ZONGO BLOG — BUSINESS PAGE JAVASCRIPT
+   File: business.js
+========================================= */
+
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* =====================================
+     ELEMENTS
+  ===================================== */
+
+  const menuToggle = document.getElementById("menuToggle");
+  const mainNav = document.getElementById("mainNav");
+
+  const searchForm = document.getElementById("businessSearchForm");
+  const searchInput = document.getElementById("businessSearchInput");
+
+  const searchStatus = document.getElementById("searchStatus");
+  const articleGrid = document.getElementById("articleGrid");
+  const noResults = document.getElementById("noResults");
+  const loadMoreButton = document.getElementById("loadMoreButton");
+
+  const newsletterForm = document.getElementById("newsletterForm");
+  const newsletterName = document.getElementById("newsletterName");
+  const newsletterEmail = document.getElementById("newsletterEmail");
+  const newsletterMessage = document.getElementById("newsletterMessage");
+
+  const currentYear = document.getElementById("currentYear");
+
+  /* =====================================
+     MOBILE NAVIGATION
+  ===================================== */
+
+  if (menuToggle && mainNav) {
+
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+    menuToggle.addEventListener("click", () => {
+
+      const isOpen = mainNav.classList.toggle("nav-open");
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation menu" : "Open navigation menu"
+      );
+
+      const icon = menuToggle.querySelector("i");
+
+      if (icon) {
+        icon.classList.toggle("fa-bars", !isOpen);
+        icon.classList.toggle("fa-xmark", isOpen);
+      }
+
+    });
+
+    // Close the menu after a navigation link is selected.
+    mainNav.querySelectorAll("a").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        mainNav.classList.remove("nav-open");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+        const icon = menuToggle.querySelector("i");
+
+        if (icon) {
+          icon.classList.add("fa-bars");
+          icon.classList.remove("fa-xmark");
+        }
+
+      });
+
+    });
+
+    // Close the menu when the user taps outside it.
+    document.addEventListener("click", event => {
+
+      if (
+        mainNav.classList.contains("nav-open") &&
+        !mainNav.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+
+        mainNav.classList.remove("nav-open");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+        const icon = menuToggle.querySelector("i");
+
+        if (icon) {
+          icon.classList.add("fa-bars");
+          icon.classList.remove("fa-xmark");
+        }
+
+      }
+
+    });
+
+  }
+
+  /* =====================================
+     COPYRIGHT YEAR
+  ===================================== */
+
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+  }
+
+  /* =====================================
+     ARTICLE SEARCH AND FILTERING
+  ===================================== */
+
+  const searchableArticles = Array.from(
+    document.querySelectorAll(".searchable-article")
+  );
+
+  const articleCards = articleGrid
+    ? Array.from(articleGrid.querySelectorAll(".article-card"))
+    : [];
+
+  const affiliateUnits = articleGrid
+    ? Array.from(articleGrid.querySelectorAll(".affiliate-unit"))
+    : [];
+
+  const articlesPerPage = 6;
+
+  let visibleArticleLimit = articlesPerPage;
+  let currentSearch = "";
+  let currentCategory = "";
+
+  /*
+    Read article information from each article card.
+    Search includes the title, description, category,
+    metadata and searchable text inside the card.
+  */
+
+  function getSearchText(element) {
+
+    const extraKeywords = element.dataset.keywords || "";
+    const extraCategory = element.dataset.category || "";
+
+    return [
+      element.textContent || "",
+      extraKeywords,
+      extraCategory
+    ]
+      .join(" ")
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+
+  }
+
+  function normalizeText(value) {
+
+    return String(value || "")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, " ");
+
+  }
+
+  function getArticleCategory(element) {
+
+    if (element.dataset.category) {
+      return normalizeText(element.dataset.category);
+    }
+
+    const categoryElement = element.querySelector(".article-category");
+
+    return normalizeText(
+      categoryElement ? categoryElement.textContent : ""
+    );
+
+  }
+
+  /*
+    Match a search query against the article text.
+  */
+
+  function matchesSearch(element, query) {
+
+    if (!query) {
+      return true;
+    }
+
+    const searchableText = getSearchText(element);
+
+    const terms = query
+      .split(/\s+/)
+      .filter(Boolean);
+
+    return terms.every(term => searchableText.includes(term));
+
+  }
+
+  /*
+    Match the selected category.
+
+    If a category link has a data-category attribute,
+    that value is used first.
+  */
+
+  function matchesCategory(element, category) {
+
+    if (!category || category === "all") {
+      return true;
+    }
+
+    const articleCategory = getArticleCategory(element);
+    const normalizedCategory = normalizeText(category);
+
+    return (
+      articleCategory.includes(normalizedCategory) ||
+      getSearchText(element).includes(normalizedCategory)
+    );
+
+  }
+
+  /*
+    Apply search, category filtering and pagination.
+  */
+
+  function updateArticles() {
+
+    const featuredArticle = document.querySelector(".featured-article");
+
+    let matchedCards = [];
+    let matchedFeatured = false;
+
+    // Featured article is filtered separately.
+    if (featuredArticle) {
+
+      matchedFeatured =
+        matchesSearch(featuredArticle, currentSearch) &&
+        matchesCategory(featuredArticle, currentCategory);
+
+      featuredArticle.hidden = !matchedFeatured;
+
+    }
+
+    // Find all matching regular article cards.
+    articleCards.forEach(card => {
+
+      const matches =
+        matchesSearch(card, currentSearch) &&
+        matchesCategory(card, currentCategory);
+
+      if (matches) {
+        matchedCards.push(card);
+      }
+
+    });
+
+    /*
+      When searching or filtering a category,
+      show every matching article instead of limiting
+      the results to the first page.
+    */
+
+    const isFiltering = Boolean(currentSearch || currentCategory);
+
+    const displayLimit = isFiltering
+      ? matchedCards.length
+      : visibleArticleLimit;
+
+    const cardsToShow = matchedCards.slice(0, displayLimit);
+
+    articleCards.forEach(card => {
+
+      card.hidden = !cardsToShow.includes(card);
+
+    });
+
+    /*
+      Show affiliate units only when the user isn't
+      searching or filtering.
+
+      Affiliate units are promotional content, not
+      regular articles, so they won't distort search.
+    */
+
+    affiliateUnits.forEach(unit => {
+
+      unit.hidden = isFiltering;
+
+    });
+
+    // Show the empty-state message when nothing matches.
+    const hasResults =
+      matchedCards.length > 0 ||
+      matchedFeatured;
+
+    if (noResults) {
+      noResults.hidden = hasResults;
+    }
+
+    // Update the search status.
+    if (searchStatus) {
+
+      if (currentSearch || currentCategory) {
+
+        const totalResults =
+          matchedCards.length + (matchedFeatured ? 1 : 0);
+
+        if (totalResults === 0) {
+
+          searchStatus.textContent = "No matching articles found.";
+
+        } else {
+
+          searchStatus.textContent =
+            `${totalResults} matching article${totalResults === 1 ? "" : "s"} found.`;
+
+        }
+
+      } else {
+
+        searchStatus.textContent = "";
+
+      }
+
+    }
+
+    // Hide Load More when all matching cards are visible.
+    if (loadMoreButton) {
+
+      const hasMore = !isFiltering &&
+        matchedCards.length > visibleArticleLimit;
+
+      loadMoreButton.hidden = !hasMore;
+
+    }
+
+  }
+
+  /*
+    Handle the search form.
+  */
+
+  if (searchForm && searchInput) {
+
+    searchForm.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      currentSearch = normalizeText(searchInput.value);
+
+      visibleArticleLimit = articlesPerPage;
+
+      updateArticles();
+
+      const latestSection = document.getElementById("latest");
+
+      if (latestSection) {
+
+        latestSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    });
+
+    /*
+      Also update results while typing.
+    */
+
+    searchInput.addEventListener("input", () => {
+
+      currentSearch = normalizeText(searchInput.value);
+
+      visibleArticleLimit = articlesPerPage;
+
+      updateArticles();
+
+    });
+
+  }
+
+  /* =====================================
+     CATEGORY FILTERING
+  ===================================== */
+
+  const categoryLinks = document.querySelectorAll(
+    "[data-business-category]"
+  );
+
+  categoryLinks.forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      const category = link.dataset.businessCategory;
+
+      if (!category) {
+        return;
+      }
+
+      /*
+        Only intercept category links explicitly marked
+        with data-business-category.
+      */
+
+      event.preventDefault();
+
+      currentCategory = normalizeText(category);
+
+      visibleArticleLimit = articlesPerPage;
+
+      // Clear the search input when switching categories.
+      currentSearch = "";
+
+      if (searchInput) {
+        searchInput.value = "";
+      }
+
+      // Update active category appearance.
+      categoryLinks.forEach(categoryLink => {
+
+        categoryLink.classList.remove("active");
+        categoryLink.removeAttribute("aria-current");
+
+      });
+
+      link.classList.add("active");
+      link.setAttribute("aria-current", "true");
+
+      updateArticles();
+
+      const latestSection = document.getElementById("latest");
+
+      if (latestSection) {
+
+        latestSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    });
+
+  });
+
+  /* =====================================
+     LOAD MORE ARTICLES
+  ===================================== */
+
+  if (loadMoreButton) {
+
+    loadMoreButton.addEventListener("click", () => {
+
+      visibleArticleLimit += articlesPerPage;
+
+      updateArticles();
+
+    });
+
+  }
+
+  /* =====================================
+     NEWSLETTER FORM
+  ===================================== */
+
+  if (newsletterForm) {
+
+    newsletterForm.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      const name = newsletterName
+        ? newsletterName.value.trim()
+        : "";
+
+      const email = newsletterEmail
+        ? newsletterEmail.value.trim()
+        : "";
+
+      /*
+        Basic client-side validation.
+
+        This does not subscribe the user or save
+        their email address to a database.
+      */
+
+      if (!name) {
+
+        showNewsletterMessage(
+          "Please enter your name.",
+          "error"
+        );
+
+        if (newsletterName) {
+          newsletterName.focus();
+        }
+
+        return;
+
+      }
+
+      if (!email) {
+
+        showNewsletterMessage(
+          "Please enter your email address.",
+          "error"
+        );
+
+        if (newsletterEmail) {
+          newsletterEmail.focus();
+        }
+
+        return;
+
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+
+        showNewsletterMessage(
+          "Please enter a valid email address.",
+          "error"
+        );
+
+        if (newsletterEmail) {
+          newsletterEmail.focus();
+        }
+
+        return;
+
+      }
+
+      showNewsletterMessage(
+        "Your details are valid, but newsletter subscriptions are not connected yet.",
+        "info"
+      );
+
+    });
+
+  }
+
+  function showNewsletterMessage(message, type) {
+
+    if (!newsletterMessage) {
+      return;
+    }
+
+    newsletterMessage.textContent = message;
+
+    newsletterMessage.setAttribute("role", "status");
+
+    if (type === "error") {
+
+      newsletterMessage.style.color = "#b42318";
+
+    } else if (type === "success") {
+
+      newsletterMessage.style.color = "#157347";
+
+    } else {
+
+      newsletterMessage.style.color = "#344563";
+
+    }
+
+  }
+
+  /* =====================================
+     PREVENT EMPTY HASH JUMPS
+  ===================================== */
+
+  document.querySelectorAll('a[href="#"]').forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      event.preventDefault();
+
+    });
+
+  });
+
+  /* =====================================
+     INITIALIZE PAGE
+  ===================================== */
+
+  updateArticles();
+
+});
+
+
+     
+ </script>
+ 
+ <script type="module" src="script.js"></script>
+ 
+ 
+ 
+</body>
+</html>
+

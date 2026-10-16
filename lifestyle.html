@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lifestyle | ZONGO Blog</title>
+
+  <meta name="description" content="Discover lifestyle stories on fashion, relationships, food, travel, wellness and everyday living on ZONGO Blog.">
+
+  <meta name="theme-color" content="#172554">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #172554;
+      --primary-light: #243b76;
+      --accent: #e85d3f;
+      --text: #202938;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --background: #f7f8fb;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow: 0 8px 30px rgba(23, 37, 84, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+      background: var(--background);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    /* TOP BAR */
+
+    .topbar {
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .topbar-inner {
+      min-height: 38px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .topbar-left,
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+    }
+
+    .topbar a {
+      opacity: 0.9;
+    }
+
+    .topbar a:hover {
+      opacity: 1;
+      color: #ffd6cc;
+    }
+
+    /* HEADER */
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-main {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      width: 43px;
+      height: 43px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--primary);
+      color: #fff;
+      font-size: 25px;
+      font-weight: 800;
+      font-family: "Playfair Display", serif;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 22px;
+      letter-spacing: -0.8px;
+      line-height: 1.2;
+      color: var(--primary);
+    }
+
+    .logo-text small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .search-form {
+      display: flex;
+      align-items: center;
+      background: #f4f5f8;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 0 12px;
+      width: 245px;
+    }
+
+    .search-form input {
+      border: 0;
+      outline: 0;
+      background: transparent;
+      width: 100%;
+      min-width: 0;
+      padding: 11px 5px;
+      font-size: 13px;
+    }
+
+    .search-form button {
+      border: 0;
+      background: transparent;
+      color: var(--primary);
+      padding: 7px;
+    }
+
+    .subscribe-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .subscribe-link:hover {
+      background: #ce4930;
+    }
+
+    /* NAVIGATION */
+
+    .main-nav {
+      border-top: 1px solid #f0f1f4;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      min-height: 48px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-inner a {
+      font-size: 13px;
+      font-weight: 700;
+      color: #4b5563;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .nav-inner a:hover,
+    .nav-inner a.active {
+      color: var(--accent);
+    }
+
+    .nav-inner a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -14px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 5px;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--primary);
+      width: 42px;
+      height: 42px;
+      border-radius: 9px;
+      font-size: 18px;
+    }
+
+    /* PAGE INTRO */
+
+    .page-intro {
+      background:
+        linear-gradient(110deg, rgba(23,37,84,.97), rgba(36,59,118,.88)),
+        url("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+      color: #fff;
+      padding: 65px 0 58px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 9px;
+      color: #d6def3;
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+
+    .breadcrumb a:hover {
+      color: #fff;
+    }
+
+    .intro-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      color: #ffd2c7;
+      margin-bottom: 14px;
+    }
+
+    .intro-label::before {
+      content: "";
+      height: 2px;
+      width: 27px;
+      background: var(--accent);
+    }
+
+    .page-intro h1 {
+      max-width: 760px;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(35px, 5vw, 58px);
+      line-height: 1.12;
+      letter-spacing: -1px;
+      margin-bottom: 18px;
+    }
+
+    .page-intro p {
+      max-width: 650px;
+      color: #e0e6f5;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .intro-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .intro-tags a {
+      border: 1px solid rgba(255,255,255,.28);
+      color: #fff;
+      padding: 7px 13px;
+      border-radius: 30px;
+      font-size: 12px;
+      transition: .2s;
+    }
+
+    .intro-tags a:hover {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    /* MAIN LAYOUT */
+
+    .page-content {
+      padding: 42px 0 65px;
+    }
+
+    .content-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .section-heading h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      color: var(--primary);
+      line-height: 1.25;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .heading-link {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* FEATURED STORY */
+
+    .featured-story {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 35px;
+      box-shadow: var(--shadow);
+    }
+
+    .featured-image {
+      min-height: 350px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-image img {
+      height: 100%;
+      min-height: 350px;
+      transition: transform .5s;
+    }
+
+    .featured-story:hover .featured-image img {
+      transform: scale(1.045);
+    }
+
+    .featured-badge {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      padding: 7px 11px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      border-radius: 5px;
+    }
+
+    .featured-copy {
+      padding: 29px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .article-category {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .featured-copy h2 {
+      font-family: "Playfair Display", serif;
+      color: var(--primary);
+      font-size: clamp(23px, 2.5vw, 32px);
+      line-height: 1.3;
+      margin-bottom: 14px;
+    }
+
+    .featured-copy > p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 19px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      color: var(--muted);
+      font-size: 11px;
+      margin-bottom: 20px;
+    }
+
+    .article-meta i {
+      color: #9ca3af;
+      margin-right: 4px;
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--primary);
+      color: #fff;
+      padding: 11px 15px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .read-more:hover {
+      background: var(--accent);
+    }
+
+    /* ARTICLE GRID */
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .article-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+      min-width: 0;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .article-image {
+      height: 215px;
+      overflow: hidden;
+      position: relative;
+      background: #e5e7eb;
+    }
+
+    .article-image img {
+      height: 100%;
+      transition: transform .4s;
+    }
+
+    .article-card:hover .article-image img {
+      transform: scale(1.05);
+    }
+
+    .image-label {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      background: rgba(255,255,255,.96);
+      color: var(--primary);
+      padding: 6px 9px;
+      font-size: 10px;
+      font-weight: 800;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+
+    .article-body {
+      padding: 19px;
+    }
+
+    .article-body h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      line-height: 1.4;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .article-body h3 a:hover {
+      color: var(--accent);
+    }
+
+    .article-body > p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.85;
+      margin-bottom: 15px;
+    }
+
+    .article-footer {
+      border-top: 1px solid #f0f1f4;
+      padding-top: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .article-footer a {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* AFFILIATE PRODUCT UNITS */
+
+    .affiliate-unit {
+      margin: 30px 0;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 5px 20px rgba(23,37,84,.04);
+    }
+
+    .affiliate-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 800;
+    }
+
+    .affiliate-label span:last-child {
+      background: #f3f4f6;
+      padding: 5px 8px;
+      border-radius: 4px;
+      letter-spacing: .4px;
+    }
+
+    .affiliate-content {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 17px;
+      align-items: center;
+    }
+
+    .affiliate-content img {
+      width: 110px;
+      height: 115px;
+      border-radius: 9px;
+      background: #f3f4f6;
+    }
+
+    .affiliate-content h3 {
+      font-family: "Playfair Display", serif;
+      color: var(--primary);
+      font-size: 19px;
+      line-height: 1.35;
+      margin-bottom: 7px;
+    }
+
+    .affiliate-content p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .affiliate-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .affiliate-button:hover {
+      background: #ce4930;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      display: grid;
+      gap: 25px;
+      min-width: 0;
+    }
+
+    .sidebar-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 23px;
+      min-width: 0;
+    }
+
+    .sidebar-title {
+      font-family: "Playfair Display", serif;
+      color: var(--primary);
+      font-size: 21px;
+      margin-bottom: 18px;
+      padding-bottom: 13px;
+      border-bottom: 2px solid #f0f1f4;
+      position: relative;
+    }
+
+    .sidebar-title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 55px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .category-list {
+      list-style: none;
+    }
+
+    .category-list li + li {
+      border-top: 1px solid #f0f1f4;
+    }
+
+    .category-list a {
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: #4b5563;
+      font-size: 13px;
+      transition: .2s;
+    }
+
+    .category-list a:hover {
+      color: var(--accent);
+      padding-left: 4px;
+    }
+
+    .category-list i {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .mini-story {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      gap: 13px;
+      align-items: center;
+    }
+
+    .mini-story + .mini-story {
+      margin-top: 17px;
+      padding-top: 17px;
+      border-top: 1px solid #f0f1f4;
+    }
+
+    .mini-story img {
+      height: 82px;
+      border-radius: 8px;
+    }
+
+    .mini-story span {
+      display: block;
+      color: var(--accent);
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      margin-bottom: 4px;
+    }
+
+    .mini-story h4 {
+      font-family: "Playfair Display", serif;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--primary);
+    }
+
+    .mini-story h4 a:hover {
+      color: var(--accent);
+    }
+
+    /* SIDEBAR NEWSLETTER */
+
+    .newsletter-box {
+      background: var(--primary);
+      color: #fff;
+      border: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-box::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border: 30px solid rgba(255,255,255,.05);
+      border-radius: 50%;
+      right: -85px;
+      top: -75px;
+    }
+
+    .newsletter-box .sidebar-title {
+      color: #fff;
+      border-bottom-color: rgba(255,255,255,.15);
+      position: relative;
+    }
+
+    .newsletter-box > p {
+      color: #dbe3f5;
+      font-size: 12px;
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .newsletter-form {
+      display: grid;
+      gap: 10px;
+      position: relative;
+    }
+
+    .newsletter-form input {
+      width: 100%;
+      min-width: 0;
+      padding: 12px;
+      border-radius: 7px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      font-size: 12px;
+    }
+
+    .newsletter-form button {
+      padding: 12px;
+      border: 0;
+      border-radius: 7px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .newsletter-form button:hover {
+      background: #ce4930;
+    }
+
+    .form-message {
+      font-size: 11px;
+      margin-top: 10px;
+      color: #dbeafe;
+      overflow-wrap: anywhere;
+    }
+
+    .newsletter-note {
+      display: block;
+      color: #c5d0eb;
+      font-size: 10px;
+      margin-top: 12px;
+    }
+
+    /* CATEGORY FEATURE STRIP */
+
+    .lifestyle-strip {
+      margin-top: 48px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 27px;
+    }
+
+    .lifestyle-strip h2 {
+      font-family: "Playfair Display", serif;
+      color: var(--primary);
+      font-size: 25px;
+      margin-bottom: 7px;
+    }
+
+    .lifestyle-strip > p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .topic-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px;
+      background: #f8f9fc;
+      border: 1px solid #edf0f5;
+      border-radius: 9px;
+      transition: .2s;
+      min-width: 0;
+    }
+
+    .topic-card:hover {
+      background: #fff3ef;
+      border-color: #ffd5cb;
+      transform: translateY(-2px);
+    }
+
+    .topic-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: #e9edfa;
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+    }
+
+    .topic-card strong {
+      display: block;
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .topic-card small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    /* SEARCH STATUS */
+
+    .search-status {
+      margin-bottom: 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 13px 16px;
+      color: var(--muted);
+      font-size: 13px;
+      display: none;
+    }
+
+    .no-results {
+      display: none;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 35px 20px;
+      text-align: center;
+      color: var(--muted);
+      grid-column: 1 / -1;
+    }
+
+    .no-results i {
+      font-size: 30px;
+      color: #9ca3af;
+      margin-bottom: 12px;
+    }
+
+    .no-results h3 {
+      color: var(--primary);
+      margin-bottom: 7px;
+    }
+
+    .load-more-wrap {
+      text-align: center;
+      margin-top: 28px;
+    }
+
+    .load-more {
+      background: #fff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 12px 23px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .load-more:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      background: #111b38;
+      color: #fff;
+      padding: 52px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 35px;
+      padding-bottom: 40px;
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 17px;
+    }
+
+    .footer-brand .logo-mark {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    .footer-brand .logo-text strong {
+      color: #fff;
+    }
+
+    .footer-brand .logo-text small {
+      color: #b8c3df;
+    }
+
+    .footer-brand > p {
+      color: #b8c3df;
+      font-size: 12px;
+      line-height: 1.9;
+            max-width: 290px;
+    }
+
+    .footer-column h3 {
+      font-size: 13px;
+      margin-bottom: 17px;
+      color: #fff;
+    }
+
+    .footer-column a {
+      display: block;
+      width: fit-content;
+      color: #b8c3df;
+      font-size: 12px;
+      margin-bottom: 11px;
+    }
+
+    .footer-column a:hover {
+      color: #fff;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      margin: 0;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding: 18px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      color: #b8c3df;
+      font-size: 11px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1000px) {
+      .content-layout {
+        grid-template-columns: minmax(0, 1fr) 280px;
+        gap: 22px;
+      }
+
+      .header-main {
+        gap: 15px;
+      }
+
+      .search-form {
+        width: 205px;
+      }
+
+      .featured-story {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-image,
+      .featured-image img {
+        min-height: 290px;
+        height: 290px;
+      }
+
+      .featured-copy {
+        padding: 24px;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 28px, 600px);
+      }
+
+      .topbar-inner {
+        justify-content: center;
+      }
+
+      .topbar-right {
+        display: none;
+      }
+
+      .header-main {
+        min-height: 72px;
+      }
+
+      .logo-mark {
+        width: 39px;
+        height: 39px;
+      }
+
+      .logo-text strong {
+        font-size: 19px;
+      }
+
+      .header-actions {
+        gap: 8px;
+      }
+
+      .header-actions .search-form {
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 9px;
+      }
+
+      .header-actions .search-form input {
+        display: none;
+      }
+
+      .header-actions .search-form button {
+        padding: 10px;
+      }
+
+      .header-actions .subscribe-link {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .main-nav {
+        display: none;
+      }
+
+      .main-nav.nav-open {
+        display: block;
+      }
+
+      .nav-inner {
+        min-height: 0;
+        padding: 12px 0 18px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 18px;
+        overflow: visible;
+      }
+
+      .nav-inner a {
+        padding: 10px 0;
+        border-bottom: 1px solid #f0f1f4;
+      }
+
+      .nav-inner a.active::after {
+        display: none;
+      }
+
+      .page-intro {
+        padding: 45px 0 42px;
+      }
+
+      .page-intro h1 {
+        font-size: 38px;
+      }
+
+      .page-intro p {
+        font-size: 13px;
+      }
+
+      .page-content {
+        padding: 30px 0 45px;
+      }
+
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-image,
+      .featured-image img {
+        min-height: 230px;
+        height: 230px;
+      }
+
+      .featured-copy {
+        padding: 21px;
+      }
+
+      .featured-copy h2 {
+        font-size: 25px;
+      }
+
+      .section-heading h2 {
+        font-size: 25px;
+      }
+
+      .article-grid {
+        gap: 14px;
+      }
+
+      .article-image {
+        height: 165px;
+      }
+
+      .article-body {
+        padding: 14px;
+      }
+
+      .article-body h3 {
+        font-size: 17px;
+      }
+
+      .article-body > p {
+        font-size: 11px;
+      }
+
+      .article-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .topic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lifestyle-strip {
+        padding: 20px;
+        margin-top: 35px;
+      }
+
+      .footer-grid {
+        gap: 27px 20px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: calc(100% - 24px);
+      }
+
+      .topbar {
+        font-size: 11px;
+      }
+
+      .logo {
+        gap: 7px;
+      }
+
+      .logo-mark {
+        width: 35px;
+        height: 35px;
+        font-size: 21px;
+      }
+
+      .logo-text strong {
+        font-size: 17px;
+      }
+
+      .logo-text small {
+        font-size: 8px;
+        letter-spacing: 1px;
+      }
+
+      .header-main {
+        gap: 8px;
+      }
+
+      .header-actions {
+        gap: 6px;
+      }
+
+      .header-actions .search-form,
+      .menu-toggle {
+        width: 37px;
+        height: 37px;
+      }
+
+      .page-intro h1 {
+        font-size: 33px;
+      }
+
+      .breadcrumb {
+        font-size: 10px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .article-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .article-image {
+        height: 220px;
+      }
+
+      .article-body {
+        padding: 18px;
+      }
+
+      .article-body h3 {
+        font-size: 20px;
+      }
+
+      .article-footer {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .affiliate-unit {
+        padding: 15px;
+      }
+
+      .affiliate-content {
+        grid-template-columns: 85px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .affiliate-content img {
+        width: 85px;
+        height: 100px;
+      }
+
+      .affiliate-content h3 {
+        font-size: 16px;
+      }
+
+      .affiliate-content p {
+        font-size: 11px;
+      }
+
+      .topic-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span><i class="fa-regular fa-calendar"></i> Stories for everyday living</span>
+        <a href="index.html">Explore ZONGO Blog</a>
+      </div>
+
+      <div class="topbar-right">
+        <a href="news.html">Latest News</a>
+        <a href="business.html">Business</a>
+        <a href="technology.html">Technology</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+
+  <header class="site-header">
+    <div class="container header-main">
+
+      <a href="index.html" class="logo" aria-label="ZONGO Blog homepage">
+        <span class="logo-mark">Z</span>
+        <span class="logo-text">
+          <strong>ZONGO</strong>
+          <small>Stories & Inspiration</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+
+        <form class="search-form" id="headerSearch">
+          <input
+            type="search"
+            id="headerSearchInput"
+            placeholder="Search lifestyle..."
+            aria-label="Search lifestyle articles"
+          >
+          <button type="submit" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+
+        <a href="#newsletter" class="subscribe-link">
+          <i class="fa-regular fa-envelope"></i>
+          Subscribe
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open navigation"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+      </div>
+    </div>
+
+    <nav class="main-nav" id="mainNav">
+      <div class="container nav-inner">
+        <a href="index.html">Home</a>
+        <a href="news.html">News</a>
+        <a href="lifestyle.html" class="active">Lifestyle</a>
+        <a href="business.html">Business & Finance</a>
+        <a href="technology.html">Technology</a>
+        <a href="entertainment.html">Entertainment</a>
+        <a href="tinubu-election.html">Featured Products</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- LIFESTYLE INTRO -->
+
+  <section class="page-intro">
+    <div class="container">
+
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Lifestyle</span>
+      </div>
+
+      <span class="intro-label">The Lifestyle Edition</span>
+
+      <h1>Live Better.<br>Dress Well. Feel Inspired.</h1>
+
+      <p>
+        Explore fresh ideas for everyday living, fashion, relationships,
+        travel, food, wellness and personal growth. Discover stories,
+        practical tips and inspiration to help you make more of every day.
+      </p>
+
+      <div class="intro-tags">
+        <a href="#fashion">Fashion & Style</a>
+        <a href="#relationships">Relationships</a>
+        <a href="#food">Food & Living</a>
+        <a href="#travel">Travel</a>
+        <a href="#wellness">Wellness</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+
+  <main class="page-content">
+    <div class="container">
+
+      <div class="content-layout">
+
+        <!-- MAIN ARTICLE COLUMN -->
+
+        <div class="main-column">
+
+          <div class="section-heading">
+            <div>
+              <h2>Lifestyle Highlights</h2>
+              <p>Ideas and inspiration for your everyday life.</p>
+            </div>
+            <a href="#latest" class="heading-link">
+              Explore stories <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- FEATURED ARTICLE -->
+
+          <article class="featured-story searchable-article">
+
+            <a href="#fashion" class="featured-image">
+              <img
+                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1000&q=85"
+                alt="Fashionable people shopping for clothing"
+                loading="lazy"
+              >
+              <span class="featured-badge">Editor's Pick</span>
+            </a>
+
+            <div class="featured-copy">
+
+              <span class="article-category">Fashion & Style</span>
+
+              <h2>
+                Simple Ways to Improve Your Personal Style Without Spending Too Much
+              </h2>
+
+              <p>
+                Looking good does not always require an expensive wardrobe.
+                Learn how to combine clothes, choose versatile pieces and
+                develop a style that reflects your personality.
+              </p>
+
+              <div class="article-meta">
+                <span><i class="fa-regular fa-user"></i> ZONGO Lifestyle</span>
+                <span><i class="fa-regular fa-clock"></i> 6 min read</span>
+              </div>
+
+              <a href="#fashion" class="read-more">
+                Read the story <i class="fa-solid fa-arrow-right"></i>
+              </a>
+
+            </div>
+          </article>
+
+          <!-- LATEST STORIES -->
+
+          <div class="section-heading" id="latest">
+            <div>
+              <h2>Latest Lifestyle Stories</h2>
+              <p>Explore practical tips, trends and everyday inspiration.</p>
+            </div>
+          </div>
+
+          <div class="search-status" id="searchStatus"></div>
+
+          <div class="article-grid" id="articleGrid">
+
+            <article class="article-card searchable-article" id="fashion" data-category="fashion style clothing outfits">
+              <a href="#fashion" class="article-image">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=850&q=80" alt="Fashion and personal style inspiration" loading="lazy">
+                <span class="image-label">Fashion</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Fashion & Style</span>
+                <h3><a href="#fashion">How to Build a Stylish Wardrobe on a Budget</a></h3>
+                <p>Discover how to choose versatile clothing, combine colours and create more outfits without constantly buying new clothes.</p>
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+                  <a href="#fashion">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="article-card searchable-article" id="relationships" data-category="relationships family dating communication">
+              <a href="#relationships" class="article-image">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=850&q=80" alt="A couple enjoying time together" loading="lazy">
+                <span class="image-label">Relationships</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Relationships</span>
+                <h3><a href="#relationships">Everyday Habits That Help Relationships Grow Stronger</a></h3>
+                <p>Small acts of kindness, honest conversations and quality time can help people build healthier and more meaningful connections.</p>
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 7 min read</span>
+                  <a href="#relationships">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- AFFILIATE PLACEMENT 1 -->
+
+            <div class="affiliate-unit" data-affiliate="1">
+              <div class="affiliate-label">
+                <span><i class="fa-solid fa-tag"></i> Sponsored recommendation</span>
+                <span>Affiliate</span>
+              </div>
+
+              <div class="affiliate-content">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=400&q=80" alt="Red sports shoe" loading="lazy">
+                <div>
+                  <h3>Explore Featured Products</h3>
+                  <p>Discover selected products and shopping recommendations from the ZONGO featured products page.</p>
+                  <a href="tinubu-election.html" class="affiliate-button">Explore products <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <article class="article-card searchable-article" id="food" data-category="food cooking recipes kitchen">
+              <a href="#food" class="article-image">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=850&q=80" alt="Fresh healthy meal with vegetables" loading="lazy">
+                <span class="image-label">Food</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Food & Living</span>
+                <h3><a href="#food">Simple Ways to Make Everyday Meals More Interesting</a></h3>
+                <p>Learn how to make familiar meals more exciting with colourful ingredients, thoughtful preparation and new combinations.</p>
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 4 min read</span>
+                  <a href="#food">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="article-card searchable-article" id="travel" data-category="travel tourism vacation adventure">
+              <a href="#travel" class="article-image">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=850&q=80" alt="Beautiful mountain travel destination" loading="lazy">
+                <span class="image-label">Travel</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Travel</span>
+                <h3><a href="#travel">How to Plan an Enjoyable Trip Without Overspending</a></h3>
+                <p>Use a realistic budget, compare transport options and plan activities ahead to make your next trip more enjoyable.</p>
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 6 min read</span>
+                  <a href="#travel">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="article-card searchable-article" id="wellness" data-category="wellness self care healthy habits">
+              <a href="#wellness" class="article-image">
+                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=850&q=80" alt="Person practising a relaxing wellness activity" loading="lazy">
+                <span class="image-label">Wellness</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Wellness</span>
+                <h3><a href="#wellness">Small Self-Care Habits That Can Improve Your Daily Routine</a></h3>
+                <p>Explore simple ways to make room for rest, movement, relaxation and healthier everyday routines.</p>
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+                  <a href="#wellness">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- AFFILIATE PLACEMENT 2 -->
+
+            <div class="affiliate-unit" data-affiliate="2">
+              <div class="affiliate-label">
+                <span><i class="fa-solid fa-tag"></i> Shopping discovery</span>
+                <span>Affiliate</span>
+              </div>
+
+              <div class="affiliate-content">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" alt="Wristwatch product" loading="lazy">
+                <div>
+                  <h3>Discover More Featured Finds</h3>
+                  <p>Browse products that may complement your lifestyle. Check product details and availability before purchasing.</p>
+                  <a href="tinubu-election.html" class="affiliate-button">View featured items <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <article class="article-card searchable-article" id="home-living" data-category="home living interior decoration organization">
+              <a href="#home-living" class="article-image">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=850&q=80" alt="Comfortable and stylish home interior" loading="lazy">
+                <span class="image-label">Home & Living</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Home & Living</span>
+                <h3><a href="#home-living">Easy Ideas for Making Your Home Feel More Comfortable</a></h3>
+                <p>Discover practical ways to organise your space, improve comfort and create a welcoming home without a major renovation.</p>
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+                  <a href="#home-living">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="article-card searchable-article" id="personal-growth" data-category="personal growth productivity habits motivation">
+              <a href="#personal-growth" class="article-image">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=850&q=80" alt="Bright and organised workspace" loading="lazy">
+                <span class="image-label">Personal Growth</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Personal Growth
+                </span>
+
+                <h3>
+                  <a href="#personal-growth">
+                    Practical Ways to Build Better Habits That Last
+                  </a>
+                </h3>
+
+                <p>
+                  Start with manageable goals, create helpful routines and
+                  track your progress instead of trying to change everything at once.
+                </p>
+
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 6 min read</span>
+                  <a href="#personal-growth">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- AFFILIATE PLACEMENT 3 -->
+
+            <div class="affiliate-unit" data-affiliate="3">
+
+              <div class="affiliate-label">
+                <span><i class="fa-solid fa-tag"></i> Featured recommendation</span>
+                <span>Affiliate</span>
+              </div>
+
+              <div class="affiliate-content">
+                <img
+                  src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80"
+                  alt="Headphones product"
+                  loading="lazy"
+                >
+
+                <div>
+                  <h3>Explore Lifestyle Product Picks</h3>
+                  <p>
+                    Visit our featured products page to explore more items
+                    and find products that suit your needs.
+                  </p>
+                  <a href="tinubu-election.html" class="affiliate-button">
+                    See product picks <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ARTICLE 8 -->
+
+            <article class="article-card searchable-article" id="beauty" data-category="beauty skincare grooming personal care">
+              <a href="#beauty" class="article-image">
+                <img
+                  src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=850&q=80"
+                  alt="Beauty and skincare products"
+                  loading="lazy"
+                >
+                <span class="image-label">Beauty</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Beauty & Personal Care</span>
+
+                <h3>
+                  <a href="#beauty">
+                    Building a Simple Personal Care Routine You Can Maintain
+                  </a>
+                </h3>
+
+                <p>
+                  Learn how to keep your routine practical by focusing on
+                  consistency, personal preferences and products that suit you.
+                </p>
+
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 4 min read</span>
+                  <a href="#beauty">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- ARTICLE 9 -->
+
+            <article class="article-card searchable-article" id="money-lifestyle" data-category="budget saving money lifestyle finance">
+              <a href="#money-lifestyle" class="article-image">
+                <img
+                  src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=850&q=80"
+                  alt="Planning personal finances and expenses"
+                  loading="lazy"
+                >
+                <span class="image-label">Smart Living</span>
+              </a>
+
+              <div class="article-body">
+                <span class="article-category">Everyday Living</span>
+
+                <h3>
+                  <a href="#money-lifestyle">
+                    Everyday Spending Habits That Can Help You Save Money
+                  </a>
+                </h3>
+
+                <p>
+                  Review recurring expenses, plan purchases and create a
+                  realistic spending routine that fits your income.
+                </p>
+
+                <div class="article-footer">
+                  <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+                  <a href="#money-lifestyle">Read more →</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- AFFILIATE PLACEMENT 4 -->
+
+            <div class="affiliate-unit" data-affiliate="4">
+
+              <div class="affiliate-label">
+                <span><i class="fa-solid fa-tag"></i> More from ZONGO</span>
+                <span>Affiliate</span>
+              </div>
+
+              <div class="affiliate-content">
+                <img
+                  src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=400&q=80"
+                  alt="Camera product"
+                  loading="lazy"
+                >
+
+                <div>
+                  <h3>Shop More Products in One Place</h3>
+                  <p>
+                    Browse our featured product collection and review the
+                    available information before making a purchase.
+                  </p>
+                  <a href="tinubu-election.html" class="affiliate-button">
+                    Browse products <i class="fa-solid fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- NO RESULTS -->
+
+            <div class="no-results" id="noResults">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <h3>No matching stories found</h3>
+              <p>Try another search term, such as fashion, food or travel.</p>
+            </div>
+
+          </div>
+
+          <div class="load-more-wrap">
+            <button class="load-more" id="loadMore" type="button">
+              Show more stories <i class="fa-solid fa-arrow-down"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+          <!-- CATEGORIES -->
+
+          <section class="sidebar-box">
+            <h2 class="sidebar-title">Explore Lifestyle</h2>
+
+            <ul class="category-list">
+              <li><a href="#fashion">Fashion & Style <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="#relationships">Relationships <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="#food">Food & Living <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="#travel">Travel & Adventure <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="#wellness">Wellness <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="#home-living">Home & Living <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="#personal-growth">Personal Growth <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="#beauty">Beauty & Personal Care <i class="fa-solid fa-arrow-right"></i></a></li>
+            </ul>
+          </section>
+
+          <!-- POPULAR STORIES -->
+
+          <section class="sidebar-box">
+            <h2 class="sidebar-title">Popular Reads</h2>
+
+            <article class="mini-story">
+              <a href="#fashion">
+                <img
+                  src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=300&q=75"
+                  alt="Fashion inspiration"
+                  loading="lazy"
+                >
+              </a>
+              <div>
+                <span>Fashion</span>
+                <h4><a href="#fashion">Build a Stylish Wardrobe on a Budget</a></h4>
+              </div>
+            </article>
+
+            <article class="mini-story">
+              <a href="#food">
+                <img
+                  src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=300&q=75"
+                  alt="Healthy meal"
+                  loading="lazy"
+                >
+              </a>
+              <div>
+                <span>Food</span>
+                <h4><a href="#food">Make Everyday Meals More Interesting</a></h4>
+              </div>
+            </article>
+
+            <article class="mini-story">
+              <a href="#travel">
+                <img
+                  src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=300&q=75"
+                  alt="Mountain destination"
+                  loading="lazy"
+                >
+              </a>
+              <div>
+                <span>Travel</span>
+                <h4><a href="#travel">Plan an Enjoyable Trip on a Budget</a></h4>
+              </div>
+            </article>
+
+            <article class="mini-story">
+              <a href="#home-living">
+                <img
+                  src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=300&q=75"
+                  alt="Comfortable living room"
+                  loading="lazy"
+                >
+              </a>
+              <div>
+                <span>Home</span>
+                <h4><a href="#home-living">Make Your Home Feel More Comfortable</a></h4>
+              </div>
+            </article>
+          </section>
+
+          <!-- NEWSLETTER -->
+
+          <section class="sidebar-box newsletter-box" id="newsletter">
+            <h2 class="sidebar-title">The ZONGO Newsletter</h2>
+
+            <p>
+              Get lifestyle inspiration, helpful tips and new stories delivered
+              to your inbox.
+            </p>
+
+            <form class="newsletter-form" id="newsletterForm">
+              <input
+                type="text"
+                id="newsletterName"
+                placeholder="Your name (optional)"
+                autocomplete="name"
+              >
+
+              <input
+                type="email"
+                id="newsletterEmail"
+                placeholder="Your email address"
+                autocomplete="email"
+                required
+              >
+
+              <button type="submit">
+                Subscribe Now <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+
+            <p class="form-message" id="newsletterMessage" aria-live="polite"></p>
+
+            <small class="newsletter-note">
+              Subscription storage requires the newsletter backend to be connected.
+            </small>
+          </section>
+
+          <!-- OTHER CATEGORIES -->
+
+          <section class="sidebar-box">
+            <h2 class="sidebar-title">More from ZONGO</h2>
+
+            <ul class="category-list">
+              <li><a href="news.html">Latest News <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="business.html">Business & Finance <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="technology.html">Technology <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="entertainment.html">Entertainment <i class="fa-solid fa-arrow-right"></i></a></li>
+              <li><a href="tinubu-election.html">Featured Products <i class="fa-solid fa-arrow-right"></i></a></li>
+            </ul>
+          </section>
+
+        </aside>
+
+      </div>
+
+      <!-- LIFESTYLE TOPICS -->
+
+      <section class="lifestyle-strip">
+        <h2>Find Your Next Inspiration</h2>
+
+        <p>
+          Explore different areas of lifestyle and discover ideas that fit
+          your interests, routines and goals.
+        </p>
+
+        <div class="topic-grid">
+
+          <a href="#fashion" class="topic-card">
+            <span class="topic-icon"><i class="fa-solid fa-shirt"></i></span>
+            <span>
+              <strong>Fashion & Style</strong>
+              <small>Clothing, trends and personal style</small>
+            </span>
+          </a>
+
+          <a href="#relationships" class="topic-card">
+            <span class="topic-icon"><i class="fa-solid fa-heart"></i></span>
+            <span>
+              <strong>Relationships</strong>
+              <small>Communication and connection</small>
+            </span>
+          </a>
+
+          <a href="#food" class="topic-card">
+            <span class="topic-icon"><i class="fa-solid fa-utensils"></i></span>
+            <span>
+              <strong>Food & Living</strong>
+              <small>Meals, recipes and everyday ideas</small>
+            </span>
+          </a>
+
+          <a href="#travel" class="topic-card">
+            <span class="topic-icon"><i class="fa-solid fa-plane"></i></span>
+            <span>
+              <strong>Travel</strong>
+              <small>Destinations and travel planning</small>
+            </span>
+          </a>
+
+          <a href="#wellness" class="topic-card">
+            <span class="topic-icon"><i class="fa-solid fa-spa"></i></span>
+            <span>
+              <strong>Wellness</strong>
+              <small>Self-care and daily routines</small>
+            </span>
+          </a>
+
+          <a href="#personal-growth" class="topic-card">
+            <span class="topic-icon"><i class="fa-solid fa-seedling"></i></span>
+            <span>
+              <strong>Personal Growth</strong>
+              <small>Habits, goals and productivity</small>
+            </span>
+          </a>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-mark">Z</span>
+            <span class="logo-text">
+              <strong>ZONGO</strong>
+              <small>Stories & Inspiration</small>
+            </span>
+          </a>
+
+          <p>
+            Your destination for news, lifestyle inspiration, business,
+            technology and entertainment. Discover stories that inform,
+            inspire and connect people.
+          </p>
+
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>Explore</h3>
+          <a href="index.html">Home</a>
+          <a href="news.html">News</a>
+          <a href="lifestyle.html">Lifestyle</a>
+          <a href="business.html">Business & Finance</a>
+          <a href="technology.html">Technology</a>
+          <a href="entertainment.html">Entertainment</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>Lifestyle</h3>
+          <a href="#fashion">Fashion & Style</a>
+          <a href="#relationships">Relationships</a>
+          <a href="#food">Food & Living</a>
+          <a href="#travel">Travel</a>
+          <a href="#wellness">Wellness</a>
+          <a href="#personal-growth">Personal Growth</a>
+        </div>
+
+        <div class="footer-column">
+          <h3>More Information</h3>
+          <a href="tinubu-election.html">Featured Products</a>
+          <a href="#newsletter">Newsletter</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> ZONGO Blog. All rights reserved.</span>
+
+        <div class="footer-bottom-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    /* ==================================
+       MOBILE NAVIGATION
+    ================================== */
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = mainNav.classList.toggle("nav-open");
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+      menuToggle.innerHTML = isOpen
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+    });
+
+
+    /* ==================================
+       SEARCH LIFESTYLE ARTICLES
+    ================================== */
+
+    const headerSearch = document.getElementById("headerSearch");
+    const headerSearchInput = document.getElementById("headerSearchInput");
+
+    const articleCards = Array.from(
+      document.querySelectorAll(".article-grid .article-card")
+    );
+
+    const searchStatus = document.getElementById("searchStatus");
+    const noResults = document.getElementById("noResults");
+    const loadMoreButton = document.getElementById("loadMore");
+
+    let currentSearch = "";
+    let visibleCount = 6;
+
+    function filterArticles() {
+      const query = currentSearch.trim().toLowerCase();
+      let matchCount = 0;
+
+      articleCards.forEach(function (card, index) {
+        const text = (
+          card.innerText + " " + (card.dataset.category || "")
+        ).toLowerCase();
+
+        const matches = !query || text.includes(query);
+        const withinLimit = index < visibleCount;
+
+        card.style.display = matches && withinLimit ? "" : "none";
+
+        if (matches) {
+          matchCount++;
+        }
+      });
+
+      const affiliateUnits = document.querySelectorAll(".affiliate-unit");
+
+      affiliateUnits.forEach(function (unit) {
+        unit.style.display = query ? "none" : "";
+      });
+
+      if (query) {
+        searchStatus.style.display = "block";
+        searchStatus.textContent =
+          matchCount + " lifestyle story/stories matched your search.";
+      } else {
+        searchStatus.style.display = "none";
+      }
+
+      noResults.style.display = matchCount === 0 ? "block" : "none";
+
+      loadMoreButton.style.display =
+        !query && visibleCount < articleCards.length ? "inline-block" : "none";
+    }
+
+    headerSearch.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      currentSearch = headerSearchInput.value;
+      visibleCount = articleCards.length;
+
+      filterArticles();
+
+      document.getElementById("latest").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+
+    headerSearchInput.addEventListener("input", function () {
+      currentSearch = headerSearchInput.value;
+      visibleCount = articleCards.length;
+      filterArticles();
+    });
+
+    loadMoreButton.addEventListener("click", function () {
+      visibleCount += 4;
+      filterArticles();
+    });
+
+    filterArticles();
+
+
+    /* ==================================
+       NEWSLETTER FORM
+       BACKEND CONNECTION REQUIRED
+    ================================== */
+
+    const newsletterForm = document.getElementById("newsletterForm");
+    const newsletterMessage = document.getElementById("newsletterMessage");
+
+    newsletterForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const email = document
+        .getElementById("newsletterEmail")
+        .value.trim();
+
+      if (!email) {
+        newsletterMessage.textContent = "Please enter your email address.";
+        return;
+      }
+
+      newsletterMessage.textContent =
+        "The form is ready, but newsletter storage is not connected yet. Connect Firebase or your newsletter backend to save subscriptions.";
+
+      /*
+        IMPORTANT:
+        This page does not save subscriber emails yet.
+
+        Connect this form to your Firebase Firestore newsletter
+        collection and secure the collection with appropriate rules
+        before collecting real subscriber information.
+      */
+    });
+
+
+    /* ==================================
+       FOOTER YEAR
+    ================================== */
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+  </script>
+  
+  
+  <script type="module" src="script.js"></script>
+  
+  
+
+</body>
+</html>
+
