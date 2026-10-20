@@ -2151,157 +2151,512 @@
     </div>
   </footer>
 
-  <script>
-    /* ==================================
-       MOBILE NAVIGATION
-    ================================== */
+  /* =========================================================
+   ZONGO LIFESTYLE PAGE
+   BATCH 1: PAGE FUNCTIONS
+========================================================= */
 
-    const menuToggle = document.getElementById("menuToggle");
-    const mainNav = document.getElementById("mainNav");
+  
+<script type="module">
 
-    menuToggle.addEventListener("click", function () {
-      const isOpen = mainNav.classList.toggle("nav-open");
+import { db } from "./firebase.js";
 
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-
-      menuToggle.innerHTML = isOpen
-        ? '<i class="fa-solid fa-xmark"></i>'
-        : '<i class="fa-solid fa-bars"></i>';
-    });
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 
-    /* ==================================
-       SEARCH LIFESTYLE ARTICLES
-    ================================== */
+/* =========================================================
+   HELPER
+========================================================= */
 
-    const headerSearch = document.getElementById("headerSearch");
-    const headerSearchInput = document.getElementById("headerSearchInput");
+const $ = (selector, parent = document) =>
+  parent.querySelector(selector);
 
-    const articleCards = Array.from(
-      document.querySelectorAll(".article-grid .article-card")
+
+/* =========================================================
+   FOOTER COPYRIGHT YEAR
+========================================================= */
+
+const currentYear = $("#currentYear");
+
+if (currentYear) {
+  currentYear.textContent = new Date().getFullYear();
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
+const menuToggle = $("#menuToggle");
+const mainNav = $("#mainNav");
+
+if (menuToggle && mainNav) {
+
+  menuToggle.addEventListener("click", () => {
+
+    const isOpen = mainNav.classList.toggle("nav-open");
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      String(isOpen)
     );
 
-    const searchStatus = document.getElementById("searchStatus");
-    const noResults = document.getElementById("noResults");
-    const loadMoreButton = document.getElementById("loadMore");
+    menuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation" : "Open navigation"
+    );
 
-    let currentSearch = "";
-    let visibleCount = 6;
+    menuToggle.innerHTML = isOpen
+      ? '<i class="fa-solid fa-xmark"></i>'
+      : '<i class="fa-solid fa-bars"></i>';
 
-    function filterArticles() {
-      const query = currentSearch.trim().toLowerCase();
-      let matchCount = 0;
+  });
 
-      articleCards.forEach(function (card, index) {
-        const text = (
-          card.innerText + " " + (card.dataset.category || "")
-        ).toLowerCase();
 
-        const matches = !query || text.includes(query);
-        const withinLimit = index < visibleCount;
+  mainNav.querySelectorAll("a").forEach(link => {
 
-        card.style.display = matches && withinLimit ? "" : "none";
+    link.addEventListener("click", () => {
 
-        if (matches) {
-          matchCount++;
-        }
-      });
+      mainNav.classList.remove("nav-open");
 
-      const affiliateUnits = document.querySelectorAll(".affiliate-unit");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation");
 
-      affiliateUnits.forEach(function (unit) {
-        unit.style.display = query ? "none" : "";
-      });
+      menuToggle.innerHTML =
+        '<i class="fa-solid fa-bars"></i>';
 
-      if (query) {
-        searchStatus.style.display = "block";
-        searchStatus.textContent =
-          matchCount + " lifestyle story/stories matched your search.";
-      } else {
-        searchStatus.style.display = "none";
-      }
+    });
 
-      noResults.style.display = matchCount === 0 ? "block" : "none";
+  });
 
-      loadMoreButton.style.display =
-        !query && visibleCount < articleCards.length ? "inline-block" : "none";
+}
+
+
+/* =========================================================
+   LIFESTYLE ARTICLE SEARCH
+========================================================= */
+
+const headerSearch = $("#headerSearch");
+const headerSearchInput = $("#headerSearchInput");
+
+const articleGrid = $("#articleGrid");
+const searchStatus = $("#searchStatus");
+const noResults = $("#noResults");
+const loadMoreButton = $("#loadMore");
+
+const articleCards = articleGrid
+  ? Array.from(articleGrid.querySelectorAll(".article-card"))
+  : [];
+
+const affiliateUnits = Array.from(
+  document.querySelectorAll(".affiliate-unit")
+);
+
+let currentSearch = "";
+let visibleCount = 6;
+
+
+/* =========================================================
+   SEARCHABLE TEXT
+========================================================= */
+
+function getSearchableText(card) {
+
+  return (
+    card.innerText + " " +
+    (card.dataset.category || "")
+  ).toLowerCase();
+
+}
+
+
+/* =========================================================
+   DISPLAY ARTICLES
+========================================================= */
+
+function filterArticles() {
+
+  const query = currentSearch.trim().toLowerCase();
+
+  let matchedCount = 0;
+  let displayedCount = 0;
+
+
+  articleCards.forEach((card, index) => {
+
+    const matches =
+      !query || getSearchableText(card).includes(query);
+
+    if (matches) {
+      matchedCount++;
     }
 
-    headerSearch.addEventListener("submit", function (event) {
-      event.preventDefault();
+    const shouldDisplay =
+      matches && (query !== "" || index < visibleCount);
 
-      currentSearch = headerSearchInput.value;
-      visibleCount = articleCards.length;
+    card.style.display = shouldDisplay ? "" : "none";
 
-      filterArticles();
+    if (shouldDisplay) {
+      displayedCount++;
+    }
 
-      document.getElementById("latest").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    });
+  });
 
-    headerSearchInput.addEventListener("input", function () {
-      currentSearch = headerSearchInput.value;
-      visibleCount = articleCards.length;
-      filterArticles();
-    });
 
-    loadMoreButton.addEventListener("click", function () {
-      visibleCount += 4;
-      filterArticles();
-    });
+  /* Hide affiliate units while searching so that
+     only matching article cards appear. */
+
+  affiliateUnits.forEach(unit => {
+
+    unit.style.display = query ? "none" : "";
+
+  });
+
+
+  /* Search status */
+
+  if (searchStatus) {
+
+    if (query) {
+
+      searchStatus.style.display = "block";
+
+      searchStatus.textContent =
+        matchedCount +
+        (matchedCount === 1
+          ? " matching lifestyle story found."
+          : " matching lifestyle stories found.");
+
+    } else {
+
+      searchStatus.style.display = "none";
+      searchStatus.textContent = "";
+
+    }
+
+  }
+
+
+  /* No-results message */
+
+  if (noResults) {
+
+    noResults.style.display =
+      matchedCount === 0 ? "block" : "none";
+
+  }
+
+
+  /* Load-more button */
+
+  if (loadMoreButton) {
+
+    loadMoreButton.style.display =
+      !query && visibleCount < articleCards.length
+        ? "inline-flex"
+        : "none";
+
+  }
+
+}
+
+
+/* =========================================================
+   SEARCH SUBMISSION
+========================================================= */
+
+if (headerSearch && headerSearchInput) {
+
+  headerSearch.addEventListener("submit", event => {
+
+    event.preventDefault();
+
+    currentSearch = headerSearchInput.value.trim();
 
     filterArticles();
 
+    const latestSection = $("#latest");
 
-    /* ==================================
-       NEWSLETTER FORM
-       BACKEND CONNECTION REQUIRED
-    ================================== */
+    if (latestSection) {
 
-    const newsletterForm = document.getElementById("newsletterForm");
-    const newsletterMessage = document.getElementById("newsletterMessage");
+      latestSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
-    newsletterForm.addEventListener("submit", function (event) {
-      event.preventDefault();
+    }
 
-      const email = document
-        .getElementById("newsletterEmail")
-        .value.trim();
+  });
 
-      if (!email) {
-        newsletterMessage.textContent = "Please enter your email address.";
-        return;
+
+  /* Update the results as the user types. */
+
+  headerSearchInput.addEventListener("input", () => {
+
+    currentSearch = headerSearchInput.value.trim();
+
+    filterArticles();
+
+  });
+
+}
+
+
+/* =========================================================
+   LOAD MORE STORIES
+========================================================= */
+
+if (loadMoreButton) {
+
+  loadMoreButton.addEventListener("click", () => {
+
+    visibleCount += 4;
+
+    filterArticles();
+
+  });
+
+}
+
+
+/* Initial display */
+
+filterArticles();
+
+
+/* =========================================================
+   IMAGE FALLBACK
+========================================================= */
+
+document.querySelectorAll("img").forEach(img => {
+
+  img.addEventListener("error", () => {
+
+    img.style.backgroundColor = "#e5e9ef";
+
+    img.setAttribute(
+      "aria-label",
+      img.alt || "Image unavailable"
+    );
+
+  });
+
+});
+
+
+/* =========================================================
+   END OF BATCH 1
+   PASTE BATCH 2 BELOW THIS LINE
+========================================================= */
+
+        /* =========================================================
+   ZONGO LIFESTYLE PAGE
+   BATCH 2: FIREBASE NEWSLETTER
+========================================================= */
+
+const newsletterForm = $("#newsletterForm");
+
+const newsletterName = $("#newsletterName");
+
+const newsletterEmail = $("#newsletterEmail");
+
+const newsletterMessage = $("#newsletterMessage");
+
+
+/* =========================================================
+   NEWSLETTER MESSAGE
+========================================================= */
+
+function showNewsletterMessage(message, type = "error") {
+
+  if (!newsletterMessage) return;
+
+  newsletterMessage.textContent = message;
+
+  newsletterMessage.setAttribute("role", "status");
+
+  newsletterMessage.style.display = "block";
+
+  newsletterMessage.style.color =
+    type === "success" ? "#15803d" : "#b91c1c";
+
+}
+
+
+/* =========================================================
+   FIREBASE NEWSLETTER SUBMISSION
+========================================================= */
+
+if (newsletterForm && newsletterEmail) {
+
+  newsletterForm.addEventListener("submit", async event => {
+
+    event.preventDefault();
+
+
+    /* Collect form values. */
+
+    const name = newsletterName
+      ? newsletterName.value.trim()
+      : "";
+
+    const email = newsletterEmail.value
+      .trim()
+      .toLowerCase();
+
+
+    /* Validate the email. */
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if (!email) {
+
+      showNewsletterMessage(
+        "Please enter your email address."
+      );
+
+      newsletterEmail.focus();
+
+      return;
+
+    }
+
+
+    if (!emailPattern.test(email)) {
+
+      showNewsletterMessage(
+        "Please enter a valid email address."
+      );
+
+      newsletterEmail.focus();
+
+      return;
+
+    }
+
+
+    /* Prevent duplicate clicks while submitting. */
+
+    const submitButton =
+      newsletterForm.querySelector('button[type="submit"]');
+
+    if (submitButton && submitButton.disabled) {
+      return;
+    }
+
+
+    const originalButtonText =
+      submitButton ? submitButton.innerHTML : "";
+
+
+    if (submitButton) {
+
+      submitButton.disabled = true;
+
+      submitButton.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i> Subscribing...';
+
+    }
+
+
+    try {
+
+      /* Save the subscription to Firestore. */
+
+      await addDoc(
+        collection(db, "newsletterSubscribers"),
+        {
+
+          name: name,
+
+          email: email,
+
+          status: "active",
+
+          source: "lifestyle-page",
+
+          page: window.location.pathname,
+
+          subscribedAt: serverTimestamp()
+
+        }
+      );
+
+
+      /* Only show success after Firestore confirms
+         the document has been saved. */
+
+      showNewsletterMessage(
+        "Thank you for subscribing! Your email has been saved successfully.",
+        "success"
+      );
+
+
+      newsletterForm.reset();
+
+
+    } catch (error) {
+
+      console.error(
+        "Newsletter subscription error:",
+        error
+      );
+
+
+      if (
+        error.code === "permission-denied" ||
+        error.code === "firestore/permission-denied"
+      ) {
+
+        showNewsletterMessage(
+          "Firebase blocked this subscription. Please check your Firestore security rules."
+        );
+
+      } else if (
+        error.code === "unavailable" ||
+        error.code === "firestore/unavailable"
+      ) {
+
+        showNewsletterMessage(
+          "The service is temporarily unavailable. Check your internet connection and try again."
+        );
+
+      } else {
+
+        showNewsletterMessage(
+          "We could not save your subscription. Please try again."
+        );
+
       }
 
-      newsletterMessage.textContent =
-        "The form is ready, but newsletter storage is not connected yet. Connect Firebase or your newsletter backend to save subscriptions.";
+    } finally {
 
-      /*
-        IMPORTANT:
-        This page does not save subscriber emails yet.
+      if (submitButton) {
 
-        Connect this form to your Firebase Firestore newsletter
-        collection and secure the collection with appropriate rules
-        before collecting real subscriber information.
-      */
-    });
+        submitButton.disabled = false;
+
+        submitButton.innerHTML = originalButtonText;
+
+      }
+
+    }
+
+  });
+
+}
 
 
-    /* ==================================
-       FOOTER YEAR
-    ================================== */
+/* =========================================================
+   END OF ZONGO LIFESTYLE SCRIPT
+========================================================= */
 
-    document.getElementById("currentYear").textContent =
-      new Date().getFullYear();
-  </script>
-  
-  
-  <script type="module" src="script.js"></script>
-  
-  
-
+        </script>
 </body>
 </html>
 
