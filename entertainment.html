@@ -2736,237 +2736,258 @@ section {
      JAVASCRIPT
 ================================ -->
 
+<script type="module">
 
-<script type="module" src="category.js"></script>
-l
+/* ==========================================
+   ZONGO ENTERTAINMENT PAGE
+   BATCH 1: NAVIGATION, SEARCH & ARTICLES
+========================================== */
+
+import { db } from "./firebase.js";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 
-<script>
-    
-    /* =========================================
-   ZONGO ENTERTAINMENT
-   File: entertainment.js
-========================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
   "use strict";
 
-  /* =========================================
-     1. MOBILE NAVIGATION
-  ========================================= */
+  /* ==========================================
+     HELPERS
+  ========================================== */
 
-  const menuToggle = document.getElementById("menuToggle");
-  const mainNav = document.getElementById("mainNav");
+  const $ = (selector, parent = document) =>
+    parent.querySelector(selector);
+
+  const $$ = (selector, parent = document) =>
+    [...parent.querySelectorAll(selector)];
+
+
+  /* ==========================================
+     COPYRIGHT YEAR
+  ========================================== */
+
+  const currentYear = $("#currentYear");
+
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+  }
+
+
+  /* ==========================================
+     MOBILE NAVIGATION
+  ========================================== */
+
+  const menuToggle = $("#menuToggle");
+  const mainNav = $("#mainNav");
+
+  function closeMenu() {
+    if (!menuToggle || !mainNav) return;
+
+    mainNav.classList.remove("open", "active");
+
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+    menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+  }
+
+  function openMenu() {
+    if (!menuToggle || !mainNav) return;
+
+    mainNav.classList.add("open", "active");
+
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute("aria-label", "Close navigation menu");
+
+    menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  }
 
   if (menuToggle && mainNav) {
 
-    function closeMenu() {
-      mainNav.classList.remove("active");
+    menuToggle.addEventListener("click", () => {
+      const isOpen =
+        mainNav.classList.contains("open") ||
+        mainNav.classList.contains("active");
 
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open navigation menu");
-
-      menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
-    }
-
-    menuToggle.addEventListener("click", function () {
-
-      const isOpen = mainNav.classList.toggle("active");
-
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation menu" : "Open navigation menu"
-      );
-
-      menuToggle.innerHTML = isOpen
-        ? '<i class="fa-solid fa-xmark"></i>'
-        : '<i class="fa-solid fa-bars"></i>';
-
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     });
 
-    mainNav.querySelectorAll("a").forEach(function (link) {
-
+    $$("#mainNav a").forEach(link => {
       link.addEventListener("click", closeMenu);
-
     });
 
-    document.addEventListener("click", function (event) {
-
+    document.addEventListener("click", event => {
       if (
-        mainNav.classList.contains("active") &&
+        mainNav.classList.contains("open") &&
         !mainNav.contains(event.target) &&
         !menuToggle.contains(event.target)
       ) {
         closeMenu();
       }
-
     });
 
-    document.addEventListener("keydown", function (event) {
-
+    document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         closeMenu();
       }
-
     });
 
   }
 
 
-  /* =========================================
-     2. ARTICLE ELEMENTS
-  ========================================= */
+  /* ==========================================
+     SEARCH ELEMENTS
+  ========================================== */
 
-  const articleGrid = document.getElementById("articleGrid");
-  const noResults = document.getElementById("noResults");
-  const searchStatus = document.getElementById("searchStatus");
+  const searchForm = $("#entertainmentSearchForm");
+  const searchInput = $("#entertainmentSearch");
+  const searchStatus = $("#searchStatus");
 
-  const searchForm = document.getElementById(
-    "entertainmentSearchForm"
-  );
+  const articleGrid = $("#articleGrid");
+  const noResults = $("#noResults");
+  const loadMoreButton = $("#loadMoreButton");
 
-  const searchInput = document.getElementById(
-    "entertainmentSearch"
-  );
+  const topicLinks = $$("[data-topic-filter]");
 
-  const loadMoreButton = document.getElementById(
-    "loadMoreButton"
-  );
+  const articleCards = articleGrid
+    ? $$(".searchable-article", articleGrid)
+    : [];
 
-  const topicButtons = document.querySelectorAll(
-    "[data-topic-filter]"
-  );
-
-  const newsletterForm = document.getElementById(
-    "newsletterForm"
-  );
-
-  const newsletterMessage = document.getElementById(
-    "newsletterMessage"
-  );
-
-  let searchTerm = "";
+  let currentSearch = "";
   let activeCategory = "all";
-  let visibleLimit = 6;
 
-  const pageSize = 3;
+  const ARTICLES_PER_PAGE = 6;
+  let visibleLimit = ARTICLES_PER_PAGE;
 
 
-  /* =========================================
-     3. FIND ARTICLE CARDS
-  ========================================= */
+  /* ==========================================
+     ARTICLE MATCHING
+  ========================================== */
 
-  function getArticles() {
+  function articleMatchesSearch(article) {
 
-    if (!articleGrid) {
-      return [];
-    }
+    if (!currentSearch) return true;
 
-    return Array.from(
-      articleGrid.querySelectorAll(".searchable-article")
+    const title = article.querySelector("h3")?.innerText || "";
+    const description = article.querySelector(".article-content p")?.innerText || "";
+    const category = article.querySelector(".article-category")?.innerText || "";
+    const meta = article.querySelector(".article-meta")?.innerText || "";
+    const extraKeywords = article.dataset.keywords || "";
+
+    const searchableText = [
+      title,
+      description,
+      category,
+      meta,
+      article.dataset.category || "",
+      extraKeywords
+    ].join(" ").toLowerCase();
+
+    const searchWords = currentSearch
+      .split(/\s+/)
+      .filter(Boolean);
+
+    return searchWords.every(word =>
+      searchableText.includes(word)
     );
-
   }
 
 
-  /* =========================================
-     4. ARTICLE CATEGORY MATCHING
-  ========================================= */
+  /* ==========================================
+     CATEGORY MATCHING
+  ========================================== */
 
-  function matchesCategory(article) {
+  function articleMatchesCategory(article) {
 
     if (activeCategory === "all") {
       return true;
     }
 
-    const categoryData = (
-      article.getAttribute("data-category") || ""
-    ).toLowerCase();
+    const categories = (
+      article.dataset.category || ""
+    ).toLowerCase().split(/\s+/);
 
-    const categories = categoryData
-      .split(/[\s,]+/)
-      .filter(Boolean);
-
-    return categories.includes(activeCategory);
-
+    return categories.includes(activeCategory.toLowerCase());
   }
 
 
-  /* =========================================
-     5. ARTICLE SEARCH MATCHING
-  ========================================= */
-
-  function matchesSearch(article) {
-
-    if (!searchTerm) {
-      return true;
-    }
-
-    const articleText = (
-      article.innerText ||
-      article.textContent ||
-      ""
-    ).toLowerCase();
-
-    return articleText.includes(searchTerm);
-
-  }
-
-
-  /* =========================================
-     6. UPDATE ARTICLE DISPLAY
-  ========================================= */
+  /* ==========================================
+     UPDATE ARTICLE GRID
+  ========================================== */
 
   function updateArticles() {
 
-    const articles = getArticles();
+    let matchingArticles = 0;
+    let displayedArticles = 0;
 
-    if (!articles.length) {
-      return;
-    }
+    articleCards.forEach(article => {
 
-    const matchingArticles = articles.filter(function (article) {
+      const matchesSearch = articleMatchesSearch(article);
+      const matchesCategory = articleMatchesCategory(article);
 
-      return matchesCategory(article) && matchesSearch(article);
+      const matches =
+        matchesSearch && matchesCategory;
+
+      if (matches) {
+        matchingArticles++;
+      }
+
+      const shouldDisplay =
+        matches &&
+        (
+          currentSearch ||
+          activeCategory !== "all" ||
+          displayedArticles < visibleLimit
+        );
+
+      article.style.display = shouldDisplay ? "" : "none";
+
+      if (shouldDisplay) {
+        displayedArticles++;
+      }
 
     });
 
-    const filteringIsActive =
-      searchTerm !== "" || activeCategory !== "all";
 
-    const articlesToDisplay = filteringIsActive
-      ? matchingArticles
-      : matchingArticles.slice(0, visibleLimit);
-
-    articles.forEach(function (article) {
-
-      article.hidden = !articlesToDisplay.includes(article);
-
-    });
-
-
-    // Show or hide the no-results message.
+    /* NO RESULTS MESSAGE */
 
     if (noResults) {
-      noResults.hidden = matchingArticles.length > 0;
+
+      const hasMatches = matchingArticles > 0;
+
+      noResults.hidden = hasMatches;
+      noResults.style.display = hasMatches ? "none" : "block";
+
     }
 
 
-    // Update search result information.
+    /* SEARCH STATUS */
 
     if (searchStatus) {
 
-      if (filteringIsActive) {
-
-        const count = matchingArticles.length;
+      if (currentSearch && matchingArticles > 0) {
 
         searchStatus.textContent =
-          count + (count === 1
-            ? " story found."
-            : " stories found.");
+          `${matchingArticles} ${matchingArticles === 1 ? "story" : "stories"} found.`;
+
+      } else if (currentSearch && matchingArticles === 0) {
+
+        searchStatus.textContent =
+          "No stories match your search. Try different keywords.";
+
+      } else if (activeCategory !== "all") {
+
+        searchStatus.textContent =
+          `${matchingArticles} ${matchingArticles === 1 ? "story" : "stories"} in ${activeCategory}.`;
 
       } else {
 
@@ -2977,45 +2998,52 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // Control the Load More button.
+    /* LOAD MORE BUTTON */
 
     if (loadMoreButton) {
 
-      const hasMoreArticles =
-        !filteringIsActive &&
-        matchingArticles.length > visibleLimit;
+      const filteringActive =
+        Boolean(currentSearch) ||
+        activeCategory !== "all";
 
-      loadMoreButton.hidden = !hasMoreArticles;
+      const moreStoriesAvailable =
+        matchingArticles > visibleLimit;
+
+      loadMoreButton.hidden =
+        filteringActive || !moreStoriesAvailable;
+
+      loadMoreButton.style.display =
+        filteringActive || !moreStoriesAvailable
+          ? "none"
+          : "inline-flex";
 
     }
 
   }
 
 
-  /* =========================================
-     7. SEARCH FORM
-  ========================================= */
+  /* ==========================================
+     SEARCH SUBMISSION
+  ========================================== */
 
   if (searchForm && searchInput) {
 
-    searchForm.addEventListener("submit", function (event) {
+    searchForm.addEventListener("submit", event => {
 
       event.preventDefault();
 
-      searchTerm = searchInput.value
+      currentSearch = searchInput.value
         .trim()
         .toLowerCase();
 
-      visibleLimit = 6;
+      visibleLimit = ARTICLES_PER_PAGE;
 
       updateArticles();
 
-      const resultsSection = document.getElementById(
-        "latestEntertainment"
-      );
+      const latestSection = $("#latestEntertainment");
 
-      if (resultsSection) {
-        resultsSection.scrollIntoView({
+      if (latestSection) {
+        latestSection.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
@@ -3024,15 +3052,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    // Update results while the user types.
+    /* LIVE SEARCH */
 
-    searchInput.addEventListener("input", function () {
+    searchInput.addEventListener("input", () => {
 
-      searchTerm = searchInput.value
+      currentSearch = searchInput.value
         .trim()
         .toLowerCase();
 
-      visibleLimit = 6;
+      visibleLimit = ARTICLES_PER_PAGE;
 
       updateArticles();
 
@@ -3041,51 +3069,52 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================
-     8. TOPIC FILTERS
-  ========================================= */
+  /* ==========================================
+     CATEGORY FILTERS
+  ========================================== */
 
-  topicButtons.forEach(function (button) {
+  function selectCategory(category) {
 
-    button.addEventListener("click", function (event) {
+    activeCategory = (category || "all").toLowerCase();
+
+    visibleLimit = ARTICLES_PER_PAGE;
+
+    topicLinks.forEach(link => {
+
+      const isActive =
+        (link.dataset.topicFilter || "all").toLowerCase() ===
+        activeCategory;
+
+      link.classList.toggle("active", isActive);
+
+      if (isActive) {
+        link.setAttribute("aria-current", "true");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+
+    });
+
+    updateArticles();
+
+  }
+
+
+  topicLinks.forEach(link => {
+
+    link.addEventListener("click", event => {
 
       event.preventDefault();
 
-      activeCategory = (
-        button.getAttribute("data-topic-filter") || "all"
-      ).toLowerCase().trim();
+      selectCategory(link.dataset.topicFilter || "all");
 
-      visibleLimit = 6;
+      const latestSection = $("#latestEntertainment");
 
-      // Highlight the selected category.
-
-      topicButtons.forEach(function (otherButton) {
-
-        otherButton.classList.remove("active");
-
-        otherButton.setAttribute("aria-pressed", "false");
-
-      });
-
-      button.classList.add("active");
-
-      button.setAttribute("aria-pressed", "true");
-
-      updateArticles();
-
-      // Move the user to the article section.
-
-      const resultsSection = document.getElementById(
-        "latestEntertainment"
-      );
-
-      if (resultsSection) {
-
-        resultsSection.scrollIntoView({
+      if (latestSection) {
+        latestSection.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
-
       }
 
     });
@@ -3093,15 +3122,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  /* =========================================
-     9. LOAD MORE STORIES
-  ========================================= */
+  /* ==========================================
+     INITIAL ARTICLE DISPLAY
+  ========================================== */
+
+  updateArticles();
+
+    /* ==========================================
+     LOAD MORE STORIES
+  ========================================== */
 
   if (loadMoreButton) {
 
-    loadMoreButton.addEventListener("click", function () {
+    loadMoreButton.addEventListener("click", () => {
 
-      visibleLimit += pageSize;
+      visibleLimit += ARTICLES_PER_PAGE;
 
       updateArticles();
 
@@ -3110,62 +3145,191 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================
-     10. NEWSLETTER FORM
-  ========================================= */
+  /* ==========================================
+     FIREBASE NEWSLETTER EMAIL COLLECTION
+     FIRESTORE COLLECTION: newsletterSubscribers
+  ========================================== */
+
+  const newsletterForm = $("#newsletterForm");
 
   if (newsletterForm) {
 
-    newsletterForm.addEventListener("submit", function (event) {
+    const newsletterEmail = $("#newsletterEmail");
+    const newsletterMessage = $("#newsletterMessage");
+    const newsletterSubmit = newsletterForm.querySelector(
+      'button[type="submit"]'
+    );
+
+    let newsletterSubmitting = false;
+
+
+    function showNewsletterMessage(message, success = false) {
+
+      if (!newsletterMessage) return;
+
+      newsletterMessage.textContent = message;
+
+      newsletterMessage.style.color = success
+        ? "#16803c"
+        : "#b42318";
+
+      newsletterMessage.setAttribute("role", "status");
+      newsletterMessage.setAttribute("aria-live", "polite");
+
+    }
+
+
+    newsletterForm.addEventListener("submit", async event => {
 
       event.preventDefault();
 
-      const emailInput = newsletterForm.querySelector(
-        'input[type="email"]'
-      );
+      if (newsletterSubmitting) return;
 
-      if (!emailInput) {
-        return;
-      }
+      const email = newsletterEmail
+        ? newsletterEmail.value.trim().toLowerCase()
+        : "";
 
-      const email = emailInput.value.trim();
+
+      /* CHECK EMPTY EMAIL */
 
       if (!email) {
 
-        if (newsletterMessage) {
-          newsletterMessage.textContent =
-            "Please enter your email address.";
-        }
+        showNewsletterMessage(
+          "Please enter your email address."
+        );
+
+        newsletterEmail?.focus();
 
         return;
 
       }
 
-      if (!emailInput.checkValidity()) {
 
-        if (newsletterMessage) {
-          newsletterMessage.textContent =
-            "Please enter a valid email address.";
-        }
+      /* VALIDATE EMAIL FORMAT */
 
-        emailInput.focus();
+      const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(email)) {
+
+        showNewsletterMessage(
+          "Please enter a valid email address."
+        );
+
+        newsletterEmail?.focus();
 
         return;
 
       }
 
-      /*
-        IMPORTANT:
-        Connect an email marketing service or backend
-        before collecting newsletter subscriptions.
 
-        This frontend-only version does not save emails.
-      */
+      const originalButtonText = newsletterSubmit
+        ? newsletterSubmit.innerHTML
+        : "";
 
-      if (newsletterMessage) {
 
-        newsletterMessage.textContent =
-          "Newsletter subscriptions are not connected yet. Please try again later.";
+      newsletterSubmitting = true;
+
+      if (newsletterSubmit) {
+
+        newsletterSubmit.disabled = true;
+
+        newsletterSubmit.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin"></i> Subscribing...';
+
+      }
+
+      if (newsletterEmail) {
+        newsletterEmail.disabled = true;
+      }
+
+      showNewsletterMessage(
+        "Please wait while we save your subscription..."
+      );
+
+
+      try {
+
+        /* SAVE SUBSCRIBER TO FIRESTORE */
+
+        await addDoc(
+          collection(db, "newsletterSubscribers"),
+          {
+            email: email,
+
+            status: "active",
+
+            source: "entertainment-page",
+
+            page: window.location.pathname,
+
+            subscribedAt: serverTimestamp(),
+
+            createdAt: serverTimestamp()
+          }
+        );
+
+
+        /* SUCCESS */
+
+        showNewsletterMessage(
+          "Thank you for subscribing! Your email has been saved successfully.",
+          true
+        );
+
+        newsletterForm.reset();
+
+
+      } catch (error) {
+
+        console.error(
+          "ZONGO Entertainment newsletter error:",
+          error
+        );
+
+
+        if (
+          error.code === "permission-denied" ||
+          error.code === "firestore/permission-denied"
+        ) {
+
+          showNewsletterMessage(
+            "Your subscription could not be saved because Firestore denied access. Please check your Firebase security rules."
+          );
+
+        } else if (
+          error.code === "unavailable" ||
+          error.code === "firestore/unavailable"
+        ) {
+
+          showNewsletterMessage(
+            "The service is temporarily unavailable. Please try again."
+          );
+
+        } else {
+
+          showNewsletterMessage(
+            "We could not save your subscription. Check your internet connection and try again."
+          );
+
+        }
+
+      } finally {
+
+        newsletterSubmitting = false;
+
+        if (newsletterSubmit) {
+
+          newsletterSubmit.disabled = false;
+
+          newsletterSubmit.innerHTML =
+            originalButtonText || "Subscribe";
+
+        }
+
+        if (newsletterEmail) {
+          newsletterEmail.disabled = false;
+        }
 
       }
 
@@ -3174,28 +3338,59 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================
-     11. AUTOMATIC COPYRIGHT YEAR
-  ========================================= */
+  /* ==========================================
+     IMAGE ERROR HANDLING
+  ========================================== */
 
-  const currentYear = document.getElementById("currentYear");
+  $$("img").forEach(img => {
 
-  if (currentYear) {
+    img.addEventListener("error", () => {
 
-    currentYear.textContent = new Date().getFullYear();
+      img.dataset.imageError = "true";
+
+      img.style.backgroundColor = "#e9edf2";
+
+      img.style.objectFit = "contain";
+
+    }, { once: true });
+
+  });
+
+
+  /* ==========================================
+     HEADER SEARCH LINK
+  ========================================== */
+
+  const headerSearch = $(".header-search");
+
+  if (headerSearch) {
+
+    headerSearch.addEventListener("click", () => {
+
+      window.setTimeout(() => {
+
+        const searchInput = $("#entertainmentSearch");
+
+        if (searchInput) {
+          searchInput.focus({ preventScroll: true });
+        }
+
+      }, 350);
+
+    });
 
   }
 
 
-  /* =========================================
-     12. BACK TO TOP
-  ========================================= */
+  /* ==========================================
+     BACK TO TOP
+  ========================================== */
 
-  const backToTop = document.getElementById("backToTop");
+  const backToTop = $("#backToTop");
 
   if (backToTop) {
 
-    backToTop.addEventListener("click", function (event) {
+    backToTop.addEventListener("click", event => {
 
       event.preventDefault();
 
@@ -3209,15 +3404,46 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================
-     13. INITIALIZE
-  ========================================= */
+  /* ==========================================
+     SMOOTH SCROLL FOR INTERNAL LINKS
+  ========================================== */
 
-  // Display the first six stories.
-  updateArticles();
+  $$('a[href^="#"]').forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      const targetId = link.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const target = $(targetId);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+    });
+
+  });
+
+
+  /* ==========================================
+     INITIALIZE CATEGORY FILTER
+  ========================================== */
+
+  selectCategory("all");
+
+
+  console.log(
+    "ZONGO Entertainment page JavaScript initialized successfully."
+  );
 
 });
-
 </script>
 
 </body>
