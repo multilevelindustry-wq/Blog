@@ -4188,31 +4188,112 @@ input:focus-visible {
 
 </footer>
 
-<script>
-    
-    /* =========================================
-   ZONGO TECHNOLOGY PAGE
+        <script type="module">
+
+/* =========================================
+   ZONGO BLOG — TECHNOLOGY PAGE
    File: technology.js
+
+   FEATURES:
+   1. Mobile navigation
+   2. Article search
+   3. Technology category filters
+   4. Load more articles
+   5. Firebase newsletter collection
 ========================================= */
+
+import { db } from "./firebase.js";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
 
 document.addEventListener("DOMContentLoaded", function () {
 
   "use strict";
 
+
   /* =========================================
-     1. MOBILE NAVIGATION
+     1. ELEMENTS
   ========================================= */
 
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
 
+  const searchForm =
+    document.getElementById("technologySearchForm");
+
+  const searchInput =
+    document.getElementById("technologySearchInput");
+
+  const searchStatus =
+    document.getElementById("searchStatus");
+
+  const articleGrid =
+    document.getElementById("articleGrid");
+
+  const noResults =
+    document.getElementById("noResults");
+
+  const loadMoreButton =
+    document.getElementById("loadMoreButton");
+
+  const yearElement =
+    document.getElementById("currentYear");
+
+  const newsletterForm =
+    document.getElementById("newsletterForm");
+
+  const newsletterMessage =
+    document.getElementById("newsletterMessage");
+
+
+  /* =========================================
+     2. MOBILE NAVIGATION
+  ========================================= */
+
+  function closeMobileMenu() {
+
+    if (!menuToggle || !mainNav) return;
+
+    mainNav.classList.remove("active");
+
+    menuToggle.setAttribute("aria-expanded", "false");
+
+    menuToggle.setAttribute(
+      "aria-label",
+      "Open navigation menu"
+    );
+
+    menuToggle.innerHTML =
+      '<i class="fa-solid fa-bars"></i>';
+
+  }
+
+
   if (menuToggle && mainNav) {
 
-    menuToggle.addEventListener("click", function () {
+    menuToggle.addEventListener("click", function (event) {
 
-      const isOpen = mainNav.classList.toggle("active");
+      event.stopPropagation();
 
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      const isOpen =
+        mainNav.classList.toggle("active");
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen
+          ? "Close navigation menu"
+          : "Open navigation menu"
+      );
 
       menuToggle.innerHTML = isOpen
         ? '<i class="fa-solid fa-xmark"></i>'
@@ -4220,20 +4301,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+
     mainNav.querySelectorAll("a").forEach(function (link) {
 
-      link.addEventListener("click", function () {
-
-        mainNav.classList.remove("active");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-
-        menuToggle.innerHTML =
-          '<i class="fa-solid fa-bars"></i>';
-
-      });
+      link.addEventListener("click", closeMobileMenu);
 
     });
+
 
     document.addEventListener("click", function (event) {
 
@@ -4242,12 +4316,18 @@ document.addEventListener("DOMContentLoaded", function () {
         !menuToggle.contains(event.target)
       ) {
 
-        mainNav.classList.remove("active");
+        closeMobileMenu();
 
-        menuToggle.setAttribute("aria-expanded", "false");
+      }
 
-        menuToggle.innerHTML =
-          '<i class="fa-solid fa-bars"></i>';
+    });
+
+
+    document.addEventListener("keydown", function (event) {
+
+      if (event.key === "Escape") {
+
+        closeMobileMenu();
 
       }
 
@@ -4257,140 +4337,218 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   /* =========================================
-     2. ARTICLE SEARCH
+     3. CURRENT YEAR
   ========================================= */
 
-  const searchInput =
-    document.getElementById("technologySearch") ||
-    document.getElementById("searchInput") ||
-    document.getElementById("articleSearch");
+  if (yearElement) {
 
-  const searchForm =
-    document.getElementById("technologySearchForm") ||
-    document.getElementById("searchForm");
+    yearElement.textContent =
+      new Date().getFullYear();
 
-  const searchStatus =
-    document.getElementById("searchStatus");
+  }
 
-  const articleGrid =
-    document.getElementById("articleGrid") ||
-    document.getElementById("technologyArticles");
 
-  const noResults =
-    document.getElementById("noResults");
+  /* =========================================
+     4. ARTICLE SEARCH AND CATEGORY FILTERS
+  ========================================= */
 
-  const articleSelector = [
-    ".searchable-article",
-    ".article-card",
-    ".technology-card",
-    ".post-card"
-  ].join(",");
-
-  let articles = articleGrid
-    ? Array.from(articleGrid.querySelectorAll(articleSelector))
+  const articleCards = articleGrid
+    ? Array.from(
+        articleGrid.querySelectorAll(
+          "article.searchable-article"
+        )
+      )
     : [];
 
-  let activeTopic = "all";
+
+  const featuredArticle =
+    document.querySelector(
+      "#featuredTechnology .featured-article"
+    );
+
+
+  const affiliateUnits = articleGrid
+    ? Array.from(
+        articleGrid.querySelectorAll(".affiliate-unit")
+      )
+    : [];
+
+
+  let activeCategory = "all";
+
   let searchTerm = "";
-  let visibleLimit = 9;
+
+  let visibleLimit = 4;
 
 
-  function getArticleText(article) {
+  function normalizeText(value) {
 
-    return (
-      article.innerText ||
-      article.textContent ||
-      ""
-    ).toLowerCase();
-
-  }
-
-
-  function getArticleTopic(article) {
-
-    return (
-      article.dataset.category ||
-      article.dataset.topic ||
-      article.dataset.tag ||
-      ""
-    ).toLowerCase().trim();
+    return String(value || "")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, " ");
 
   }
 
 
-  function articleMatchesTopic(article) {
+  function getSearchableText(article) {
 
-    if (activeTopic === "all") {
-      return true;
-    }
+    if (!article) return "";
 
-    const topic = getArticleTopic(article);
+    const keywords =
+      article.getAttribute("data-keywords") || "";
 
-    const categories = topic
-      .split(",")
-      .map(function (item) {
-        return item.trim();
-      });
+    const category =
+      article.getAttribute("data-category") || "";
 
-    return (
-      categories.includes(activeTopic) ||
-      topic.includes(activeTopic)
+    return normalizeText(
+      article.innerText +
+      " " +
+      keywords +
+      " " +
+      category
     );
 
   }
 
 
-  function articleMatchesSearch(article) {
+  function matchesSearch(article) {
 
-    if (!searchTerm) {
+    if (!searchTerm) return true;
+
+    return getSearchableText(article)
+      .includes(searchTerm);
+
+  }
+
+
+  function matchesCategory(article) {
+
+    if (activeCategory === "all") {
+
       return true;
+
     }
 
-    return getArticleText(article).includes(searchTerm);
+    const category = normalizeText(
+      article.getAttribute("data-category")
+    );
+
+    const keywords = normalizeText(
+      article.getAttribute("data-keywords")
+    );
+
+    /*
+      Match the selected topic against the article's
+      category and keywords.
+    */
+
+    return (
+      category.includes(activeCategory) ||
+      keywords.includes(activeCategory)
+    );
+
+  }
+
+
+  function matchesFilters(article) {
+
+    return (
+      matchesSearch(article) &&
+      matchesCategory(article)
+    );
 
   }
 
 
   function updateArticles() {
 
-    if (!articles.length) {
-      return;
-    }
+    const matchingArticles =
+      articleCards.filter(matchesFilters);
 
-    const matchingArticles = articles.filter(function (article) {
 
-      return (
-        articleMatchesTopic(article) &&
-        articleMatchesSearch(article)
-      );
+    const filteringIsActive =
+      searchTerm !== "" ||
+      activeCategory !== "all";
 
-    });
 
-    const filteredArticles = searchTerm || activeTopic !== "all"
+    /*
+      When searching or filtering, show every match.
+      Otherwise, show articles up to the current limit.
+    */
+
+    const articlesToShow = filteringIsActive
       ? matchingArticles
       : matchingArticles.slice(0, visibleLimit);
 
-    articles.forEach(function (article) {
 
-      article.hidden = !filteredArticles.includes(article);
+    articleCards.forEach(function (article) {
+
+      article.hidden =
+        !articlesToShow.includes(article);
 
     });
 
-    if (noResults) {
 
-      noResults.hidden = matchingArticles.length > 0;
+    /*
+      Sponsored units remain visible on the normal page.
+      Hide them during searches and category filtering
+      so unrelated promotions do not interrupt results.
+    */
+
+    affiliateUnits.forEach(function (unit) {
+
+      unit.hidden = filteringIsActive;
+
+    });
+
+
+    /*
+      Filter the featured story too.
+    */
+
+    let featuredMatches = false;
+
+    if (featuredArticle) {
+
+      featuredMatches =
+        matchesFilters(featuredArticle);
+
+      featuredArticle.hidden =
+        filteringIsActive && !featuredMatches;
 
     }
 
+
+    /*
+      No-results message.
+    */
+
+    const totalMatches =
+      matchingArticles.length +
+      (featuredMatches ? 1 : 0);
+
+
+    if (noResults) {
+
+      noResults.hidden = totalMatches > 0;
+
+    }
+
+
+    /*
+      Search status.
+    */
+
     if (searchStatus) {
 
-      if (searchTerm || activeTopic !== "all") {
+      if (filteringIsActive) {
 
         searchStatus.textContent =
-          matchingArticles.length +
-          (matchingArticles.length === 1
-            ? " article found."
-            : " articles found.");
+          totalMatches +
+          (totalMatches === 1
+            ? " matching article found."
+            : " matching articles found.");
 
       } else {
 
@@ -4400,29 +4558,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    const loadMoreButton =
-      document.getElementById("loadMoreButton") ||
-      document.getElementById("loadMore");
+
+    /*
+      Load More button.
+    */
 
     if (loadMoreButton) {
 
-      const canLoadMore =
-        !searchTerm &&
-        activeTopic === "all" &&
+      const hasMore =
         matchingArticles.length > visibleLimit;
 
-      loadMoreButton.hidden = !canLoadMore;
+      loadMoreButton.hidden =
+        filteringIsActive || !hasMore;
 
     }
 
   }
 
 
+  /*
+    Search as the user types.
+  */
+
   if (searchInput) {
 
     searchInput.addEventListener("input", function () {
 
-      searchTerm = searchInput.value.trim().toLowerCase();
+      searchTerm = normalizeText(searchInput.value);
+
+      visibleLimit = 4;
 
       updateArticles();
 
@@ -4430,6 +4594,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   }
 
+
+  /*
+    Handle submitted searches.
+  */
 
   if (searchForm) {
 
@@ -4437,11 +4605,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
       event.preventDefault();
 
-      if (searchInput) {
+      searchTerm = normalizeText(
+        searchInput ? searchInput.value : ""
+      );
 
-        searchTerm = searchInput.value.trim().toLowerCase();
+      visibleLimit = 4;
 
-        updateArticles();
+      updateArticles();
+
+      const latestSection =
+        document.getElementById("latestTechnology");
+
+      if (latestSection) {
+
+        latestSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
 
       }
 
@@ -4450,59 +4630,80 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================
-     3. TECHNOLOGY TOPIC FILTERS
-  ========================================= */
+  /*
+    Technology category links.
 
-  const topicButtons = document.querySelectorAll(
-    "[data-topic-filter], [data-category-filter]"
+    Supports your existing data-tech-category attribute
+    in the top topic navigation, sidebar and topic cards.
+  */
+
+  const categoryLinks = document.querySelectorAll(
+    "[data-tech-category]"
   );
 
-  topicButtons.forEach(function (button) {
 
-    button.addEventListener("click", function () {
+  categoryLinks.forEach(function (link) {
 
-      const selectedTopic =
-        button.dataset.topicFilter ||
-        button.dataset.categoryFilter ||
-        "all";
+    link.addEventListener("click", function (event) {
 
-      activeTopic = selectedTopic.toLowerCase().trim();
+      event.preventDefault();
 
-      topicButtons.forEach(function (otherButton) {
+      activeCategory = normalizeText(
+        link.getAttribute("data-tech-category") || "all"
+      );
 
-        otherButton.classList.remove("active");
+      visibleLimit = 4;
 
-        otherButton.setAttribute("aria-pressed", "false");
+      /*
+        Update the active appearance of category links.
+      */
+
+      categoryLinks.forEach(function (otherLink) {
+
+        const isActive =
+          normalizeText(
+            otherLink.getAttribute("data-tech-category")
+          ) === activeCategory;
+
+        otherLink.classList.toggle("active", isActive);
+
+        otherLink.setAttribute(
+          "aria-pressed",
+          String(isActive)
+        );
 
       });
 
-      button.classList.add("active");
-
-      button.setAttribute("aria-pressed", "true");
-
-      visibleLimit = 9;
 
       updateArticles();
+
+
+      const latestSection =
+        document.getElementById("latestTechnology");
+
+      if (latestSection) {
+
+        latestSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
 
     });
 
   });
 
 
-  /* =========================================
-     4. LOAD MORE ARTICLES
-  ========================================= */
-
-  const loadMoreButton =
-    document.getElementById("loadMoreButton") ||
-    document.getElementById("loadMore");
+  /*
+    Load additional articles.
+  */
 
   if (loadMoreButton) {
 
     loadMoreButton.addEventListener("click", function () {
 
-      visibleLimit += 9;
+      visibleLimit += 4;
 
       updateArticles();
 
@@ -4511,99 +4712,231 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /* =========================================
-     5. NEWSLETTER FORM
-  ========================================= */
-
-  const newsletterForm =
-    document.getElementById("newsletterForm");
-
-  const newsletterMessage =
-    document.getElementById("newsletterMessage");
-
-  if (newsletterForm) {
-
-    newsletterForm.addEventListener("submit", function (event) {
-
-      event.preventDefault();
-
-      const emailInput =
-        newsletterForm.querySelector('input[type="email"]');
-
-      if (!emailInput || !emailInput.value.trim()) {
-
-        if (newsletterMessage) {
-          newsletterMessage.textContent =
-            "Please enter your email address.";
-        }
-
-        return;
-
-      }
-
-      if (newsletterMessage) {
-
-        newsletterMessage.textContent =
-          "Subscribed.";
-
-      }
-
-    });
-
-  }
-
-
-  /* =========================================
-     6. CURRENT YEAR
-  ========================================= */
-
-  const yearElement =
-    document.getElementById("currentYear");
-
-  if (yearElement) {
-
-    yearElement.textContent = new Date().getFullYear();
-
-  }
-
-
-  /* =========================================
-     7. BACK TO TOP
-  ========================================= */
-
-  const backToTop =
-    document.getElementById("backToTop");
-
-  if (backToTop) {
-
-    backToTop.addEventListener("click", function (event) {
-
-      event.preventDefault();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    });
-
-  }
-
-
-  /* =========================================
-     8. INITIALIZE PAGE
-  ========================================= */
+  /*
+    Run the initial article display.
+  */
 
   updateArticles();
 
-});
 
-</script>
+  /* =========================================
+     5. NEWSLETTER — FIREBASE
+  ========================================= */
+
+  /*
+    Uses your existing HTML IDs:
+    newsletterForm
+    newsletterName
+    newsletterEmail
+    newsletterMessage
+
+    Saves subscriptions to:
+    Firestore collection: newsletterSubscribers
+  */
+
+  if (newsletterForm) {
+
+    newsletterForm.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
 
 
-<script type="module" src="script.js"></script>
+        const nameInput =
+          newsletterForm.querySelector(
+            'input[name="name"]'
+          ) ||
+          newsletterForm.querySelector(
+            'input[type="text"]'
+          );
 
 
+        const emailInput =
+          newsletterForm.querySelector(
+            'input[name="email"]'
+          ) ||
+          newsletterForm.querySelector(
+            'input[type="email"]'
+          );
+
+
+        const submitButton =
+          newsletterForm.querySelector(
+            'button[type="submit"]'
+          );
+
+
+        const name = nameInput
+          ? nameInput.value.trim()
+          : "";
+
+
+        const email = emailInput
+          ? emailInput.value.trim().toLowerCase()
+          : "";
+
+
+        /*
+          Show messages accessibly.
+        */
+
+        function showNewsletterMessage(message, type) {
+
+          if (!newsletterMessage) return;
+
+          newsletterMessage.textContent = message;
+
+          newsletterMessage.setAttribute(
+            "role",
+            type === "error" ? "alert" : "status"
+          );
+
+          newsletterMessage.dataset.status = type;
+
+        }
+
+
+        /*
+          Validate email.
+        */
+
+        const emailPattern =
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (!name) {
+
+          showNewsletterMessage(
+            "Please enter your name.",
+            "error"
+          );
+
+          if (nameInput) nameInput.focus();
+
+          return;
+
+        }
+
+
+        if (!email || !emailPattern.test(email)) {
+
+          showNewsletterMessage(
+            "Please enter a valid email address.",
+            "error"
+          );
+
+          if (emailInput) emailInput.focus();
+
+          return;
+
+        }
+
+
+        /*
+          Prevent repeated clicks while saving.
+        */
+
+        if (
+          submitButton &&
+          submitButton.disabled
+        ) {
+
+          return;
+
+        }
+
+
+        const originalButtonHTML = submitButton
+          ? submitButton.innerHTML
+          : "";
+
+
+        if (submitButton) {
+
+          submitButton.disabled = true;
+
+          submitButton.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Subscribing...';
+
+        }
+
+
+        if (newsletterMessage) {
+
+          newsletterMessage.textContent = "";
+
+        }
+
+
+        try {
+
+          /*
+            Save the subscriber to Firestore.
+          */
+
+          await addDoc(
+            collection(db, "newsletterSubscribers"),
+            {
+              name: name,
+
+              email: email,
+
+              status: "active",
+
+              source: "technology-page",
+
+              page: window.location.pathname,
+
+              subscribedAt: serverTimestamp()
+            }
+          );
+
+
+          showNewsletterMessage(
+            "Thank you! You have successfully subscribed to ZONGO Blog technology updates.",
+            "success"
+          );
+
+
+          /*
+            Clear fields only after Firebase confirms
+            that the subscription was saved.
+          */
+
+          newsletterForm.reset();
+
+
+        } catch (error) {
+
+          console.error(
+            "Newsletter subscription error:",
+            error
+          );
+
+
+          showNewsletterMessage(
+            "We could not save your subscription. Please try again.",
+            "error"
+          );
+
+        } finally {
+
+          if (submitButton) {
+
+            submitButton.disabled = false;
+
+            submitButton.innerHTML =
+              originalButtonHTML;
+
+          }
+
+        }
+
+      }
+    );
+
+  }
 
 </body>
 
