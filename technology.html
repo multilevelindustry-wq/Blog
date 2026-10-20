@@ -4188,19 +4188,19 @@ input:focus-visible {
 
 </footer>
 
-        <script type="module">
+                            <script type="module">
+/* =========================================================
+   ZONGO TECHNOLOGY PAGE — BATCH 1 OF 2
 
-/* =========================================
-   ZONGO BLOG — TECHNOLOGY PAGE
-   File: technology.js
+   Features:
+   - Firebase connection
+   - Mobile navigation
+   - Technology article search
+   - Category filtering
+   - Search status updates
 
-   FEATURES:
-   1. Mobile navigation
-   2. Article search
-   3. Technology category filters
-   4. Load more articles
-   5. Firebase newsletter collection
-========================================= */
+   Paste Batch 2 immediately after this code.
+========================================================= */
 
 import { db } from "./firebase.js";
 
@@ -4210,78 +4210,50 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
   "use strict";
 
+  /* =======================================================
+     1. HELPER FUNCTIONS
+  ======================================================= */
 
-  /* =========================================
-     1. ELEMENTS
-  ========================================= */
+  const $ = (selector, parent = document) =>
+    parent.querySelector(selector);
 
-  const menuToggle = document.getElementById("menuToggle");
-  const mainNav = document.getElementById("mainNav");
+  const $$ = (selector, parent = document) =>
+    [...parent.querySelectorAll(selector)];
 
-  const searchForm =
-    document.getElementById("technologySearchForm");
-
-  const searchInput =
-    document.getElementById("technologySearchInput");
-
-  const searchStatus =
-    document.getElementById("searchStatus");
-
-  const articleGrid =
-    document.getElementById("articleGrid");
-
-  const noResults =
-    document.getElementById("noResults");
-
-  const loadMoreButton =
-    document.getElementById("loadMoreButton");
-
-  const yearElement =
-    document.getElementById("currentYear");
-
-  const newsletterForm =
-    document.getElementById("newsletterForm");
-
-  const newsletterMessage =
-    document.getElementById("newsletterMessage");
-
-
-  /* =========================================
+  /* =======================================================
      2. MOBILE NAVIGATION
-  ========================================= */
+  ======================================================= */
 
-  function closeMobileMenu() {
+  const menuToggle = $("#menuToggle");
+  const mainNav = $("#mainNav");
 
+  function closeMenu() {
     if (!menuToggle || !mainNav) return;
 
     mainNav.classList.remove("active");
+    mainNav.classList.remove("open");
 
     menuToggle.setAttribute("aria-expanded", "false");
-
-    menuToggle.setAttribute(
-      "aria-label",
-      "Open navigation menu"
-    );
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
 
     menuToggle.innerHTML =
       '<i class="fa-solid fa-bars"></i>';
-
   }
-
 
   if (menuToggle && mainNav) {
 
-    menuToggle.addEventListener("click", function (event) {
-
+    menuToggle.addEventListener("click", event => {
       event.stopPropagation();
 
       const isOpen =
-        mainNav.classList.toggle("active");
+        !mainNav.classList.contains("active");
+
+      mainNav.classList.toggle("active", isOpen);
+      mainNav.classList.toggle("open", isOpen);
 
       menuToggle.setAttribute(
         "aria-expanded",
@@ -4298,645 +4270,509 @@ document.addEventListener("DOMContentLoaded", function () {
       menuToggle.innerHTML = isOpen
         ? '<i class="fa-solid fa-xmark"></i>'
         : '<i class="fa-solid fa-bars"></i>';
-
     });
 
-
-    mainNav.querySelectorAll("a").forEach(function (link) {
-
-      link.addEventListener("click", closeMobileMenu);
-
+    $$("#mainNav a").forEach(link => {
+      link.addEventListener("click", closeMenu);
     });
 
-
-    document.addEventListener("click", function (event) {
-
+    document.addEventListener("click", event => {
       if (
+        mainNav.classList.contains("active") &&
         !mainNav.contains(event.target) &&
         !menuToggle.contains(event.target)
       ) {
-
-        closeMobileMenu();
-
+        closeMenu();
       }
-
     });
 
-
-    document.addEventListener("keydown", function (event) {
-
+    document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
-
-        closeMobileMenu();
-
+        closeMenu();
       }
-
     });
-
   }
 
-
-  /* =========================================
+  /* =======================================================
      3. CURRENT YEAR
-  ========================================= */
+  ======================================================= */
 
-  if (yearElement) {
+  const currentYear = $("#currentYear");
 
-    yearElement.textContent =
-      new Date().getFullYear();
-
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
   }
 
+  /* =======================================================
+     4. ARTICLE SEARCH AND CATEGORY FILTERING
+  ======================================================= */
 
-  /* =========================================
-     4. ARTICLE SEARCH AND CATEGORY FILTERS
-  ========================================= */
+  const searchForm = $("#technologySearchForm");
+  const searchInput = $("#technologySearchInput");
+  const articleGrid = $("#articleGrid");
+  const searchStatus = $("#searchStatus");
+  const noResults = $("#noResults");
 
   const articleCards = articleGrid
-    ? Array.from(
-        articleGrid.querySelectorAll(
-          "article.searchable-article"
-        )
-      )
+    ? $$(".searchable-article", articleGrid)
     : [];
 
-
-  const featuredArticle =
-    document.querySelector(
-      "#featuredTechnology .featured-article"
-    );
-
-
-  const affiliateUnits = articleGrid
-    ? Array.from(
-        articleGrid.querySelectorAll(".affiliate-unit")
-      )
-    : [];
-
-
-  let activeCategory = "all";
+  const featuredArticle = $(
+    "#featuredTechnology .searchable-article"
+  );
 
   let searchTerm = "";
-
-  let visibleLimit = 4;
-
+  let activeCategory = "all";
+  let visibleLimit = 6;
 
   function normalizeText(value) {
-
     return String(value || "")
       .toLowerCase()
-      .trim()
-      .replace(/\s+/g, " ");
-
+      .trim();
   }
-
 
   function getSearchableText(article) {
-
-    if (!article) return "";
-
-    const keywords =
-      article.getAttribute("data-keywords") || "";
-
-    const category =
-      article.getAttribute("data-category") || "";
-
     return normalizeText(
-      article.innerText +
+      (article.innerText || article.textContent || "") +
       " " +
-      keywords +
+      (article.dataset.keywords || "") +
       " " +
-      category
+      (article.dataset.category || "")
     );
-
   }
-
 
   function matchesSearch(article) {
-
     if (!searchTerm) return true;
 
-    return getSearchableText(article)
-      .includes(searchTerm);
-
+    return getSearchableText(article).includes(searchTerm);
   }
 
-
   function matchesCategory(article) {
-
-    if (activeCategory === "all") {
-
-      return true;
-
-    }
+    if (activeCategory === "all") return true;
 
     const category = normalizeText(
-      article.getAttribute("data-category")
+      article.dataset.category
     );
 
     const keywords = normalizeText(
-      article.getAttribute("data-keywords")
+      article.dataset.keywords
     );
-
-    /*
-      Match the selected topic against the article's
-      category and keywords.
-    */
 
     return (
       category.includes(activeCategory) ||
       keywords.includes(activeCategory)
     );
-
   }
-
-
-  function matchesFilters(article) {
-
-    return (
-      matchesSearch(article) &&
-      matchesCategory(article)
-    );
-
-  }
-
 
   function updateArticles() {
 
-    const matchingArticles =
-      articleCards.filter(matchesFilters);
-
+    const matchingCards = articleCards.filter(article => {
+      return (
+        matchesSearch(article) &&
+        matchesCategory(article)
+      );
+    });
 
     const filteringIsActive =
-      searchTerm !== "" ||
+      Boolean(searchTerm) ||
       activeCategory !== "all";
 
+    const cardsToShow = filteringIsActive
+      ? matchingCards
+      : matchingCards.slice(0, visibleLimit);
 
-    /*
-      When searching or filtering, show every match.
-      Otherwise, show articles up to the current limit.
-    */
-
-    const articlesToShow = filteringIsActive
-      ? matchingArticles
-      : matchingArticles.slice(0, visibleLimit);
-
-
-    articleCards.forEach(function (article) {
-
-      article.hidden =
-        !articlesToShow.includes(article);
-
+    articleCards.forEach(article => {
+      article.style.display =
+        cardsToShow.includes(article) ? "" : "none";
     });
 
-
     /*
-      Sponsored units remain visible on the normal page.
-      Hide them during searches and category filtering
-      so unrelated promotions do not interrupt results.
+      Keep affiliate units visible. They are not article cards
+      and should not count as search results.
     */
-
-    affiliateUnits.forEach(function (unit) {
-
-      unit.hidden = filteringIsActive;
-
-    });
-
-
-    /*
-      Filter the featured story too.
-    */
-
-    let featuredMatches = false;
 
     if (featuredArticle) {
+      const featuredMatches =
+        matchesSearch(featuredArticle) &&
+        matchesCategory(featuredArticle);
 
-      featuredMatches =
-        matchesFilters(featuredArticle);
-
-      featuredArticle.hidden =
-        filteringIsActive && !featuredMatches;
-
+      featuredArticle.style.display =
+        filteringIsActive && !featuredMatches
+          ? "none"
+          : "";
     }
-
-
-    /*
-      No-results message.
-    */
-
-    const totalMatches =
-      matchingArticles.length +
-      (featuredMatches ? 1 : 0);
-
 
     if (noResults) {
-
-      noResults.hidden = totalMatches > 0;
-
+      noResults.hidden = matchingCards.length > 0;
+      noResults.style.display =
+        matchingCards.length > 0 ? "none" : "block";
     }
-
-
-    /*
-      Search status.
-    */
 
     if (searchStatus) {
 
       if (filteringIsActive) {
+        const count = matchingCards.length;
 
         searchStatus.textContent =
-          totalMatches +
-          (totalMatches === 1
-            ? " matching article found."
-            : " matching articles found.");
-
+          count +
+          (count === 1
+            ? " technology article found."
+            : " technology articles found.");
       } else {
-
         searchStatus.textContent = "";
-
       }
-
     }
 
-
-    /*
-      Load More button.
-    */
+    const loadMoreButton = $("#loadMoreButton");
 
     if (loadMoreButton) {
 
       const hasMore =
-        matchingArticles.length > visibleLimit;
+        !filteringIsActive &&
+        matchingCards.length > visibleLimit;
 
-      loadMoreButton.hidden =
-        filteringIsActive || !hasMore;
-
+      loadMoreButton.hidden = !hasMore;
+      loadMoreButton.style.display =
+        hasMore ? "" : "none";
     }
-
   }
 
+  /* Search form submission */
 
-  /*
-    Search as the user types.
-  */
+  if (searchForm && searchInput) {
 
-  if (searchInput) {
-
-    searchInput.addEventListener("input", function () {
+    searchForm.addEventListener("submit", event => {
+      event.preventDefault();
 
       searchTerm = normalizeText(searchInput.value);
-
-      visibleLimit = 4;
-
-      updateArticles();
-
-    });
-
-  }
-
-
-  /*
-    Handle submitted searches.
-  */
-
-  if (searchForm) {
-
-    searchForm.addEventListener("submit", function (event) {
-
-      event.preventDefault();
-
-      searchTerm = normalizeText(
-        searchInput ? searchInput.value : ""
-      );
-
-      visibleLimit = 4;
+      visibleLimit = 6;
 
       updateArticles();
 
-      const latestSection =
-        document.getElementById("latestTechnology");
+      const latestSection = $("#latestTechnology");
 
       if (latestSection) {
-
         latestSection.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
-
       }
-
     });
 
+    /* Update results as the visitor types. */
+
+    searchInput.addEventListener("input", () => {
+      searchTerm = normalizeText(searchInput.value);
+      visibleLimit = 6;
+      updateArticles();
+    });
   }
 
+  /* =======================================================
+     5. TECHNOLOGY CATEGORY LINKS
+  ======================================================= */
 
-  /*
-    Technology category links.
+  const categoryLinks = $$("[data-tech-category]");
 
-    Supports your existing data-tech-category attribute
-    in the top topic navigation, sidebar and topic cards.
-  */
+  function applyCategory(category) {
 
-  const categoryLinks = document.querySelectorAll(
-    "[data-tech-category]"
-  );
+    activeCategory = normalizeText(category || "all");
 
+    if (!activeCategory) {
+      activeCategory = "all";
+    }
 
-  categoryLinks.forEach(function (link) {
+    visibleLimit = 6;
 
-    link.addEventListener("click", function (event) {
+    categoryLinks.forEach(link => {
 
-      event.preventDefault();
-
-      activeCategory = normalizeText(
-        link.getAttribute("data-tech-category") || "all"
+      const linkCategory = normalizeText(
+        link.dataset.techCategory
       );
 
-      visibleLimit = 4;
+      const isActive =
+        linkCategory === activeCategory;
 
-      /*
-        Update the active appearance of category links.
-      */
+      link.classList.toggle("active", isActive);
 
-      categoryLinks.forEach(function (otherLink) {
+      link.setAttribute(
+        "aria-pressed",
+        String(isActive)
+      );
+    });
 
-        const isActive =
-          normalizeText(
-            otherLink.getAttribute("data-tech-category")
-          ) === activeCategory;
+    updateArticles();
+  }
 
-        otherLink.classList.toggle("active", isActive);
+  categoryLinks.forEach(link => {
 
-        otherLink.setAttribute(
-          "aria-pressed",
-          String(isActive)
-        );
+    link.addEventListener("click", event => {
+      event.preventDefault();
 
-      });
+      const category = link.dataset.techCategory || "all";
 
+      applyCategory(category);
 
-      updateArticles();
+      closeMenu();
 
-
-      const latestSection =
-        document.getElementById("latestTechnology");
+      const latestSection = $("#latestTechnology");
 
       if (latestSection) {
-
         latestSection.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
-
       }
-
     });
-
   });
 
-
-  /*
-    Load additional articles.
-  */
-
-  if (loadMoreButton) {
-
-    loadMoreButton.addEventListener("click", function () {
-
-      visibleLimit += 4;
-
-      updateArticles();
-
-    });
-
-  }
-
-
-  /*
-    Run the initial article display.
-  */
+  /* Initial article display. */
 
   updateArticles();
 
+  /* =======================================================
+     END OF BATCH 1
+     Paste Batch 2 directly below this line.
+  ======================================================= */
 
-  /* =========================================
-     5. NEWSLETTER — FIREBASE
-  ========================================= */
+    /* =======================================================
+     6. LOAD MORE ARTICLES
+  ======================================================= */
 
-  /*
-    Uses your existing HTML IDs:
-    newsletterForm
-    newsletterName
-    newsletterEmail
-    newsletterMessage
+  const loadMoreButton = $("#loadMoreButton");
 
-    Saves subscriptions to:
-    Firestore collection: newsletterSubscribers
-  */
+  if (loadMoreButton) {
+
+    loadMoreButton.addEventListener("click", () => {
+
+      if (
+        searchTerm ||
+        activeCategory !== "all"
+      ) {
+        return;
+      }
+
+      visibleLimit += 6;
+
+      updateArticles();
+
+    });
+  }
+
+  /* =======================================================
+     7. NEWSLETTER — FIREBASE FIRESTORE
+  ======================================================= */
+
+  const newsletterForm = $("#newsletterForm");
+  const newsletterMessage = $("#newsletterMessage");
+
+  function showNewsletterMessage(message, type = "error") {
+
+    if (!newsletterMessage) return;
+
+    newsletterMessage.textContent = message;
+
+    newsletterMessage.style.color =
+      type === "success" ? "#16a34a" : "#dc2626";
+
+    newsletterMessage.setAttribute("role", "status");
+  }
 
   if (newsletterForm) {
 
-    newsletterForm.addEventListener(
-      "submit",
-      async function (event) {
+    newsletterForm.addEventListener("submit", async event => {
 
-        event.preventDefault();
+      event.preventDefault();
 
+      const nameInput = $("#newsletterName", newsletterForm);
+      const emailInput = $("#newsletterEmail", newsletterForm);
+      const submitButton = $(
+        'button[type="submit"]',
+        newsletterForm
+      );
 
-        const nameInput =
-          newsletterForm.querySelector(
-            'input[name="name"]'
-          ) ||
-          newsletterForm.querySelector(
-            'input[type="text"]'
-          );
+      const name = nameInput
+        ? nameInput.value.trim()
+        : "";
 
+      const email = emailInput
+        ? emailInput.value.trim().toLowerCase()
+        : "";
 
-        const emailInput =
-          newsletterForm.querySelector(
-            'input[name="email"]'
-          ) ||
-          newsletterForm.querySelector(
-            'input[type="email"]'
-          );
+      if (!name) {
+        showNewsletterMessage("Please enter your name.");
+        if (nameInput) nameInput.focus();
+        return;
+      }
 
+      if (!email || !emailInput.checkValidity()) {
+        showNewsletterMessage(
+          "Please enter a valid email address."
+        );
 
-        const submitButton =
-          newsletterForm.querySelector(
-            'button[type="submit"]'
-          );
+        if (emailInput) emailInput.focus();
+        return;
+      }
 
+      const originalButtonText = submitButton
+        ? submitButton.innerHTML
+        : "";
 
-        const name = nameInput
-          ? nameInput.value.trim()
-          : "";
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "SUBSCRIBING...";
+      }
 
+      if (nameInput) nameInput.disabled = true;
+      if (emailInput) emailInput.disabled = true;
 
-        const email = emailInput
-          ? emailInput.value.trim().toLowerCase()
-          : "";
+      showNewsletterMessage(
+        "Submitting your subscription...",
+        "success"
+      );
 
+      try {
 
-        /*
-          Show messages accessibly.
-        */
+        await addDoc(
+          collection(db, "newsletterSubscribers"),
+          {
+            name: name,
+            email: email,
+            status: "active",
+            source: "technology-page",
+            page: window.location.pathname,
+            consent: true,
+            subscribedAt: serverTimestamp(),
+            consentAt: serverTimestamp()
+          }
+        );
 
-        function showNewsletterMessage(message, type) {
+        newsletterForm.reset();
 
-          if (!newsletterMessage) return;
+        showNewsletterMessage(
+          "Thank you for subscribing to ZONGO Technology updates!",
+          "success"
+        );
 
-          newsletterMessage.textContent = message;
+      } catch (error) {
 
-          newsletterMessage.setAttribute(
-            "role",
-            type === "error" ? "alert" : "status"
-          );
+        console.error(
+          "ZONGO newsletter subscription error:",
+          error
+        );
 
-          newsletterMessage.dataset.status = type;
+        showNewsletterMessage(
+          "Subscription failed. Please try again later."
+        );
 
-        }
-
-
-        /*
-          Validate email.
-        */
-
-        const emailPattern =
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-        if (!name) {
-
-          showNewsletterMessage(
-            "Please enter your name.",
-            "error"
-          );
-
-          if (nameInput) nameInput.focus();
-
-          return;
-
-        }
-
-
-        if (!email || !emailPattern.test(email)) {
-
-          showNewsletterMessage(
-            "Please enter a valid email address.",
-            "error"
-          );
-
-          if (emailInput) emailInput.focus();
-
-          return;
-
-        }
-
-
-        /*
-          Prevent repeated clicks while saving.
-        */
-
-        if (
-          submitButton &&
-          submitButton.disabled
-        ) {
-
-          return;
-
-        }
-
-
-        const originalButtonHTML = submitButton
-          ? submitButton.innerHTML
-          : "";
-
+      } finally {
 
         if (submitButton) {
-
-          submitButton.disabled = true;
-
-          submitButton.innerHTML =
-            '<i class="fa-solid fa-spinner fa-spin"></i> Subscribing...';
-
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalButtonText;
         }
 
-
-        if (newsletterMessage) {
-
-          newsletterMessage.textContent = "";
-
-        }
-
-
-        try {
-
-          /*
-            Save the subscriber to Firestore.
-          */
-
-          await addDoc(
-            collection(db, "newsletterSubscribers"),
-            {
-              name: name,
-
-              email: email,
-
-              status: "active",
-
-              source: "technology-page",
-
-              page: window.location.pathname,
-
-              subscribedAt: serverTimestamp()
-            }
-          );
-
-
-          showNewsletterMessage(
-            "Thank you! You have successfully subscribed to ZONGO Blog technology updates.",
-            "success"
-          );
-
-
-          /*
-            Clear fields only after Firebase confirms
-            that the subscription was saved.
-          */
-
-          newsletterForm.reset();
-
-
-        } catch (error) {
-
-          console.error(
-            "Newsletter subscription error:",
-            error
-          );
-
-
-          showNewsletterMessage(
-            "We could not save your subscription. Please try again.",
-            "error"
-          );
-
-        } finally {
-
-          if (submitButton) {
-
-            submitButton.disabled = false;
-
-            submitButton.innerHTML =
-              originalButtonHTML;
-
-          }
-
-        }
-
+        if (nameInput) nameInput.disabled = false;
+        if (emailInput) emailInput.disabled = false;
       }
-    );
 
+    });
   }
+
+  /* =======================================================
+     8. IMAGE ERROR HANDLING
+  ======================================================= */
+
+  $$("img").forEach(img => {
+
+    function handleImageError() {
+      img.style.backgroundColor = "#e5e9ef";
+      img.dataset.imageError = "true";
+    }
+
+    img.addEventListener("error", handleImageError);
+
+    if (img.complete && img.naturalWidth === 0 && img.src) {
+      handleImageError();
+    }
+  });
+
+  /* =======================================================
+     9. SMOOTH SCROLL FOR EXISTING PAGE ANCHORS
+  ======================================================= */
+
+  $$('a[href^="#"]').forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      const href = link.getAttribute("href");
+
+      if (!href || href === "#") {
+        event.preventDefault();
+        return;
+      }
+
+      /*
+        Do not intercept technology-category links here.
+        Their own handlers perform filtering and scrolling.
+      */
+
+      if (link.hasAttribute("data-tech-category")) {
+        return;
+      }
+
+      const target = $(href);
+
+      if (target) {
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        closeMenu();
+      }
+
+    });
+  });
+
+  /* =======================================================
+     10. BACK TO TOP — IF PRESENT IN THE HTML
+  ======================================================= */
+
+  const backToTop = $("#backToTop");
+
+  if (backToTop) {
+
+    backToTop.addEventListener("click", event => {
+
+      event.preventDefault();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+  }
+
+  /* =======================================================
+     11. PAGE INITIALIZATION
+  ======================================================= */
+
+  const yearElement = $("#currentYear");
+
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  console.log(
+    "ZONGO Technology page initialized successfully."
+  );
+
+});
+</script>
 
 </body>
 
