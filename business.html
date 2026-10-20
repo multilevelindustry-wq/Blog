@@ -3567,481 +3567,12 @@ input:focus-visible {
        JAVASCRIPT
   ====================================== -->
 
- <script>
-     
-     /* =========================================
-   ZONGO BLOG — BUSINESS PAGE JAVASCRIPT
-   File: business.js
-========================================= */
-
-"use strict";
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  /* =====================================
-     ELEMENTS
+          NEWSLETTER FORM
   ===================================== */
 
-  const menuToggle = document.getElementById("menuToggle");
-  const mainNav = document.getElementById("mainNav");
-
-  const searchForm = document.getElementById("businessSearchForm");
-  const searchInput = document.getElementById("businessSearchInput");
-
-  const searchStatus = document.getElementById("searchStatus");
-  const articleGrid = document.getElementById("articleGrid");
-  const noResults = document.getElementById("noResults");
-  const loadMoreButton = document.getElementById("loadMoreButton");
-
-  const newsletterForm = document.getElementById("newsletterForm");
-  const newsletterName = document.getElementById("newsletterName");
-  const newsletterEmail = document.getElementById("newsletterEmail");
-  const newsletterMessage = document.getElementById("newsletterMessage");
-
-  const currentYear = document.getElementById("currentYear");
-
-  /* =====================================
-     MOBILE NAVIGATION
-  ===================================== */
-
-  if (menuToggle && mainNav) {
-
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation menu");
-
-    menuToggle.addEventListener("click", () => {
-
-      const isOpen = mainNav.classList.toggle("nav-open");
-
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation menu" : "Open navigation menu"
-      );
-
-      const icon = menuToggle.querySelector("i");
-
-      if (icon) {
-        icon.classList.toggle("fa-bars", !isOpen);
-        icon.classList.toggle("fa-xmark", isOpen);
-      }
-
-    });
-
-    // Close the menu after a navigation link is selected.
-    mainNav.querySelectorAll("a").forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        mainNav.classList.remove("nav-open");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation menu");
-
-        const icon = menuToggle.querySelector("i");
-
-        if (icon) {
-          icon.classList.add("fa-bars");
-          icon.classList.remove("fa-xmark");
-        }
-
-      });
-
-    });
-
-    // Close the menu when the user taps outside it.
-    document.addEventListener("click", event => {
-
-      if (
-        mainNav.classList.contains("nav-open") &&
-        !mainNav.contains(event.target) &&
-        !menuToggle.contains(event.target)
-      ) {
-
-        mainNav.classList.remove("nav-open");
-
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation menu");
-
-        const icon = menuToggle.querySelector("i");
-
-        if (icon) {
-          icon.classList.add("fa-bars");
-          icon.classList.remove("fa-xmark");
-        }
-
-      }
-
-    });
-
-  }
-
-  /* =====================================
-     COPYRIGHT YEAR
-  ===================================== */
-
-  if (currentYear) {
-    currentYear.textContent = new Date().getFullYear();
-  }
-
-  /* =====================================
-     ARTICLE SEARCH AND FILTERING
-  ===================================== */
-
-  const searchableArticles = Array.from(
-    document.querySelectorAll(".searchable-article")
-  );
-
-  const articleCards = articleGrid
-    ? Array.from(articleGrid.querySelectorAll(".article-card"))
-    : [];
-
-  const affiliateUnits = articleGrid
-    ? Array.from(articleGrid.querySelectorAll(".affiliate-unit"))
-    : [];
-
-  const articlesPerPage = 6;
-
-  let visibleArticleLimit = articlesPerPage;
-  let currentSearch = "";
-  let currentCategory = "";
-
-  /*
-    Read article information from each article card.
-    Search includes the title, description, category,
-    metadata and searchable text inside the card.
-  */
-
-  function getSearchText(element) {
-
-    const extraKeywords = element.dataset.keywords || "";
-    const extraCategory = element.dataset.category || "";
-
-    return [
-      element.textContent || "",
-      extraKeywords,
-      extraCategory
-    ]
-      .join(" ")
-      .toLowerCase()
-      .replace(/\s+/g, " ")
-      .trim();
-
-  }
-
-  function normalizeText(value) {
-
-    return String(value || "")
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, " ");
-
-  }
-
-  function getArticleCategory(element) {
-
-    if (element.dataset.category) {
-      return normalizeText(element.dataset.category);
-    }
-
-    const categoryElement = element.querySelector(".article-category");
-
-    return normalizeText(
-      categoryElement ? categoryElement.textContent : ""
-    );
-
-  }
-
-  /*
-    Match a search query against the article text.
-  */
-
-  function matchesSearch(element, query) {
-
-    if (!query) {
-      return true;
-    }
-
-    const searchableText = getSearchText(element);
-
-    const terms = query
-      .split(/\s+/)
-      .filter(Boolean);
-
-    return terms.every(term => searchableText.includes(term));
-
-  }
-
-  /*
-    Match the selected category.
-
-    If a category link has a data-category attribute,
-    that value is used first.
-  */
-
-  function matchesCategory(element, category) {
-
-    if (!category || category === "all") {
-      return true;
-    }
-
-    const articleCategory = getArticleCategory(element);
-    const normalizedCategory = normalizeText(category);
-
-    return (
-      articleCategory.includes(normalizedCategory) ||
-      getSearchText(element).includes(normalizedCategory)
-    );
-
-  }
-
-  /*
-    Apply search, category filtering and pagination.
-  */
-
-  function updateArticles() {
-
-    const featuredArticle = document.querySelector(".featured-article");
-
-    let matchedCards = [];
-    let matchedFeatured = false;
-
-    // Featured article is filtered separately.
-    if (featuredArticle) {
-
-      matchedFeatured =
-        matchesSearch(featuredArticle, currentSearch) &&
-        matchesCategory(featuredArticle, currentCategory);
-
-      featuredArticle.hidden = !matchedFeatured;
-
-    }
-
-    // Find all matching regular article cards.
-    articleCards.forEach(card => {
-
-      const matches =
-        matchesSearch(card, currentSearch) &&
-        matchesCategory(card, currentCategory);
-
-      if (matches) {
-        matchedCards.push(card);
-      }
-
-    });
-
-    /*
-      When searching or filtering a category,
-      show every matching article instead of limiting
-      the results to the first page.
-    */
-
-    const isFiltering = Boolean(currentSearch || currentCategory);
-
-    const displayLimit = isFiltering
-      ? matchedCards.length
-      : visibleArticleLimit;
-
-    const cardsToShow = matchedCards.slice(0, displayLimit);
-
-    articleCards.forEach(card => {
-
-      card.hidden = !cardsToShow.includes(card);
-
-    });
-
-    /*
-      Show affiliate units only when the user isn't
-      searching or filtering.
-
-      Affiliate units are promotional content, not
-      regular articles, so they won't distort search.
-    */
-
-    affiliateUnits.forEach(unit => {
-
-      unit.hidden = isFiltering;
-
-    });
-
-    // Show the empty-state message when nothing matches.
-    const hasResults =
-      matchedCards.length > 0 ||
-      matchedFeatured;
-
-    if (noResults) {
-      noResults.hidden = hasResults;
-    }
-
-    // Update the search status.
-    if (searchStatus) {
-
-      if (currentSearch || currentCategory) {
-
-        const totalResults =
-          matchedCards.length + (matchedFeatured ? 1 : 0);
-
-        if (totalResults === 0) {
-
-          searchStatus.textContent = "No matching articles found.";
-
-        } else {
-
-          searchStatus.textContent =
-            `${totalResults} matching article${totalResults === 1 ? "" : "s"} found.`;
-
-        }
-
-      } else {
-
-        searchStatus.textContent = "";
-
-      }
-
-    }
-
-    // Hide Load More when all matching cards are visible.
-    if (loadMoreButton) {
-
-      const hasMore = !isFiltering &&
-        matchedCards.length > visibleArticleLimit;
-
-      loadMoreButton.hidden = !hasMore;
-
-    }
-
-  }
-
-  /*
-    Handle the search form.
-  */
-
-  if (searchForm && searchInput) {
-
-    searchForm.addEventListener("submit", event => {
-
-      event.preventDefault();
-
-      currentSearch = normalizeText(searchInput.value);
-
-      visibleArticleLimit = articlesPerPage;
-
-      updateArticles();
-
-      const latestSection = document.getElementById("latest");
-
-      if (latestSection) {
-
-        latestSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }
-
-    });
-
-    /*
-      Also update results while typing.
-    */
-
-    searchInput.addEventListener("input", () => {
-
-      currentSearch = normalizeText(searchInput.value);
-
-      visibleArticleLimit = articlesPerPage;
-
-      updateArticles();
-
-    });
-
-  }
-
-  /* =====================================
-     CATEGORY FILTERING
-  ===================================== */
-
-  const categoryLinks = document.querySelectorAll(
-    "[data-business-category]"
-  );
-
-  categoryLinks.forEach(link => {
-
-    link.addEventListener("click", event => {
-
-      const category = link.dataset.businessCategory;
-
-      if (!category) {
-        return;
-      }
-
-      /*
-        Only intercept category links explicitly marked
-        with data-business-category.
-      */
-
-      event.preventDefault();
-
-      currentCategory = normalizeText(category);
-
-      visibleArticleLimit = articlesPerPage;
-
-      // Clear the search input when switching categories.
-      currentSearch = "";
-
-      if (searchInput) {
-        searchInput.value = "";
-      }
-
-      // Update active category appearance.
-      categoryLinks.forEach(categoryLink => {
-
-        categoryLink.classList.remove("active");
-        categoryLink.removeAttribute("aria-current");
-
-      });
-
-      link.classList.add("active");
-      link.setAttribute("aria-current", "true");
-
-      updateArticles();
-
-      const latestSection = document.getElementById("latest");
-
-      if (latestSection) {
-
-        latestSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }
-
-    });
-
-  });
-
-  /* =====================================
-     LOAD MORE ARTICLES
-  ===================================== */
-
-  if (loadMoreButton) {
-
-    loadMoreButton.addEventListener("click", () => {
-
-      visibleArticleLimit += articlesPerPage;
-
-      updateArticles();
-
-    });
-
-  }
-
-  /* =====================================
-     NEWSLETTER FORM
-  ===================================== */
-
+  
+<script type="module" src="script.js">
+  
   if (newsletterForm) {
 
     newsletterForm.addEventListener("submit", event => {
@@ -4060,8 +3591,531 @@ document.addEventListener("DOMContentLoaded", () => {
         Basic client-side validation.
 
         This does not subscribe the user or save
-        their email address to a database.
-      */
+/* =========================================
+   ZONGO BUSINESS PAGE — BATCH 1
+   Navigation, Search, Categories & Articles
+========================================= */
+
+import { db } from "./firebase.js";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  "use strict";
+
+  const $ = (selector, parent = document) =>
+    parent.querySelector(selector);
+
+  const $$ = (selector, parent = document) =>
+    [...parent.querySelectorAll(selector)];
+
+
+  /* =====================================
+     COPYRIGHT YEAR
+  ===================================== */
+
+  const currentYear = $("#currentYear");
+
+  if (currentYear) {
+    currentYear.textContent = new Date().getFullYear();
+  }
+
+
+  /* =====================================
+     MOBILE NAVIGATION
+  ===================================== */
+
+  const menuToggle = $("#menuToggle");
+  const mainNav = $("#mainNav");
+
+  function closeMenu() {
+
+    if (!menuToggle || !mainNav) return;
+
+    mainNav.classList.remove("nav-open", "open", "active");
+
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+    menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+
+  }
+
+  function openMenu() {
+
+    if (!menuToggle || !mainNav) return;
+
+    mainNav.classList.add("nav-open");
+
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute("aria-label", "Close navigation menu");
+
+    menuToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+
+  }
+
+  if (menuToggle && mainNav) {
+
+    menuToggle.addEventListener("click", () => {
+
+      const isOpen = mainNav.classList.contains("nav-open");
+
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+
+    });
+
+    $$("#mainNav a").forEach(link => {
+
+      link.addEventListener("click", closeMenu);
+
+    });
+
+    document.addEventListener("click", event => {
+
+      if (
+        mainNav.classList.contains("nav-open") &&
+        !mainNav.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeMenu();
+      }
+
+    });
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+
+    });
+
+  }
+
+
+  /* =====================================
+     ARTICLE SEARCH
+  ===================================== */
+
+  const searchForm = $("#businessSearchForm");
+  const searchInput = $("#businessSearchInput");
+  const searchStatus = $("#searchStatus");
+
+  const articleGrid = $("#articleGrid");
+  const noResults = $("#noResults");
+  const loadMoreButton = $("#loadMoreButton");
+  const clearSearchButton = $("#clearSearchButton");
+
+  const featuredArticle = $(".featured-article");
+
+  const articleCards = articleGrid
+    ? $$(".article-card.searchable-article", articleGrid)
+    : [];
+
+  const affiliateUnits = articleGrid
+    ? $$(".affiliate-unit", articleGrid)
+    : [];
+
+  const ARTICLES_PER_PAGE = 6;
+
+  let currentSearch = "";
+  let currentCategory = "all";
+  let visibleLimit = ARTICLES_PER_PAGE;
+
+
+  /* =====================================
+     ARTICLE SEARCH TEXT
+  ===================================== */
+
+  function normalize(value) {
+
+    return String(value || "")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, " ");
+
+  }
+
+  function getSearchableText(article) {
+
+    return normalize([
+      article.innerText || article.textContent || "",
+      article.dataset.category || "",
+      article.dataset.keywords || "",
+      article.dataset.search || ""
+    ].join(" "));
+
+  }
+
+  function matchesSearch(article) {
+
+    if (!currentSearch) return true;
+
+    const text = getSearchableText(article);
+
+    const words = currentSearch
+      .split(/\s+/)
+      .filter(Boolean);
+
+    return words.every(word => text.includes(word));
+
+  }
+
+
+  /* =====================================
+     CATEGORY MATCHING
+  ===================================== */
+
+  function matchesCategory(article) {
+
+    if (!currentCategory || currentCategory === "all") {
+      return true;
+    }
+
+    const category = normalize(article.dataset.category || "");
+
+    const categoryWords = category.split(/\s+/);
+
+    return categoryWords.includes(currentCategory);
+
+  }
+
+
+  /* =====================================
+     UPDATE ARTICLE GRID
+  ===================================== */
+
+  function updateArticles() {
+
+    let matchingCards = [];
+    let featuredMatches = false;
+
+    const filteringActive =
+      Boolean(currentSearch) ||
+      currentCategory !== "all";
+
+
+    /* FEATURED ARTICLE */
+
+    if (featuredArticle) {
+
+      featuredMatches =
+        matchesSearch(featuredArticle) &&
+        matchesCategory(featuredArticle);
+
+      featuredArticle.hidden = !featuredMatches;
+
+    }
+
+
+    /* REGULAR ARTICLES */
+
+    articleCards.forEach(article => {
+
+      const matches =
+        matchesSearch(article) &&
+        matchesCategory(article);
+
+      if (matches) {
+        matchingCards.push(article);
+      }
+
+    });
+
+
+    /* PAGINATION */
+
+    const cardsToShow = filteringActive
+      ? matchingCards
+      : matchingCards.slice(0, visibleLimit);
+
+    articleCards.forEach(article => {
+
+      article.hidden = !cardsToShow.includes(article);
+
+    });
+
+
+    /* AFFILIATE CONTENT */
+
+    affiliateUnits.forEach(unit => {
+
+      unit.hidden = filteringActive;
+
+    });
+
+
+    /* EMPTY RESULTS */
+
+    const hasResults =
+      matchingCards.length > 0 ||
+      featuredMatches;
+
+    if (noResults) {
+      noResults.hidden = hasResults;
+    }
+
+
+    /* SEARCH STATUS */
+
+    if (searchStatus) {
+
+      if (filteringActive) {
+
+        const resultCount =
+          matchingCards.length + (featuredMatches ? 1 : 0);
+
+        searchStatus.textContent = resultCount
+          ? `${resultCount} matching ${resultCount === 1 ? "article" : "articles"} found.`
+          : "No matching articles found. Try another search.";
+
+      } else {
+
+        searchStatus.textContent = "";
+
+      }
+
+    }
+
+
+    /* LOAD MORE */
+
+    if (loadMoreButton) {
+
+      const hasMore =
+        !filteringActive &&
+        matchingCards.length > visibleLimit;
+
+      loadMoreButton.hidden = !hasMore;
+
+    }
+
+  }
+
+
+  /* =====================================
+     SEARCH FORM
+  ===================================== */
+
+  function performSearch() {
+
+    currentSearch = normalize(searchInput?.value || "");
+
+    visibleLimit = ARTICLES_PER_PAGE;
+
+    updateArticles();
+
+  }
+
+  if (searchForm && searchInput) {
+
+    searchForm.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      currentCategory = "all";
+
+      performSearch();
+
+      const latestArticles = $("#latestArticles");
+
+      if (latestArticles) {
+
+        latestArticles.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    });
+
+    searchInput.addEventListener("input", () => {
+
+      currentCategory = "all";
+
+      performSearch();
+
+    });
+
+  }
+
+
+  /* =====================================
+     CLEAR SEARCH
+  ===================================== */
+
+  if (clearSearchButton) {
+
+    clearSearchButton.addEventListener("click", () => {
+
+      currentSearch = "";
+      currentCategory = "all";
+      visibleLimit = ARTICLES_PER_PAGE;
+
+      if (searchInput) {
+        searchInput.value = "";
+      }
+
+      updateArticles();
+
+    });
+
+  }
+
+
+  /* =====================================
+     CATEGORY LINKS
+  ===================================== */
+
+  const categoryLinks = $$("[data-business-category]");
+
+  categoryLinks.forEach(link => {
+
+    link.addEventListener("click", event => {
+
+      const category = normalize(
+        link.dataset.businessCategory
+      );
+
+      if (!category) return;
+
+      event.preventDefault();
+
+      currentCategory = category;
+      currentSearch = "";
+      visibleLimit = ARTICLES_PER_PAGE;
+
+      if (searchInput) {
+        searchInput.value = "";
+      }
+
+      categoryLinks.forEach(item => {
+
+        item.classList.remove("active");
+        item.removeAttribute("aria-current");
+
+      });
+
+      link.classList.add("active");
+      link.setAttribute("aria-current", "true");
+
+      updateArticles();
+
+      const latestArticles = $("#latestArticles");
+
+      if (latestArticles) {
+
+        latestArticles.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }
+
+    });
+
+  });
+
+
+  /* =====================================
+     LOAD MORE ARTICLES
+  ===================================== */
+
+  if (loadMoreButton) {
+
+    loadMoreButton.addEventListener("click", () => {
+
+      visibleLimit += ARTICLES_PER_PAGE;
+
+      updateArticles();
+
+    });
+
+  }
+
+
+  /* =====================================
+     BATCH 2 CONTINUES BELOW
+  ===================================== */
+
+    /* =====================================
+     NEWSLETTER — FIREBASE FIRESTORE
+     Collection: newsletterSubscribers
+  ===================================== */
+
+  const newsletterForm = $("#newsletterForm");
+
+  const newsletterName = $("#newsletterName");
+  const newsletterEmail = $("#newsletterEmail");
+  const newsletterMessage = $("#newsletterMessage");
+
+  if (newsletterForm) {
+
+    const submitButton = newsletterForm.querySelector(
+      'button[type="submit"]'
+    );
+
+    let isSubmitting = false;
+
+
+    /* SHOW NEWSLETTER MESSAGE */
+
+    function showNewsletterMessage(message, type = "info") {
+
+      if (!newsletterMessage) return;
+
+      newsletterMessage.textContent = message;
+
+      newsletterMessage.setAttribute("role", "status");
+      newsletterMessage.setAttribute("aria-live", "polite");
+
+      if (type === "success") {
+
+        newsletterMessage.style.color = "#15803d";
+
+      } else if (type === "error") {
+
+        newsletterMessage.style.color = "#b42318";
+
+      } else {
+
+        newsletterMessage.style.color = "#344563";
+
+      }
+
+    }
+
+
+    /* SUBMIT NEWSLETTER */
+
+    newsletterForm.addEventListener("submit", async event => {
+
+      event.preventDefault();
+
+      if (isSubmitting) return;
+
+
+      const name = newsletterName
+        ? newsletterName.value.trim()
+        : "";
+
+      const email = newsletterEmail
+        ? newsletterEmail.value.trim().toLowerCase()
+        : "";
+
+
+      /* VALIDATE NAME */
 
       if (!name) {
 
@@ -4070,94 +4124,235 @@ document.addEventListener("DOMContentLoaded", () => {
           "error"
         );
 
-        if (newsletterName) {
-          newsletterName.focus();
-        }
+        newsletterName?.focus();
 
         return;
 
       }
 
-      if (!email) {
+      if (name.length > 100) {
 
         showNewsletterMessage(
-          "Please enter your email address.",
+          "Your name must be 100 characters or fewer.",
           "error"
         );
 
-        if (newsletterEmail) {
-          newsletterEmail.focus();
-        }
+        newsletterName?.focus();
 
         return;
 
       }
 
+
+      /* VALIDATE EMAIL */
+
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      if (!emailPattern.test(email)) {
+      if (!email || !emailPattern.test(email) || email.length > 254) {
 
         showNewsletterMessage(
           "Please enter a valid email address.",
           "error"
         );
 
-        if (newsletterEmail) {
-          newsletterEmail.focus();
-        }
+        newsletterEmail?.focus();
 
         return;
 
       }
 
+
+      /* LOADING STATE */
+
+      const originalButtonHTML = submitButton
+        ? submitButton.innerHTML
+        : "";
+
+      isSubmitting = true;
+
+      if (submitButton) {
+
+        submitButton.disabled = true;
+
+        submitButton.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin"></i> Subscribing...';
+
+      }
+
+      if (newsletterName) {
+        newsletterName.disabled = true;
+      }
+
+      if (newsletterEmail) {
+        newsletterEmail.disabled = true;
+      }
+
       showNewsletterMessage(
-        "Your details are valid, but newsletter subscriptions are not connected yet.",
+        "Saving your subscription...",
         "info"
       );
+
+
+      try {
+
+        /* SAVE TO FIRESTORE */
+
+        await addDoc(
+          collection(db, "newsletterSubscribers"),
+          {
+            name: name,
+            email: email,
+
+            status: "active",
+
+            source: "business-page",
+
+            page: window.location.pathname,
+
+            subscribedAt: serverTimestamp(),
+            createdAt: serverTimestamp()
+          }
+        );
+
+
+        /* SUCCESS */
+
+        showNewsletterMessage(
+          "Thank you for subscribing! Your details have been saved successfully.",
+          "success"
+        );
+
+        newsletterForm.reset();
+
+
+      } catch (error) {
+
+        console.error(
+          "ZONGO Business newsletter subscription error:",
+          error
+        );
+
+
+        if (
+          error.code === "permission-denied" ||
+          error.code === "firestore/permission-denied"
+        ) {
+
+          showNewsletterMessage(
+            "We could not save your subscription because Firebase denied permission. Check your Firestore security rules.",
+            "error"
+          );
+
+        } else if (
+          error.code === "unavailable" ||
+          error.code === "firestore/unavailable"
+        ) {
+
+          showNewsletterMessage(
+            "The subscription service is temporarily unavailable. Please try again.",
+            "error"
+          );
+
+        } else {
+
+          showNewsletterMessage(
+            "Your subscription could not be saved. Please check your internet connection and try again.",
+            "error"
+          );
+
+        }
+
+      } finally {
+
+        isSubmitting = false;
+
+        if (submitButton) {
+
+          submitButton.disabled = false;
+
+          submitButton.innerHTML =
+            originalButtonHTML || "Subscribe";
+
+        }
+
+        if (newsletterName) {
+          newsletterName.disabled = false;
+        }
+
+        if (newsletterEmail) {
+          newsletterEmail.disabled = false;
+        }
+
+      }
 
     });
 
   }
 
-  function showNewsletterMessage(message, type) {
-
-    if (!newsletterMessage) {
-      return;
-    }
-
-    newsletterMessage.textContent = message;
-
-    newsletterMessage.setAttribute("role", "status");
-
-    if (type === "error") {
-
-      newsletterMessage.style.color = "#b42318";
-
-    } else if (type === "success") {
-
-      newsletterMessage.style.color = "#157347";
-
-    } else {
-
-      newsletterMessage.style.color = "#344563";
-
-    }
-
-  }
 
   /* =====================================
-     PREVENT EMPTY HASH JUMPS
+     IMAGE ERROR HANDLING
   ===================================== */
 
-  document.querySelectorAll('a[href="#"]').forEach(link => {
+  $$("img").forEach(img => {
+
+    img.addEventListener("error", () => {
+
+      img.dataset.imageError = "true";
+
+      img.style.backgroundColor = "#e9edf2";
+
+      img.style.objectFit = "contain";
+
+    }, { once: true });
+
+  });
+
+
+  /* =====================================
+     SMOOTH INTERNAL LINKS
+  ===================================== */
+
+  $$('a[href^="#"]').forEach(link => {
 
     link.addEventListener("click", event => {
 
+      const href = link.getAttribute("href");
+
+      if (!href || href === "#") {
+        event.preventDefault();
+        return;
+      }
+
+      /*
+        Leave category filters to their own handler.
+      */
+
+      if (link.hasAttribute("data-business-category")) {
+        return;
+      }
+
+      let target;
+
+      try {
+        target = document.querySelector(href);
+      } catch {
+        return;
+      }
+
+      if (!target) return;
+
       event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
     });
 
   });
+
 
   /* =====================================
      INITIALIZE PAGE
@@ -4165,15 +4360,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateArticles();
 
+  console.log(
+    "ZONGO Business page JavaScript initialized successfully."
+  );
+
 });
-
-
-     
- </script>
- 
- <script type="module" src="script.js"></script>
- 
- 
+      </script>
  
 </body>
 </html>
